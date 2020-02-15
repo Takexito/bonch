@@ -19,13 +19,8 @@ class TimetableFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        timetableViewModel =
-                ViewModelProviders.of(this).get(TimetableViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_timetable, container, false)
-        val textView: TextView = root.findViewById(R.id.text_timetable)
-        timetableViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 }
