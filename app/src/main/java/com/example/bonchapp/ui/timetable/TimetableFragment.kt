@@ -1,4 +1,4 @@
-package com.example.bonchapp.ui.dashboard
+package com.example.bonchapp.ui.timetable
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.bonchapp.R
 
-class DashboardFragment : Fragment() {
+class TimetableFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var timetableViewModel: TimetableViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        timetableViewModel =
+                ViewModelProviders.of(this).get(TimetableViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_timetable, container, false)
+        val textView: TextView = root.findViewById(R.id.text_timetable)
+        timetableViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
