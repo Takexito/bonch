@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-import com.example.bonchapp.ui.model.SubjectDTO
+import com.example.bonchapp.pojo.SubjectDTO
 
 class TimetableAdapter(val context: Context) : RecyclerView.Adapter<TimetablePostHolder>() {
 

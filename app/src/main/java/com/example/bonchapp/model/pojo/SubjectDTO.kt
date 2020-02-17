@@ -1,4 +1,4 @@
-package com.example.bonchapp.ui.model
+package com.example.bonchapp.pojo
 
 public class SubjectDTO {
     val time = ""
