@@ -9,9 +9,12 @@ import com.example.bonchapp.ui.navgut.NavgutFragment
 
 class NavgutPresenter(private val context: NavgutFragment) {
 
-    private lateinit var pWebView: WebView
+    private var BASE_URL = "https://nav.sut.ru/"
 
-    private val webViewClient = object: WebViewClient() {
+    private var currentCabinet: String? = null
+
+    private lateinit var pWebView: WebView
+    private val webViewClient = object : WebViewClient() {
 
         override fun shouldOverrideUrlLoading(
             view: WebView?,
@@ -43,14 +46,24 @@ class NavgutPresenter(private val context: NavgutFragment) {
         webView.webViewClient = webViewClient
 
         if (context.isOnline()) {
-            pWebView.loadUrl("https://nav.sut.ru/")
+            pWebView.loadUrl(BASE_URL)
         } else {
             context.pageLoadError()
         }
     }
 
     fun reloadPage() {
-        pWebView.loadUrl("")
+        if (context.isOnline()) {
+            if (currentCabinet == null) {
+                pWebView.loadUrl(BASE_URL)
+                context.pageLoadStarted()
+            } else {
+                context.pageLoadStarted()
+                pWebView.loadUrl(currentCabinet)
+            }
+        } else {
+            context.pageLoadError()
+        }
     }
 
     fun onPause() {
