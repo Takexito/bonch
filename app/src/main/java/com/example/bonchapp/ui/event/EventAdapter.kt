@@ -3,18 +3,15 @@ package com.example.bonchapp.ui.event
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-import com.example.bonchapp.model.pojo.Event
 import kotlinx.android.synthetic.main.item_event.view.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 class EventAdapter(private val eventFragment: EventFragment) :
     RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     private val data = eventFragment.presenter.testData
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
