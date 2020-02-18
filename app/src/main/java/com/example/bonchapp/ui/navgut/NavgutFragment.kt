@@ -1,61 +1,94 @@
 package com.example.bonchapp.ui.navgut
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.bonchapp.MainActivity
 import com.example.bonchapp.R
 import com.example.bonchapp.presenter.NavgutPresenter
 
 class NavgutFragment : Fragment() {
 
     private lateinit var webView: WebView
+    private lateinit var progressBar: ProgressBar
+    private lateinit var errorTW: TextView
 
     private lateinit var presenter: NavgutPresenter
-
-    private val webViewClient = object: WebViewClient() {
-        override fun shouldOverrideUrlLoading(
-            view: WebView?,
-            request: WebResourceRequest?
-        ): Boolean = true
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        presenter = NavgutPresenter(this)
         val root = inflater.inflate(R.layout.fragment_navgut, container, false)
 
-        presenter = NavgutPresenter(this)
+        initView(root)
 
-        initWebView(root)
+        presenter.onCreate(webView)
+
+        setClicker()
 
         return root
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    fun initWebView(view: View) {
-        webView = view.findViewById(R.id.webview)
+    fun initView(view: View) {
+        webView = view.findViewById(R.id.web_view)
         webView.settings.javaScriptEnabled = true
-        webView.webViewClient = webViewClient
+
+        progressBar = view.findViewById(R.id.progress_bar)
+        errorTW = view.findViewById(R.id.error_text_view)
     }
 
     fun hideProgressBar() {
-
+        progressBar.visibility = View.GONE
     }
 
     fun showProgressBar() {
-
+        progressBar.visibility = View.VISIBLE
     }
 
-    override fun onResume() {
-        super.onResume()
-        webView.loadUrl("https://nav.sut.ru/")
+    fun pageLoaded() {
+        hideProgressBar()
+        webView.visibility = View.VISIBLE
+        errorTW.visibility = View.GONE
+    }
+
+    fun pageLoadError() {
+        webView.visibility = View.GONE
+        hideProgressBar()
+        errorTW.visibility = View.VISIBLE
+    }
+
+    fun pageLoadStarted() {
+        webView.visibility = View.GONE
+        showProgressBar()
+    }
+
+    private fun setClicker() {
+        errorTW.setOnClickListener {
+            presenter.reloadPage()
+        }
+    }
+
+    override fun onPause() {
+        presenter.onPause()
+        super.onPause()
+    }
+
+    fun isOnline(): Boolean {
+        val cm = NavgutFragment@context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        return activeNetwork !== null && activeNetwork.isConnectedOrConnecting
     }
 }
