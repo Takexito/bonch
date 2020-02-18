@@ -3,16 +3,18 @@ package com.example.bonchapp.ui.event
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.model.pojo.Event
 import kotlinx.android.synthetic.main.item_event.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
-class EventAdapter(
-    private val data: ArrayList<Event>,
-    private val eventFragment: EventFragment
-) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
+class EventAdapter(private val eventFragment: EventFragment) :
+    RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
+    private val data = eventFragment.presenter.testData
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,16 +24,24 @@ class EventAdapter(
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return data.value?.size ?: 1//TODO: Fix nullability
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.apply {
-            titleEventView.text = data[position].title
-            subTitleEventView.text = data[position].subTitle
-            setOnClickListener {
-                eventFragment.presenter.onItemClick(position)
-            }
-        }
+        onDataChange(holder.itemView, position)
+    }
+
+    private fun onDataChange(itemView: View, position: Int) {
+        eventFragment.presenter.testData.observe(
+            eventFragment.viewLifecycleOwner,
+            androidx.lifecycle.Observer {
+                itemView.apply {
+                    titleEventView.text = it[position]
+                    subTitleEventView.text = it[position]
+                    setOnClickListener {
+                        eventFragment.presenter.onItemClick(position)
+                    }
+                }
+            })
     }
 }

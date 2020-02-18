@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.bonchapp.R
-import com.example.bonchapp.ui.event.EventViewModel
 
 class ProfileFragment : Fragment() {
 
