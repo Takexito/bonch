@@ -2,5 +2,5 @@
     <string name="app_name">BonchApp</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="navgut_loading_error">Произошла ошибка загрузки. Нажмите <u>здесь</u>, чтобы попробовать снова</string>
+    <string name="navgut_loading_error">Произошла ошибка загрузки. Нажмите в любом месте, чтобы попробовать снова</string>
 </resources>

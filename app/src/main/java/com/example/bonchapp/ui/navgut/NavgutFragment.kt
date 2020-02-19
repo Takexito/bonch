@@ -31,13 +31,11 @@ class NavgutFragment : Fragment() {
     ): View? {
         presenter = NavgutPresenter(this)
         val root = inflater.inflate(R.layout.fragment_navgut, container, false)
-
         initView(root)
 
         presenter.onCreate(webView)
 
         setClicker()
-
         return root
     }
 
@@ -71,6 +69,7 @@ class NavgutFragment : Fragment() {
     }
 
     fun pageLoadStarted() {
+        errorTW.visibility = View.GONE
         webView.visibility = View.GONE
         showProgressBar()
     }

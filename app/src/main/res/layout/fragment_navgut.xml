@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.storage.StorageFragment">
+    tools:context=".ui.storage.StorageFragment"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/fragment_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:padding="20dp"
+        android:textAlignment="center"
+        android:text="ГУТ.Навигатор"
+        android:textColor="#FF8117"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <WebView
         android:id="@+id/web_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="center"
+        android:elevation="0dp"
         android:keepScreenOn="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -25,16 +43,27 @@
         android:layout_height="wrap_content"
         android:backgroundTintMode="src_atop"
         android:indeterminate="true"
+        android:indeterminateTint="#FF8926"
         android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="#FF8926" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_title" />
 
     <TextView
         android:id="@+id/error_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/navgut_loading_error"
+        android:textColor="#FF8117"
+        android:textSize="18sp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
         android:visibility="gone"
-        android:textColor="#000"
-        android:textSize="18sp"/>
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_title" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
