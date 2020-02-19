@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
+import kotlinx.android.synthetic.main.fragment_event.*
 import kotlinx.android.synthetic.main.item_event.view.*
 
 class EventAdapter(private val eventFragment: EventFragment) :
@@ -33,8 +34,10 @@ class EventAdapter(private val eventFragment: EventFragment) :
             eventFragment.viewLifecycleOwner,
             androidx.lifecycle.Observer {
                 itemView.apply {
+                    eventFragment.eventRecyclerView?.visibility = View.VISIBLE //TODO: add loadBar
                     titleEventView.text = it[position]
-                    subTitleEventView.text = it[position]
+                    dateEventView.text = it[position]
+
                     setOnClickListener {
                         eventFragment.presenter.onItemClick(position)
                     }
