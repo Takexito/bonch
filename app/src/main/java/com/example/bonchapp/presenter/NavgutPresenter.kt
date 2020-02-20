@@ -22,7 +22,7 @@ class NavgutPresenter(private val context: NavgutFragment) {
         ): Boolean = true
 
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-            if (url?.subSequence(0..18) == "https://nav.sut.ru/") {
+            if (url?.subSequence(0..18) == BASE_URL) {
                 context.pageLoadStarted()
             } else pWebView.loadUrl(BASE_URL)
             super.onPageStarted(view, url, favicon)
@@ -49,9 +49,9 @@ class NavgutPresenter(private val context: NavgutFragment) {
 
         if (context.isOnline()) {
             if (currentCabinet == null) {
-                pWebView.loadUrl("https://nav.sut.ru/")
+                pWebView.loadUrl(BASE_URL)
             } else {
-                var url = "https://nav.sut.ru/"
+                var url = BASE_URL
                 when (currentCabinet!!.length) {
                     3 -> {
                         url += "m/?cab=k$currentCabinet"
