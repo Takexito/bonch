@@ -1,10 +1,6 @@
 package com.example.bonchapp.presenter
 
 import android.graphics.Bitmap
-import android.text.SpannableString
-import android.text.style.ClickableSpan
-import android.util.Log
-import android.view.View
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -15,7 +11,7 @@ class NavgutPresenter(private val context: NavgutFragment) {
 
     private val BASE_URL = "https://nav.sut.ru/"
 
-    private var currentCabinet: String? = null
+    var currentCabinet: String? = null
 
     private lateinit var pWebView: WebView
     private val webViewClient = object: WebViewClient() {
@@ -26,7 +22,9 @@ class NavgutPresenter(private val context: NavgutFragment) {
         ): Boolean = true
 
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-            context.pageLoadStarted()
+            if (url?.subSequence(0..18) == "https://nav.sut.ru/") {
+                context.pageLoadStarted()
+            } else pWebView.loadUrl(BASE_URL)
             super.onPageStarted(view, url, favicon)
         }
 
@@ -50,7 +48,23 @@ class NavgutPresenter(private val context: NavgutFragment) {
         webView.webViewClient = webViewClient
 
         if (context.isOnline()) {
-            pWebView.loadUrl("https://nav.sut.ru/")
+            if (currentCabinet == null) {
+                pWebView.loadUrl("https://nav.sut.ru/")
+            } else {
+                var url = "https://nav.sut.ru/"
+                when (currentCabinet!!.length) {
+                    3 -> {
+                        url += "m/?cab=k$currentCabinet"
+                    }
+                    5 -> {
+                        url += "/?cab=k${currentCabinet!![4]}-${currentCabinet!!.substringBefore('/')}"
+                    }
+                    7 -> {
+                        url += "/?cab=k${currentCabinet!!.substringAfterLast('/')}-${currentCabinet!!.substringBefore('/')}a${currentCabinet!![4]}"
+                    }
+                }
+                pWebView.loadUrl(url)
+            }
         } else {
             context.pageLoadError()
         }
