@@ -3,6 +3,7 @@ package com.example.bonchapp
 import androidx.lifecycle.LiveData
 import com.example.bonchapp.pojo.SubjectDTO
 import java.util.*
+import kotlin.collections.ArrayList
 
 interface MainContract {
 
@@ -11,10 +12,10 @@ interface MainContract {
     }
 
     interface Presenter {
-        fun swithDay(day: Date)
+        fun swithDay(day: String)
     }
 
     interface Model{
-        fun loadTimetable(day: Date): LiveData<List<SubjectDTO>>
+        fun loadTimetable(day: String): LiveData<ArrayList<String>>
     }
 }

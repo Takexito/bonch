@@ -10,22 +10,19 @@ import com.example.bonchapp.pojo.SubjectDTO
 import java.util.*
 
 
-class PresenterTimeTable(view: MainContract.View) : MainContract.Presenter, LifecycleOwner {
+class PresenterTimeTable(fr: Fragment, view:MainContract.View) : MainContract.Presenter{
     val mView = view
     var mModel = ModelTimetable()
+    val fragment = fr
     lateinit var timetable: List<SubjectDTO>
-    override fun swithDay(day: Date) {
-        val date:Date
-        date = Date(2020, 2, 17)
 
-        mModel.loadTimetable(date).observe(this, Observer {
-            timetable = it
+    override fun swithDay(day: String) {
+        val date = "2020-02-17"
+
+        mModel.loadTimetable(date).observe(fragment.viewLifecycleOwner, Observer {
+            //timetable = it
             mView.showTimetable(timetable)
         })
-    }
-
-    override fun getLifecycle(): Lifecycle {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }
