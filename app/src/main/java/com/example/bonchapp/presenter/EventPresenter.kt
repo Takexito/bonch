@@ -7,11 +7,10 @@ import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.model.repository.TestRep
 import com.example.bonchapp.ui.event.EventFragment
 
-class EventPresenter(val context: EventFragment) : ViewModel() {
-
+class EventPresenter(val context: EventFragment) {
 
     private val _testData =
-        MutableLiveData<ArrayList<String>>().apply { value = arrayListOf("Error!") }
+        MutableLiveData<ArrayList<String>>().apply { value = arrayListOf("Load!") }
 
     var testData: LiveData<ArrayList<String>> = _testData
 
@@ -19,10 +18,8 @@ class EventPresenter(val context: EventFragment) : ViewModel() {
         MainCoordinator.navigateToFullEvent(context, pos)
     }
 
-
     fun setDataFromApi() {
-        testData = TestRep.getGroups()
+        TestRep.getGroups(_testData)
     }
-
 
 }

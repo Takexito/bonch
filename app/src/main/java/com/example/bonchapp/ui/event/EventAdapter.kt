@@ -21,27 +21,20 @@ class EventAdapter(private val eventFragment: EventFragment) :
         return ViewHolder(itemView)
     }
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.apply {
+            eventFragment.eventRecyclerView?.visibility = View.VISIBLE
+            titleEventView.text = data.value?.get(position) ?: "Bad"
+            dateEventView.text = data.value?.get(position) ?: "Bad"
+
+            setOnClickListener {
+                eventFragment.presenter.onItemClick(position)
+            }
+        }
+    }
+
     override fun getItemCount(): Int {
         return data.value?.size ?: 1//TODO: Fix nullability
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        onDataChange(holder.itemView, position)
-    }
-
-    private fun onDataChange(itemView: View, position: Int) {
-        eventFragment.presenter.testData.observe(
-            eventFragment.viewLifecycleOwner,
-            androidx.lifecycle.Observer {
-                itemView.apply {
-                    eventFragment.eventRecyclerView?.visibility = View.VISIBLE //TODO: add loadBar
-                    titleEventView.text = it[position]
-                    dateEventView.text = it[position]
-
-                    setOnClickListener {
-                        eventFragment.presenter.onItemClick(position)
-                    }
-                }
-            })
-    }
 }

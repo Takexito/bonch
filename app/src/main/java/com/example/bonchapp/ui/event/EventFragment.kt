@@ -29,7 +29,6 @@ class EventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         presenter.setDataFromApi()
         initRecycler()
-        //eventRecyclerView.visibility = View.INVISIBLE
     }
 
     private fun initRecycler() {
@@ -37,6 +36,11 @@ class EventFragment : Fragment() {
             adapter = EventAdapter(this@EventFragment)
             layoutManager = LinearLayoutManager(context)
         }
+        presenter.testData.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer {
+                eventRecyclerView.adapter?.notifyDataSetChanged()
+            })
     }
 
 }

@@ -8,21 +8,17 @@ import java.util.concurrent.TimeUnit
 
 object NetworkService {
     val TABLE_API: JsonApi
-    private val mRetrofit: Retrofit
+    private val retrofit: Retrofit
 
     init{
-        val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(2, TimeUnit.MINUTES)
-            .writeTimeout(2, TimeUnit.MINUTES)
-            .build()
+        val okHttpClient = OkHttpClient.Builder().build()
 
-        mRetrofit = Retrofit.Builder()
+        retrofit = Retrofit.Builder()
             .baseUrl("http://165.22.199.70/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        TABLE_API = mRetrofit.create(
+        TABLE_API = retrofit.create(
             JsonApi::class.java)
     }
 }
