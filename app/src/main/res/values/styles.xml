@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="buttonStyle">@style/buttonStyle</item>
+        <item name="android:buttonStyle">@style/buttonStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -14,9 +14,9 @@
     </style>
 
     <style name="buttonStyle">
-        <item name="background">@drawable/button_border</item>
-        <item name="paddingStart">10dp</item>
-        <item name="paddingEnd">10dp</item>
+        <item name="android:background">@drawable/button_border</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
     </style>
 
 </resources>
