@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.MainContract
@@ -15,6 +12,10 @@ import com.example.bonchapp.R
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.adapters.TimetableAdapter
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
+import kotlinx.android.synthetic.main.calendar_sheet.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,7 +41,9 @@ class TimetableFragment : Fragment(), MainContract.View {
 
         initRecyclerView(root)
 
-        mPresenter.swithDay("2020-02-17")
+        mPresenter.swithDay("2020-02-27")
+
+        initCalender(root)
 
         return root
     }
@@ -55,4 +58,18 @@ class TimetableFragment : Fragment(), MainContract.View {
         recyclerViewDay.layoutManager = LinearLayoutManager(view.context)
         recyclerViewDay.adapter = adapter
     }
+
+    fun initCalender(view: View) {
+        val calendar = view.findViewById<MaterialCalendarView>(R.id.calendar)
+        calendar.setTopbarVisible(false)
+        calendar.setOnDateChangedListener(OnDateSelectedListener { widget, date, selected ->
+            val s: String = "${date.year}-${date.month}-${date.day}"
+            mPresenter.swithDay(s)
+        })
+    }
+
+    fun initSpinner(){
+
+    }
+
 }

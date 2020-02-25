@@ -44,8 +44,8 @@ class TimetablePostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(subject: SubjectDTO) {
         textTime.text = subject.time
         textName.text = subject.subject
-        textType.text = subject.subjec_type
+        textType.text = subject.subject_type
         textProfessor.text = subject.tutor
-        textCabinet.text = subject.cabinet
+        textCabinet.text = subject.place
     }
 }

@@ -5,65 +5,32 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.model.network.NetworkService
+import com.example.bonchapp.pojo.SubjectDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 class ModelTimetable() : MainContract.Model {
 
-    override fun loadTimetable(day: String): LiveData<ArrayList<String>> {
+    override fun loadTimetable(body:RequestDTO): LiveData<ArrayList<SubjectDTO>> {
 
-        /*val timetableService = NetworkService.TABLE_API
-
-        val timetable = MutableLiveData<List<SubjectDTO>>().apply {
-
-            //val response = timetableService.requestTimeTable(RequestDTO(0, Info(), Date()))
-            val response = timetableService.getGroups()
-            lateinit var subjects: List<SubjectDTO>
-
-            /*CoroutineScope(Dispatchers.Main).launch {
-
-                try {
-                    withContext(Dispatchers.Main) {
-                        if (response.isSuccessful) {
-                            subjects = response.body()!!
-                        }
-                    }
-                } catch (err: Exception) {
-                    Log.e("Retrofit", "${err.printStackTrace()}")
-                }
-            }*/
-
-            //response.enqueue(object : Callback<List<SubjectDTO>> {
-            response.enqueue(object : Callback<ArrayList<String>> {
-
-                //override fun onFailure(call: Call<List<SubjectDTO>>, t: Throwable) {
-                override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
-                    Log.d("retrofit", "call failed")
-                }
-
-                //override fun onResponse(call: Call<List<SubjectDTO>>, response: Response<List<SubjectDTO>>) {
-                override fun onResponse(call: Call<ArrayList<String>>, response: Response<ArrayList<String>>) {
-                    Log.d("retrofit", "call super")
-                }
-            })
-        }*/
-
-        val data = MutableLiveData<ArrayList<String>>()
+        val data = MutableLiveData<ArrayList<SubjectDTO>>()
         NetworkService
             .TABLE_API
-            .getGroups()
-            .enqueue(object : Callback<ArrayList<String>> {
+            .requestTimeTable(body = body)
+            .enqueue(object : Callback<ArrayList<SubjectDTO>> {
                 override fun onResponse(
-                    call: Call<ArrayList<String>>,
-                    resp: Response<ArrayList<String>>
+                    call: Call<ArrayList<SubjectDTO>>,
+                    resp: Response<ArrayList<SubjectDTO>>
                 ) {
                     Log.d("LoL", "Good")
                     data.value = resp.body()
-                        ?: arrayListOf("Error!")
+                        ?: arrayListOf(SubjectDTO())
                 }
 
-                override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
+                override fun onFailure(call: Call<ArrayList<SubjectDTO>>, t: Throwable) {
                     Log.d("LoL", t.localizedMessage ?: "Error!")
 
                 }

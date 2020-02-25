@@ -2,4 +2,9 @@
     <string name="app_name">BonchApp</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
+    <string-array name="switсhTimetable">
+        <item>Выбор группы</item>
+        <item>Выбор преподавателя</item>
+    </string-array>
 </resources>

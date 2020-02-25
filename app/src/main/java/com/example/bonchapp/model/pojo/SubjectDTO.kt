@@ -1,9 +1,9 @@
 package com.example.bonchapp.pojo
 
-public class SubjectDTO {
-    val time = ""
-    val subject = ""
-    val subjec_type = ""
-    val tutor = ""
-    val cabinet = ""
-}
+data class SubjectDTO(
+    val time: String = "",
+    val subject: String = "",
+    val subject_type: String = "",
+    val tutor: String = "",
+    val place: String = ""
+)
