@@ -26,12 +26,4 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_event, R.id.navigation_navgut, R.id.navigation_timetable, R.id.navigation_storage,R.id.navigation_profile))
         navView.setupWithNavController(navController)
     }
-
-    //Function for open navigator fragment with showing cabinet
-    //Accepts cabinet number as argument. Example: 552/4; 522/4/1; 122 (for college)
-    fun showCabinetInNavigator(cabinet: String) {
-        val bundle = Bundle()
-        bundle.putString("cabinet", cabinet)
-        navController.navigate(R.id.navigation_navgut, bundle)
-    }
 }
