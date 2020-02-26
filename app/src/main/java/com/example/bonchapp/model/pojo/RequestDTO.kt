@@ -14,5 +14,5 @@ data class Info (
 data class Date (
 
     val from : String = "2020-02-12",
-    val to : String = "2020-02-12"
+    val to : String = "2020-02-29"
 )
