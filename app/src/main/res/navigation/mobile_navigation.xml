@@ -43,4 +43,42 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+    <navigation android:id="@+id/navigation_events"
+        app:startDestination="@id/mainEventFragment">
+        <fragment
+            android:id="@+id/mainEventFragment"
+            android:name="com.example.bonchapp.ui.event.MainEventFragment"
+            android:label="fragment_main_event"
+            tools:layout="@layout/fragment_main_event" >
+            <action
+                android:id="@+id/action_mainEventFragment2_to_myEventFragment2"
+                app:destination="@id/myEventFragment" />
+            <action
+                android:id="@+id/action_mainEventFragment2_to_favoriteEventFragment"
+                app:destination="@id/favoriteEventFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/myEventFragment"
+            android:name="com.example.bonchapp.ui.event.MyEventFragment"
+            android:label="fragment_my_event"
+            tools:layout="@layout/fragment_my_event" >
+            <action
+                android:id="@+id/action_myEventFragment2_to_favoriteEventFragment"
+                app:destination="@id/favoriteEventFragment" />
+            <action
+                android:id="@+id/action_myEventFragment2_to_mainEventFragment2"
+                app:destination="@id/mainEventFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/favoriteEventFragment"
+            android:name="com.example.bonchapp.ui.event.FavoriteEventFragment"
+            android:label="FavoriteEventFragment" >
+            <action
+                android:id="@+id/action_favoriteEventFragment_to_myEventFragment2"
+                app:destination="@id/myEventFragment" />
+            <action
+                android:id="@+id/action_favoriteEventFragment_to_mainEventFragment2"
+                app:destination="@id/mainEventFragment" />
+        </fragment>
+    </navigation>
 </navigation>

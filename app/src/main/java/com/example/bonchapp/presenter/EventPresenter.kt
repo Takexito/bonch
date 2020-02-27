@@ -8,8 +8,9 @@ import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.model.repository.TestRep
 import com.example.bonchapp.ui.event.EventFragment
 import com.example.bonchapp.ui.event.FullEventFragment
+import com.example.bonchapp.ui.event.MainEventFragment
 
-class EventPresenter(val context: EventFragment) {
+class EventPresenter(val context: MainEventFragment) {
 
     private val _testData =
         MutableLiveData<ArrayList<String>>().apply { value = arrayListOf("Load!") }
