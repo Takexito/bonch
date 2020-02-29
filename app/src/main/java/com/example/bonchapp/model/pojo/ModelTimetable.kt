@@ -38,4 +38,30 @@ class ModelTimetable() : MainContract.Model {
         return data
     }
 
+    override fun getGroups(): LiveData<ArrayList<String>>  {
+
+        val data = MutableLiveData<ArrayList<String>>()
+
+        NetworkService
+            .TABLE_API
+            .getGroups()
+            .enqueue(object : Callback<ArrayList<String>> {
+                override fun onResponse(
+                    call: Call<ArrayList<String>>,
+                    resp: Response<ArrayList<String>>
+                ){
+                    Log.d("Test", "Good")
+                    data.value = resp.body() ?: arrayListOf("Error!", "LOL", "statr")
+
+                }
+
+                override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
+                    Log.d("Test", t.localizedMessage ?: "Error!")
+
+                }
+            })
+
+        return data
+    }
+
 }

@@ -23,15 +23,19 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
     var type = "group"
 
     lateinit var timetable: List<SubjectDTO>
+    lateinit var groupsList:List<String>
+
+    lateinit var activeday:String
 
     init {
         val sdf = SimpleDateFormat("yyyy-MM-dd")
-        val today = sdf.format(java.util.Date())
-            updateTimetable(today)
+        activeday = sdf.format(java.util.Date())
+        updateTimetable(activeday)
     }
 
     override fun updateTimetable(day: String) {
-        val body = RequestDTO(0, Info(type, name), Date(day))
+        activeday = day
+        val body = RequestDTO(0, Info(type, name), Date(activeday))
 
         mModel.loadTimetable(body).observe(fragment.viewLifecycleOwner, Observer {
             timetable = it
@@ -39,13 +43,25 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
         })
     }
 
-    override fun switchTimetable(type: Int) {
-        if (type == 0) {
-            this.type = "group"
+    override fun updateGroupsList() {
+        mModel.getGroups().observe(fragment.viewLifecycleOwner, Observer {
+            groupsList = it
+            mView.showGroupsList(groupsList)
+        })
+    }
+
+    override fun switchTimetable(type: String) {
+        this.type = type
+        if (type == "group")
             mView.showSwitchGroupFragment()
-        } else {
-            this.type = "tutor"
+        else
             mView.showSwitchProfessorFragment()
-        }
+    }
+
+    fun switchGroup(name:String, type:String){
+        this.name = name
+        this.type = type
+
+        updateTimetable(activeday)
     }
 }

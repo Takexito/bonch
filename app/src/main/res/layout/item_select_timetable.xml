@@ -21,20 +21,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/btn_select_group"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:onClick="onClickSelectGroup"
         android:text="Выбор группы"
         android:textAllCaps="false"
         android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btn_select_tutor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_select_tutor"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"

@@ -20,13 +20,7 @@ class NavgutFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        navgutViewModel =
-            ViewModelProviders.of(this).get(NavgutViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_navgut, container, false)
-        val textView: TextView = root.findViewById(R.id.text_navgut)
-        navgutViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 }

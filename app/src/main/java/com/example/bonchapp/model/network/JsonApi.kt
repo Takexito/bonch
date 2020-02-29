@@ -19,15 +19,7 @@ interface JsonApi {
     //@FormUrlEncoded
     @POST("/api/timetable")
     fun requestTimeTable(
-
         @Header("Accept") accept: String = "application/json",
-        @Body body:RequestDTO?
-    //@Field("range") range: Int = 0
-        //@Field("info", encoded = false) info: Array<String> = arrayOf("group", "ИКТ-802"),
-        //@Field("date") date: Array<String> = arrayOf("2020-02-12", "2020-02-12")
-        //@Field("type") type: String = "group",
-        //@Field("text") text: String = URLEncoder.encode("ИКТ-802", StandardCharsets.UTF_8.toString()),
-        //@Field("from") from: String = "2020-02-12",
-        //@Field("to") to: String = "2020-02-12"
+        @Body body: RequestDTO?
     ): Call<ArrayList<SubjectDTO>>
 }
