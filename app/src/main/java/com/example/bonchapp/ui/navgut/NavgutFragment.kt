@@ -20,14 +20,13 @@ class NavgutFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var errorTW: TextView
 
-    private lateinit var presenter: NavgutPresenter
+    val presenter = NavgutPresenter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        presenter = NavgutPresenter(this)
         presenter.currentCabinet = arguments?.getString("cabinet")
         val root = inflater.inflate(R.layout.fragment_navgut, container, false)
         initView(root)
