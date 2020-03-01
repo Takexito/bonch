@@ -1,11 +1,9 @@
 package com.example.bonchapp.model.network.api
 
 import retrofit2.Call
-import retrofit2.http.GET
 import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.model.pojo.RequestTutorsDTO
 import com.example.bonchapp.pojo.SubjectDTO
-import retrofit2.Call
 import retrofit2.http.*
 
 
