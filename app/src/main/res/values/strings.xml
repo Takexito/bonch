@@ -95,4 +95,9 @@
     </string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="switсhTimetable">
+        <item>Выбор группы</item>
+        <item>Выбор преподавателя</item>
+    </string-array>
 </resources>
