@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
 import com.example.bonchapp.presenter.EventPresenter
 import kotlinx.android.synthetic.main.fragment_main_event.*
+
 
 class MainEventFragment : Fragment() {
 
@@ -24,8 +26,10 @@ class MainEventFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         presenter.setDataFromApi()
         initRecycler()
+        initSearch()
     }
 
     private fun initRecycler() {
@@ -36,8 +40,26 @@ class MainEventFragment : Fragment() {
         presenter.testData.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer {
+                (eventRecyclerView.adapter as EventAdapter).setData(
+                    presenter.testData.value ?: arrayListOf()
+                )
                 eventRecyclerView.adapter?.notifyDataSetChanged()
             })
+    }
+
+    private fun initSearch() {
+        searchView.maxWidth = Int.MAX_VALUE
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                presenter.onSearchQueryUpdate(eventRecyclerView, newText)
+                return true
+            }
+        })
     }
 
 }
