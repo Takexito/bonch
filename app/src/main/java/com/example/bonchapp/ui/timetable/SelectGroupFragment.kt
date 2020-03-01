@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.R
+import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.adapters.SelectGroupAdapter
 
 class SelectGroupFragment() : Fragment() {
@@ -29,9 +30,10 @@ class SelectGroupFragment() : Fragment() {
 
     fun initRecyclerView(root:View){
         groupsListAdapter = SelectGroupAdapter(root.context)
-        val recyclerViewDay = root.findViewById<RecyclerView>(R.id.rv_selectGroup)
-        recyclerViewDay.layoutManager = LinearLayoutManager(root.context)
-        recyclerViewDay.adapter = groupsListAdapter
+        val recyclerView = root.findViewById<RecyclerView>(R.id.rv_selectGroup)
+        recyclerView.layoutManager = LinearLayoutManager(root.context)
+        recyclerView.adapter = groupsListAdapter
+
     }
 
 }

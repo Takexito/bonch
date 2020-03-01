@@ -12,6 +12,7 @@ interface MainContract {
         fun showGroupsList(list: List<String>)
         fun showSwitchProfessorFragment()
         fun showSwitchGroupFragment()
+        fun setNameGroup(name:String)
     }
 
     interface Presenter {

@@ -17,14 +17,12 @@ import com.example.bonchapp.ui.adapters.TimetableAdapter
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 
+lateinit var mPresenter: PresenterTimeTable
 
 class TimetableFragment : Fragment(), MainContract.View {
 
     lateinit var timeTableAdapter: TimetableAdapter
     lateinit var selectGroupFragment: SelectGroupFragment
-
-
-    lateinit var mPresenter: PresenterTimeTable
 
     lateinit var root:View
 
@@ -101,14 +99,17 @@ class TimetableFragment : Fragment(), MainContract.View {
 
         btn_select_group.setOnClickListener {
             mPresenter.switchTimetable("group")
+            itemSwitchTimeTable.setVisibility(View.INVISIBLE)
         }
 
         btn_select_professor.setOnClickListener {
             mPresenter.switchTimetable("tutor")
+            itemSwitchTimeTable.setVisibility(View.INVISIBLE)
         }
     }
 
-    fun onClickSelectGroup(view:View){
-        mPresenter.updateGroupsList()
+    override fun setNameGroup(name:String){
+        val groupName = root.findViewById<TextView>(R.id.groupName)
+        groupName.text = name
     }
 }

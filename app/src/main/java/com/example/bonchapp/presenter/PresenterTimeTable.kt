@@ -63,5 +63,9 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
         this.type = type
 
         updateTimetable(activeday)
+
+        mView.setNameGroup(name)
+
+        fragment.activity?.onBackPressed()
     }
 }
