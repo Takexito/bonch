@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.R
+import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.adapters.SelectGroupAdapter
@@ -65,7 +66,7 @@ class TimetableFragment : Fragment(), MainContract.View {
     }
 
     private fun initRecyclerView(view: View) {
-        timeTableAdapter = TimetableAdapter(view.context)
+        timeTableAdapter = TimetableAdapter(view.context, this)
         val recyclerViewDay = view.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
         recyclerViewDay.layoutManager = LinearLayoutManager(view.context)
         recyclerViewDay.adapter = timeTableAdapter
@@ -103,8 +104,8 @@ class TimetableFragment : Fragment(), MainContract.View {
         }
 
         btn_select_professor.setOnClickListener {
-            mPresenter.switchTimetable("tutor")
-            itemSwitchTimeTable.setVisibility(View.INVISIBLE)
+            //mPresenter.switchTimetable("tutor")
+            //itemSwitchTimeTable.setVisibility(View.INVISIBLE)
         }
     }
 
