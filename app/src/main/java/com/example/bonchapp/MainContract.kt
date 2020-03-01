@@ -1,7 +1,7 @@
 package com.example.bonchapp
 
 import androidx.lifecycle.LiveData
-import com.example.bonchapp.model.pojo.RequestDTO
+import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import kotlin.collections.ArrayList
 
@@ -22,7 +22,7 @@ interface MainContract {
     }
 
     interface Model {
-        fun loadTimetable(body: RequestDTO): LiveData<ArrayList<SubjectDTO>>
+        fun loadTimetable(body: RequestTimeTableDTO): LiveData<ArrayList<SubjectDTO>>
         fun getGroups(): LiveData<ArrayList<String>>
     }
 }

@@ -33,7 +33,7 @@ class SelectGroupAdapter(val context: Context) : RecyclerView.Adapter<SelectGrou
 
 
     override fun onBindViewHolder(holder: SelectGroupPostHolder, position: Int) {
-        holder.bind(subject[position])
+        holder.bind(subject[position], position)
     }
 
 }
@@ -44,11 +44,21 @@ class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     lateinit var group: String
     val textName = itemView.findViewById<TextView>(R.id.item_group_nameGroup)
 
-    fun bind(group: String) {
+    fun bind(group: String, pos: Int) {
         this.group = group
         textName.text = group
 
-        itemView.setOnClickListener{
+        val background: Int
+
+        if (pos % 2 != 0)
+            background = itemView.resources.getColor(R.color.colorItemGrey)
+        else
+            background = itemView.resources.getColor(R.color.colorItemWhite)
+
+        itemView.setBackgroundColor(background)
+
+
+        itemView.setOnClickListener {
             mPresenter.switchGroup(group, "group")
         }
 

@@ -1,6 +1,6 @@
 package com.example.bonchapp.model.pojo
 
-data class RequestDTO (
+data class RequestTimeTableDTO (
 
     val range : Int = 0,
     val info : Info,

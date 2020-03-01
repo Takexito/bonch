@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="Выбор группы"
-        android:textColor="#FF8117"
+        android:textColor="@color/colorOrange"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

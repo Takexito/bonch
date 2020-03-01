@@ -33,9 +33,9 @@
             android:padding="16dp"
             android:text="Выбор группы"
             android:textAlignment="center"
-            android:textColor="#FF8117"
+            android:textColor="@color/colorOrange"
             android:textSize="16sp"
-            android:textStyle=""
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,10 +54,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:rotation="180"
 
+        android:rotation="180"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +82,9 @@
         android:id="@+id/item_swithTimeTable"
         layout="@layout/item_select_timetable"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+        android:layout_width="215dp"
+        android:layout_height="132dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

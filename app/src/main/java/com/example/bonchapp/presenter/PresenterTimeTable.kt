@@ -1,17 +1,14 @@
 package com.example.bonchapp.presenter
 
-import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.model.pojo.Date
 import com.example.bonchapp.model.pojo.Info
 import com.example.bonchapp.model.pojo.ModelTimetable
-import com.example.bonchapp.model.pojo.RequestDTO
+import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import java.text.SimpleDateFormat
-import java.util.*
 
 
 class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.Presenter {
@@ -35,7 +32,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
 
     override fun updateTimetable(day: String) {
         activeday = day
-        val body = RequestDTO(0, Info(type, name), Date(activeday))
+        val body = RequestTimeTableDTO(0, Info(type, name), Date(activeday))
 
         mModel.loadTimetable(body).observe(fragment.viewLifecycleOwner, Observer {
             timetable = it
