@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.model.pojo.Date
 import com.example.bonchapp.model.pojo.Info
-import com.example.bonchapp.model.pojo.ModelTimetable
+import com.example.bonchapp.model.ModelTimetable
 import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import java.text.SimpleDateFormat
