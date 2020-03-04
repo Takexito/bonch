@@ -2,7 +2,6 @@ package com.example.bonchapp.presenter
 
 import com.example.bonchapp.ui.storage.StorageFragment
 
-
 class StoragePresenter(val context: StorageFragment) {
 
     var data = mutableListOf("Мой Файл 1", "Мой Файл 2", "Мой Файл 3", "Мой Файл 4", "Мой Файл 5", "Мой Файл 6", "Мой Файл 7")
