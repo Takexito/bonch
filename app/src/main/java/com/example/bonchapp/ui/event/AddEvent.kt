@@ -14,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [FavoriteEventFragment.newInstance] factory method to
+ * Use the [AddEvent.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FavoriteEventFragment : Fragment() {
+class AddEvent : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +35,7 @@ class FavoriteEventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite_event, container, false)
+        return inflater.inflate(R.layout.fragment_add_event, container, false)
     }
 
     companion object {
@@ -45,12 +45,12 @@ class FavoriteEventFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment FavoriteEventFragment.
+         * @return A new instance of fragment AddEvent.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            FavoriteEventFragment().apply {
+            AddEvent().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

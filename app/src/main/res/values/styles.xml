@@ -9,6 +9,11 @@
         <item name="materialButtonStyle">@style/ButtonStyle</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+        <item name="extendedFloatingActionButtonStyle">@style/ExtendedFloatingActionButton</item>
+        <item name="tabStyle">@style/TabLayout</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -16,6 +21,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--Button-->
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="strokeColor">@color/colorPrimary</item>
         <item name="strokeWidth">1dp</item>
@@ -23,6 +29,7 @@
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
+    <!--Bottom Dialog-->
     <style name="CustomBottomSheetDialog" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
     </style>
@@ -39,10 +46,20 @@
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
-    <style name="AppTheme.TabsText" parent="Widget.AppCompat.Light.ActionBar.TabText">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textAllCaps">true</item>
+    <!--Tab Layout-->
+    <style name="TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabTextAppearance">@style/TabsText</item>
         <item name="tabTextColor">@color/colorPrimary</item>
     </style>
+    <style name="TabsText" parent="Widget.AppCompat.Light.ActionBar.TabText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!--Fab-->
+    <style name="ExtendedFloatingActionButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+
 
 </resources>

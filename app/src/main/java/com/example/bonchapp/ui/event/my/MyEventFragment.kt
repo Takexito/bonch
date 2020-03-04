@@ -1,4 +1,4 @@
-package com.example.bonchapp.ui.event
+package com.example.bonchapp.ui.event.my
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

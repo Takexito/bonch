@@ -1,10 +1,10 @@
-package com.example.bonchapp.ui.event
+package com.example.bonchapp.ui.event.main
 
 import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.bonchapp.coordinator.MainCoordinator
+import com.example.bonchapp.ui.event.favorite.FavoriteEventFragment
+import com.example.bonchapp.ui.event.my.MyEventFragment
 
 class EventPagerAdapter(val fragment: Fragment): FragmentPagerAdapter(fragment.fragmentManager!!) {
     private val tabs = arrayOf("Мероприятия", "Избранное", "Мои события")

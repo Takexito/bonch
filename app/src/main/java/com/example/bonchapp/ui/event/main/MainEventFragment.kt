@@ -1,4 +1,4 @@
-package com.example.bonchapp.ui.event
+package com.example.bonchapp.ui.event.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,11 +30,13 @@ class MainEventFragment : Fragment() {
         presenter.setDataFromApi()
         initRecycler()
         initSearch()
+        initFab()
     }
 
     private fun initRecycler() {
         eventRecyclerView.apply {
-            adapter = EventAdapter(this@MainEventFragment)
+            adapter =
+                EventAdapter(this@MainEventFragment)
             layoutManager = LinearLayoutManager(context)
         }
         presenter.testData.observe(
@@ -62,4 +64,10 @@ class MainEventFragment : Fragment() {
         })
     }
 
+    private fun initFab(){
+        addEventFab.setOnClickListener{
+            presenter.onFabClick()
+
+        }
+    }
 }

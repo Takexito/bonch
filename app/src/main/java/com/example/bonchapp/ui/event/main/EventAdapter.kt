@@ -1,4 +1,4 @@
-package com.example.bonchapp.ui.event
+package com.example.bonchapp.ui.event.main
 
 import android.util.Log
 import android.view.LayoutInflater
