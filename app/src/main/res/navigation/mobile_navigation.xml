@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/navigation_event"
         android:name="com.example.bonchapp.ui.event.EventFragment"
-        tools:layout="@layout/fragment_event"/>
+        tools:layout="@layout/fragment_event">
+        <action
+            android:id="@+id/action_navigation_event_to_fullEventFragment"
+            app:destination="@id/fullEventFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_navgut"
@@ -29,4 +33,14 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.bonchapp.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/fullEventFragment"
+        android:name="com.example.bonchapp.ui.event.FullEventFragment"
+        android:label="fragment_full_event"
+        tools:layout="@layout/fragment_full_event" >
+        <argument
+            android:name="eventId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
