@@ -62,4 +62,10 @@
     </style>
 
 
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+    <style name="spinnerDropdownItemStyle" parent = "android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
 </resources>
