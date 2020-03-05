@@ -95,6 +95,10 @@
     </string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="search_files">Поиск по автору или названию</string>
 
     <string-array name="Months">
