@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
@@ -39,13 +40,54 @@ class SelectGroupAdapter(val context: Context) : RecyclerView.Adapter<SelectGrou
 }
 
 class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    //val imageSrc = itemView.findViewById<TextView>(R.id.subject_time)
-
-    lateinit var group: String
+    val imageSrc = itemView.findViewById<ImageView>(R.id.faculty_icon)
     val textName = itemView.findViewById<TextView>(R.id.item_group_nameGroup)
 
-    fun bind(group: String, pos: Int) {
-        this.group = group
+    lateinit var group:String
+
+    fun bind(str: String, pos: Int) {
+
+        group = str
+
+        when {
+            group.indexOf("РТС/") != -1 -> {
+                group = group.replace("РТС/", "")
+                imageSrc.setImageResource(R.drawable.rts)
+            }
+            group.indexOf("ИС и Т/") != -1 -> {
+                group = group.replace("ИС и Т/", "")
+                imageSrc.setImageResource(R.drawable.isit)
+            }
+            group.indexOf("ИКСС/") != -1 -> {
+                group = group.replace("ИКСС/", "")
+                imageSrc.setImageResource(R.drawable.ikss_pushka)
+            }
+            group.indexOf("ЦЭУБИ/") != -1 -> {
+                group = group.replace("ЦЭУБИ/", "")
+                imageSrc.setImageResource(R.drawable.ceubi)
+            }
+            group.indexOf("ГФ/") != -1 -> {
+                group = group.replace("ГФ/", "")
+                imageSrc.setImageResource(R.drawable.gf)
+            }/*
+            group.indexOf("Санкт-Петербургский колледж телекоммуникаций СПбГУТ/") != -1 -> {
+                textName.text =
+                    group.replace("Санкт-Петербургский колледж телекоммуникаций СПбГУТ/", "")
+                imageSrc.setImageResource(R.drawable.empty)
+            }
+            group.indexOf("Институт магистратуры/") != -1 -> {
+                textName.text = group.replace("Институт магистратуры/", "")
+                imageSrc.setImageResource(R.drawable.empty)
+            }
+            group.indexOf("ИНО/") != -1 -> {
+                textName.text = group.replace("ИНО/", "")
+                imageSrc.setImageResource(R.drawable.empty)
+            }*/
+            else -> {
+                group = group.substring(group.indexOf("/")+1)
+                imageSrc.setImageResource(R.drawable.empty)
+            }
+        }
         textName.text = group
 
         val background: Int
@@ -61,7 +103,5 @@ class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
         itemView.setOnClickListener {
             mPresenter.switchGroup(group, "group")
         }
-
     }
-
 }

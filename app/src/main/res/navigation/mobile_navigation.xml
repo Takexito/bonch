@@ -24,11 +24,6 @@
         tools:layout="@layout/fragment_navgut"/>
 
     <fragment
-        android:id="@+id/navigation_timetable"
-        android:name="com.example.bonchapp.ui.timetable.TimetableFragment"
-        tools:layout="@layout/fragment_timetable" />
-
-    <fragment
         android:id="@+id/navigation_storage"
         android:name="com.example.bonchapp.ui.storage.StorageFragment"
         tools:layout="@layout/fragment_storage" />
@@ -52,4 +47,24 @@
         android:name="com.example.bonchapp.ui.event.AddEvent"
         android:label="fragment_add_event"
         tools:layout="@layout/fragment_add_event" />
+
+    <fragment
+        android:id="@+id/navigation_timetable"
+        android:name="com.example.bonchapp.ui.timetable.TimetableFragment"
+        tools:layout="@layout/fragment_timetable">
+        <action
+            android:id="@+id/action_navigation_timetable_to_selectGroupFragment"
+            app:destination="@id/selectGroup"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectGroup"
+        android:name="com.example.bonchapp.ui.timetable.SelectGroupFragment"
+        android:label="fragment_select_group"
+        tools:layout="@layout/fragment_select_group">
+        <argument
+            android:name="listGroup"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

@@ -26,7 +26,7 @@ class TimetableFragment : Fragment(), MainContract.View {
     lateinit var timeTableAdapter: TimetableAdapter
     lateinit var selectGroupFragment: SelectGroupFragment
 
-    lateinit var root:View
+    lateinit var root: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,11 +61,14 @@ class TimetableFragment : Fragment(), MainContract.View {
 
     override fun showSwitchGroupFragment() {
         selectGroupFragment = SelectGroupFragment()
-        activity!!.supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment ,
-            selectGroupFragment, null).addToBackStack("HZ").commit()
 
+        activity!!.supportFragmentManager.beginTransaction().add(
+            R.id.nav_host_fragment,
+            selectGroupFragment, null
+        ).addToBackStack(null).commit()
+
+        //MainCoordinator.navigateToSelectGroup(this)
         mPresenter.updateGroupsList()
-
     }
 
     private fun initRecyclerView(view: View) {
@@ -86,10 +89,11 @@ class TimetableFragment : Fragment(), MainContract.View {
             mPresenter.updateTimetable(s)
         })
 
-        textMonth.text = resources.getStringArray(R.array.Months)[calendar.currentDate.month-1]
+        textMonth.text = resources.getStringArray(R.array.Months)[calendar.currentDate.month - 1]
 
         calendar.setOnMonthChangedListener { widget, date ->
-            textMonth.text = resources.getStringArray(R.array.Months)[calendar.currentDate.month-1]
+            textMonth.text =
+                resources.getStringArray(R.array.Months)[calendar.currentDate.month - 1]
         }
 
     }
@@ -122,7 +126,7 @@ class TimetableFragment : Fragment(), MainContract.View {
         }
     }
 
-    override fun setNameGroup(name:String){
+    override fun setNameGroup(name: String) {
         val groupName = root.findViewById<TextView>(R.id.groupName)
         groupName.text = name
     }

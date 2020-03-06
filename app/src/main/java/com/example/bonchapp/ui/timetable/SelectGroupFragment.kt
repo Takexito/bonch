@@ -10,9 +10,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bonchapp.MainContract
 import com.example.bonchapp.R
-import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.adapters.SelectGroupAdapter
 
 class SelectGroupFragment() : Fragment() {
@@ -25,7 +23,7 @@ class SelectGroupFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_switch_group, container, false)
+        val root = inflater.inflate(R.layout.fragment_select_group, container, false)
 
         initRecyclerView(root)
         initSearchField(root)
