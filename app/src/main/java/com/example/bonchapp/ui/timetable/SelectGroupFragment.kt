@@ -13,17 +13,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.adapters.SelectGroupAdapter
 
-class SelectGroupFragment() : Fragment() {
+class SelectGroupFragment(type: Int) : Fragment() {
 
     lateinit var groupsListAdapter: SelectGroupAdapter
-    lateinit var arrSubjects:List<String>
+    lateinit var arrSubjects: List<String>
+    val type = type
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_select_group, container, false)
+
+        val root: View
+
+        if (type == 0) root = inflater.inflate(R.layout.fragment_select_group, container, false)
+        else root = inflater.inflate(R.layout.fragment_select_tutor, container, false)
 
         initRecyclerView(root)
         initSearchField(root)
@@ -33,7 +38,7 @@ class SelectGroupFragment() : Fragment() {
     }
 
     fun initRecyclerView(root: View) {
-        groupsListAdapter = SelectGroupAdapter(root.context)
+        groupsListAdapter = SelectGroupAdapter(root.context, type)
         val recyclerView = root.findViewById<RecyclerView>(R.id.rv_selectGroup)
         recyclerView.layoutManager = LinearLayoutManager(root.context)
         recyclerView.adapter = groupsListAdapter
@@ -42,23 +47,23 @@ class SelectGroupFragment() : Fragment() {
     fun initSearchField(root: View) {
         val textSearch = root.findViewById<EditText>(R.id.search_field)
         textSearch.doOnTextChanged { text, start, count, after ->
-            Log.d("lol", text.toString())
             findInArray(text.toString())
         }
     }
 
     fun findInArray(str: String) {
 
-        if(str == "")
+        if (str == "")
             groupsListAdapter.setGroups(arrSubjects)
-            else{
+        else {
 
-        var arr: ArrayList<String> = arrayListOf()
-        for (i in arrSubjects) {
-            if(i.contains(str, true)){
-                arr.add(i)
+            var arr: ArrayList<String> = arrayListOf()
+            for (i in arrSubjects) {
+                if (i.contains(str, true)) {
+                    arr.add(i)
+                }
             }
+            groupsListAdapter.setGroups(arr)
         }
-        groupsListAdapter.setGroups(arr)
-    }}
+    }
 }

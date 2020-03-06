@@ -1,11 +1,14 @@
 package com.example.bonchapp.presenter
 
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.bonchapp.MainContract
+import com.example.bonchapp.model.ModelTimetable
 import com.example.bonchapp.model.pojo.Date
 import com.example.bonchapp.model.pojo.Info
-import com.example.bonchapp.model.ModelTimetable
 import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import java.text.SimpleDateFormat
@@ -21,6 +24,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
 
     lateinit var timetable: List<SubjectDTO>
     lateinit var groupsList:List<String>
+    lateinit var tutorsList:List<String>
 
     lateinit var activeday:String
 
@@ -47,12 +51,18 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
         })
     }
 
+    override fun updateTutorsList() {
+        mModel.getTutors().observe(fragment.viewLifecycleOwner, Observer {
+            tutorsList = it
+            mView.showGroupsList(tutorsList)
+        })    }
+
     override fun switchTimetable(type: String) {
         this.type = type
         if (type == "group")
-            mView.showSwitchGroupFragment()
+            mView.showSelectGroupFragment()
         else
-            mView.showSwitchProfessorFragment()
+            mView.showSelectProfessorFragment()
     }
 
     fun switchGroup(name:String, type:String){

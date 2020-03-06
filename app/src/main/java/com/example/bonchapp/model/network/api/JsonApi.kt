@@ -18,9 +18,9 @@ interface JsonApi {
         @Body body: RequestTimeTableDTO?
     ): Call<ArrayList<SubjectDTO>>
 
-    @GET("/api/tutors")
+    @POST("/api/tutors")
     fun getTutors(
         @Header("Accept") accept: String = "application/json",
         @Body body: RequestTutorsDTO?
-    ): Call<ArrayList<SubjectDTO>>
+    ): Call<ArrayList<String>>
 }

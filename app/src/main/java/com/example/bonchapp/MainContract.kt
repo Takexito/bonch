@@ -10,19 +10,21 @@ interface MainContract {
     interface View {
         fun showTimetable(timetable: List<SubjectDTO>)
         fun showGroupsList(list: List<String>)
-        fun showSwitchProfessorFragment()
-        fun showSwitchGroupFragment()
+        fun showSelectProfessorFragment()
+        fun showSelectGroupFragment()
         fun setNameGroup(name:String)
     }
 
     interface Presenter {
         fun updateTimetable(day: String)
         fun updateGroupsList()
+        fun updateTutorsList()
         fun switchTimetable(type: String)
     }
 
     interface Model {
         fun loadTimetable(body: RequestTimeTableDTO): LiveData<ArrayList<SubjectDTO>>
         fun getGroups(): LiveData<ArrayList<String>>
+        fun getTutors(): LiveData<ArrayList<String>>
     }
 }

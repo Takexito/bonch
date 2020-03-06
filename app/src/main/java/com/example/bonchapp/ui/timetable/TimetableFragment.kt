@@ -55,12 +55,19 @@ class TimetableFragment : Fragment(), MainContract.View {
 
     }
 
-    override fun showSwitchProfessorFragment() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun showSelectProfessorFragment() {
+        selectGroupFragment = SelectGroupFragment(1)
 
-    override fun showSwitchGroupFragment() {
-        selectGroupFragment = SelectGroupFragment()
+        activity!!.supportFragmentManager.beginTransaction().add(
+            R.id.nav_host_fragment,
+            selectGroupFragment, null
+        ).addToBackStack(null).commit()
+
+        //MainCoordinator.navigateToSelectGroup(this)
+        mPresenter.updateTutorsList()    }
+
+    override fun showSelectGroupFragment() {
+        selectGroupFragment = SelectGroupFragment(0)
 
         activity!!.supportFragmentManager.beginTransaction().add(
             R.id.nav_host_fragment,
@@ -121,8 +128,8 @@ class TimetableFragment : Fragment(), MainContract.View {
         }
 
         btn_select_professor.setOnClickListener {
-            //mPresenter.switchTimetable("tutor")
-            //itemSwitchTimeTable.setVisibility(View.INVISIBLE)
+            mPresenter.switchTimetable("tutor")
+            itemSwitchTimeTable.setVisibility(View.INVISIBLE)
         }
     }
 
