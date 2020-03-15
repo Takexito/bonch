@@ -1,4 +1,4 @@
-package com.example.bonchapp.presenter
+package com.example.bonchapp.presenter.event
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

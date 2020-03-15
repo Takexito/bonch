@@ -8,7 +8,7 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
-import com.example.bonchapp.presenter.EventPresenter
+import com.example.bonchapp.presenter.event.EventPresenter
 import kotlinx.android.synthetic.main.fragment_main_event.*
 
 

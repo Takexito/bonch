@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.bonchapp.R
-import com.example.bonchapp.presenter.FullEventPresenter
+import com.example.bonchapp.presenter.event.FullEventPresenter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_full_event.*
 
