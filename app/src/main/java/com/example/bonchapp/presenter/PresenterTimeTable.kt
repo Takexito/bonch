@@ -1,8 +1,5 @@
 package com.example.bonchapp.presenter
 
-import android.content.Context
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.bonchapp.MainContract
@@ -19,19 +16,23 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
     var mModel = ModelTimetable()
     val fragment = fr
 
-    var name = "ИКПИ-84"
+    var name = ""
     var type = "group"
 
     lateinit var timetable: List<SubjectDTO>
-    lateinit var groupsList:List<String>
-    lateinit var tutorsList:List<String>
+    lateinit var groupsList: List<String>
+    lateinit var tutorsList: List<String>
 
-    lateinit var activeday:String
+    var activeday: String
 
     init {
         val sdf = SimpleDateFormat("yyyy-MM-dd")
         activeday = sdf.format(java.util.Date())
-        updateTimetable(activeday)
+
+        loadSavedNameGroup()
+
+        if (name != "")
+            updateTimetable(activeday)
     }
 
     override fun updateTimetable(day: String) {
@@ -40,7 +41,13 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
 
         mModel.loadTimetable(body).observe(fragment.viewLifecycleOwner, Observer {
             timetable = it
+
             mView.showTimetable(timetable)
+
+            if (timetable.size != 0) {
+                mView.setWithoutClassesVisibility(false)
+            } else
+                mView.setWithoutClassesVisibility(true)
         })
     }
 
@@ -55,7 +62,8 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
         mModel.getTutors().observe(fragment.viewLifecycleOwner, Observer {
             tutorsList = it
             mView.showGroupsList(tutorsList)
-        })    }
+        })
+    }
 
     override fun switchTimetable(type: String) {
         this.type = type
@@ -65,7 +73,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
             mView.showSelectProfessorFragment()
     }
 
-    fun switchGroup(name:String, type:String){
+    override fun switchGroup(name: String, type: String) {
         this.name = name
         this.type = type
 
@@ -74,5 +82,18 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
         mView.setNameGroup(name)
 
         fragment.activity?.onBackPressed()
+        mView.setMissingGroupVisibility(false)
+    }
+
+    fun loadSavedNameGroup() {
+        mModel.loadSavedNameGroup(name)
+
+        //name = "ИКПИ-84"
+
+
+        if (name != "") {
+            mView.setMissingGroupVisibility(false)
+            mView.setNameGroup(name)
+        }
     }
 }

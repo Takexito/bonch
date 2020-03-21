@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -64,7 +65,8 @@ class TimetableFragment : Fragment(), MainContract.View {
         ).addToBackStack(null).commit()
 
         //MainCoordinator.navigateToSelectGroup(this)
-        mPresenter.updateTutorsList()    }
+        mPresenter.updateTutorsList()
+    }
 
     override fun showSelectGroupFragment() {
         selectGroupFragment = SelectGroupFragment(0)
@@ -133,8 +135,31 @@ class TimetableFragment : Fragment(), MainContract.View {
         }
     }
 
+    override fun setMissingGroupVisibility(b: Boolean) {
+        val r = root.findViewById<LinearLayout>(R.id.missing_teacher)
+
+        if (b)
+            r.setVisibility(View.VISIBLE)
+        else
+            r.setVisibility(View.INVISIBLE)
+
+    }
+
+    override fun setWithoutClassesVisibility(b: Boolean) {
+        val r = root.findViewById<LinearLayout>(R.id.without_classes)
+
+        if (b)
+            r.setVisibility(View.VISIBLE)
+        else
+            r.setVisibility(View.INVISIBLE)
+
+    }
+
     override fun setNameGroup(name: String) {
         val groupName = root.findViewById<TextView>(R.id.groupName)
         groupName.text = name
+
+        val spinner_groupName = root.findViewById<TextView>(R.id.spinner)
+        spinner_groupName.text = name
     }
 }

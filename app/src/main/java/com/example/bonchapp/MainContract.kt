@@ -13,6 +13,8 @@ interface MainContract {
         fun showSelectProfessorFragment()
         fun showSelectGroupFragment()
         fun setNameGroup(name:String)
+        fun setMissingGroupVisibility(b:Boolean)
+        fun setWithoutClassesVisibility(b:Boolean)
     }
 
     interface Presenter {
@@ -20,6 +22,7 @@ interface MainContract {
         fun updateGroupsList()
         fun updateTutorsList()
         fun switchTimetable(type: String)
+        fun switchGroup(name:String, type:String)
     }
 
     interface Model {

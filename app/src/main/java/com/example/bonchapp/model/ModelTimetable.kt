@@ -90,4 +90,7 @@ class ModelTimetable() : MainContract.Model {
         return data
     }
 
+    fun loadSavedNameGroup(name:String){
+
+    }
 }
