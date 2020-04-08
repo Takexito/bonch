@@ -10,6 +10,12 @@
     android:stateListAnimator="@null"
     app:cardCornerRadius="4dp">
 
+    <ImageView
+        android:id="@+id/gradient_timetable"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:background = "@drawable/gradient_timetable"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

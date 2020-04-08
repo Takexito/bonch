@@ -32,23 +32,24 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
         loadSavedNameGroup()
 
         if (name != "")
-            updateTimetable(activeday)
+            switchDayTimetable(activeday)
     }
 
-    override fun updateTimetable(day: String) {
+    override fun switchDayTimetable(day: String) {
         activeday = day
         val body = RequestTimeTableDTO(0, Info(type, name), Date(activeday))
 
-        mModel.loadTimetable(body).observe(fragment.viewLifecycleOwner, Observer {
-            timetable = it
+        if (name != "")
+            mModel.loadTimetable(body).observe(fragment.viewLifecycleOwner, Observer {
+                timetable = it
 
-            mView.showTimetable(timetable)
+                mView.showTimetable(timetable)
 
-            if (timetable.size != 0) {
-                mView.setWithoutClassesVisibility(false)
-            } else
-                mView.setWithoutClassesVisibility(true)
-        })
+                if (timetable.size != 0) {
+                    mView.setWithoutClassesVisibility(false)
+                } else
+                    mView.setWithoutClassesVisibility(true)
+            })
     }
 
     override fun updateGroupsList() {
@@ -77,7 +78,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
         this.name = name
         this.type = type
 
-        updateTimetable(activeday)
+        switchDayTimetable(activeday)
 
         mView.setNameGroup(name)
 

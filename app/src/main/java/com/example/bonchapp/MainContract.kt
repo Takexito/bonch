@@ -18,7 +18,7 @@ interface MainContract {
     }
 
     interface Presenter {
-        fun updateTimetable(day: String)
+        fun switchDayTimetable(day: String)
         fun updateGroupsList()
         fun updateTutorsList()
         fun switchTimetable(type: String)

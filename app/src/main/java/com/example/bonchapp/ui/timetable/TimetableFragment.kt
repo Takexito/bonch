@@ -1,24 +1,23 @@
 package com.example.bonchapp.ui.timetable
 
+import android.app.Activity
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.R
-import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
-import com.example.bonchapp.ui.adapters.SelectGroupAdapter
 import com.example.bonchapp.ui.adapters.TimetableAdapter
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
-import kotlinx.android.synthetic.main.fragment_timetable.view.*
+import com.prolificinteractive.materialcalendarview.*
 
 lateinit var mPresenter: PresenterTimeTable
 
@@ -93,9 +92,15 @@ class TimetableFragment : Fragment(), MainContract.View {
 
         val textMonth = view.findViewById<TextView>(R.id.month)
 
+        val cur = CurrentDayDecorator(activity, CalendarDay.today(), calendar.selectedDate)
+        calendar.addDecorators(cur)
+
         calendar.setOnDateChangedListener(OnDateSelectedListener { widget, date, selected ->
             val s: String = "${date.year}-${date.month}-${date.day}"
-            mPresenter.updateTimetable(s)
+            mPresenter.switchDayTimetable(s)
+
+            cur.myDay = CalendarDay.from(2020,3,22)
+            cur.shouldDecorate(CalendarDay.from(2020,3,22))
         })
 
         textMonth.text = resources.getStringArray(R.array.Months)[calendar.currentDate.month - 1]
@@ -103,7 +108,11 @@ class TimetableFragment : Fragment(), MainContract.View {
         calendar.setOnMonthChangedListener { widget, date ->
             textMonth.text =
                 resources.getStringArray(R.array.Months)[calendar.currentDate.month - 1]
+
         }
+
+        calendar.setSelectedDate(CalendarDay.today())
+
 
     }
 
@@ -161,5 +170,23 @@ class TimetableFragment : Fragment(), MainContract.View {
 
         val spinner_groupName = root.findViewById<TextView>(R.id.spinner)
         spinner_groupName.text = name
+    }
+}
+
+class CurrentDayDecorator(context: Activity?, currentDay: CalendarDay, selectedDay: CalendarDay?) : DayViewDecorator {
+    private val drawable: Drawable?
+    var myDay = currentDay
+    val sel = selectedDay
+    override fun shouldDecorate(day: CalendarDay): Boolean {
+        return day == myDay
+    }
+
+    override fun decorate(view: DayViewFacade) {
+        view.setSelectionDrawable(drawable!!)
+    }
+
+    init {
+        // You can set background for Decorator via drawable here
+        drawable = ContextCompat.getDrawable(context!!, R.drawable.currentday_outline)
     }
 }
