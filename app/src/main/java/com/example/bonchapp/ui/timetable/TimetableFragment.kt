@@ -17,7 +17,12 @@ import com.example.bonchapp.R
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.adapters.TimetableAdapter
-import com.prolificinteractive.materialcalendarview.*
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.DayViewDecorator
+import com.prolificinteractive.materialcalendarview.DayViewFacade
+import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
+import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar.CalendarListener
+
 
 lateinit var mPresenter: PresenterTimeTable
 
@@ -29,9 +34,9 @@ class TimetableFragment : Fragment(), MainContract.View {
     lateinit var root: View
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
 
         root = inflater.inflate(R.layout.fragment_timetable, container, false)
@@ -59,8 +64,8 @@ class TimetableFragment : Fragment(), MainContract.View {
         selectGroupFragment = SelectGroupFragment(1)
 
         activity!!.supportFragmentManager.beginTransaction().add(
-            R.id.nav_host_fragment,
-            selectGroupFragment, null
+                R.id.nav_host_fragment,
+                selectGroupFragment, null
         ).addToBackStack(null).commit()
 
         //MainCoordinator.navigateToSelectGroup(this)
@@ -71,8 +76,8 @@ class TimetableFragment : Fragment(), MainContract.View {
         selectGroupFragment = SelectGroupFragment(0)
 
         activity!!.supportFragmentManager.beginTransaction().add(
-            R.id.nav_host_fragment,
-            selectGroupFragment, null
+                R.id.nav_host_fragment,
+                selectGroupFragment, null
         ).addToBackStack(null).commit()
 
         //MainCoordinator.navigateToSelectGroup(this)
@@ -87,7 +92,7 @@ class TimetableFragment : Fragment(), MainContract.View {
     }
 
     private fun initCalender(view: View) {
-        val calendar = view.findViewById<MaterialCalendarView>(R.id.calendar)
+        /*val calendar = view.findViewById<MaterialCalendarView>(R.id.calendar)
         calendar.setTopbarVisible(false)
 
         val textMonth = view.findViewById<TextView>(R.id.month)
@@ -112,7 +117,33 @@ class TimetableFragment : Fragment(), MainContract.View {
         }
 
         calendar.setSelectedDate(CalendarDay.today())
+         */
 
+        val calendar = view.findViewById<CollapsibleCalendar>(R.id.calendar)
+
+
+        calendar.setCalendarListener(object : CalendarListener {
+            override fun onDaySelect() {
+                /*val day: Day = calendar.getSelectedDay()
+                Log.i(
+                    javaClass.name, "Selected Day: "
+                            + day.year + "/" + (day.month + 1) + "/" + day.day
+                )*/
+            }
+
+            override fun onItemClick(view: View) {}
+            override fun onClickListener() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDataUpdate() {}
+            override fun onDayChanged() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onMonthChange() {}
+            override fun onWeekChange(i: Int) {}
+        })
 
     }
 
@@ -186,7 +217,7 @@ class CurrentDayDecorator(context: Activity?, currentDay: CalendarDay, selectedD
     }
 
     init {
-        // You can set background for Decorator via drawable here
-        drawable = ContextCompat.getDrawable(context!!, R.drawable.currentday_outline)
+// You can set background for Decorator via drawable here
+        drawable = ContextCompat.getDrawable(context!!, R.drawable.selectedday_outline)
     }
 }
