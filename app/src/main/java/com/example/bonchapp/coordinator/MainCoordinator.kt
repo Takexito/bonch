@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.timetable.SelectGroupFragment
+import com.example.bonchapp.ui.timetable.SelectTypeTimetableFragment
 import com.example.bonchapp.ui.timetable.mPresenter
 
 object MainCoordinator {
@@ -35,7 +36,14 @@ object MainCoordinator {
         mPresenter.updateGroupsList()
     }*/
 
-    fun navigateToSelectGroup(fragment: Fragment) {
-        fragment.findNavController().navigate(R.id.action_navigation_timetable_to_selectGroupFragment)
+    fun navigateToSelectGroup(context: Fragment) {
+        context.findNavController().navigate(R.id.action_navigation_timetable_to_selectGroupFragment)
+    }
+
+    fun navigateToSelectTypeTimetable(context: Fragment){
+        context.activity!!.supportFragmentManager.beginTransaction().add(
+            R.id.nav_host_fragment,
+           SelectTypeTimetableFragment(), null
+        ).addToBackStack(null).commit()
     }
 }

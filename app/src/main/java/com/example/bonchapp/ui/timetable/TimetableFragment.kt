@@ -8,15 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.R
+import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.adapters.TimetableAdapter
+import com.example.bonchapp.ui.event.FullEventFragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
@@ -34,9 +37,9 @@ class TimetableFragment : Fragment(), MainContract.View {
     lateinit var root: View
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         root = inflater.inflate(R.layout.fragment_timetable, container, false)
@@ -44,6 +47,7 @@ class TimetableFragment : Fragment(), MainContract.View {
         initRecyclerView(root)
         initCalender(root)
         initSwitchTimetable(root)
+        initSelectTypeTimetable()
 
         mPresenter = PresenterTimeTable(this, this)
 
@@ -64,8 +68,8 @@ class TimetableFragment : Fragment(), MainContract.View {
         selectGroupFragment = SelectGroupFragment(1)
 
         activity!!.supportFragmentManager.beginTransaction().add(
-                R.id.nav_host_fragment,
-                selectGroupFragment, null
+            R.id.nav_host_fragment,
+            selectGroupFragment, null
         ).addToBackStack(null).commit()
 
         //MainCoordinator.navigateToSelectGroup(this)
@@ -76,8 +80,8 @@ class TimetableFragment : Fragment(), MainContract.View {
         selectGroupFragment = SelectGroupFragment(0)
 
         activity!!.supportFragmentManager.beginTransaction().add(
-                R.id.nav_host_fragment,
-                selectGroupFragment, null
+            R.id.nav_host_fragment,
+            selectGroupFragment, null
         ).addToBackStack(null).commit()
 
         //MainCoordinator.navigateToSelectGroup(this)
@@ -175,6 +179,15 @@ class TimetableFragment : Fragment(), MainContract.View {
         }
     }
 
+    private fun initSelectTypeTimetable() {
+        val button = root.findViewById<AppCompatButton>(R.id.filter)
+        button.setOnClickListener {
+            //MainCoordinator.navigateToSelectTypeTimetable(this)
+            activity!!.supportFragmentManager.beginTransaction().add(SelectTypeTimetableFragment(), null)
+                .commit()
+        }
+    }
+
     override fun setMissingGroupVisibility(b: Boolean) {
         val r = root.findViewById<LinearLayout>(R.id.missing_teacher)
 
@@ -204,7 +217,8 @@ class TimetableFragment : Fragment(), MainContract.View {
     }
 }
 
-class CurrentDayDecorator(context: Activity?, currentDay: CalendarDay, selectedDay: CalendarDay?) : DayViewDecorator {
+class CurrentDayDecorator(context: Activity?, currentDay: CalendarDay, selectedDay: CalendarDay?) :
+    DayViewDecorator {
     private val drawable: Drawable?
     var myDay = currentDay
     val sel = selectedDay
