@@ -28,6 +28,10 @@
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
+    <style name="LikeButton" parent="Widget.MaterialComponents.Button">
+        <item name="background">@drawable/ic_favorite_btn_stroke</item>
+    </style>
+
     <!--Bottom Dialog-->
     <style name="CustomBottomSheetDialog" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CustomBottomSheet</item>

@@ -19,7 +19,7 @@ object MainCoordinator {
     }
 
     fun changeMyEventFragment(context: Fragment, fragment: Fragment){
-        context.activity!!.supportFragmentManager.beginTransaction().replace(R.id.my_event_fragment_view, fragment).commit()
+       // context.activity!!.supportFragmentManager.beginTransaction().replace(R.id.my_event_fragment_view, fragment).commit()
     }
 
     //Function for open navigator fragment with showing cabinet

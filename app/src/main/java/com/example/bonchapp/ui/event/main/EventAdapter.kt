@@ -8,10 +8,12 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
+import com.example.bonchapp.presenter.event.Presenter
+import com.example.bonchapp.ui.event.EventFragment
 import kotlinx.android.synthetic.main.fragment_main_event.*
 import kotlinx.android.synthetic.main.item_event.view.*
 
-class EventAdapter(private val eventFragment: MainEventFragment) :
+class EventAdapter(private val presenter: Presenter) :
         RecyclerView.Adapter<EventAdapter.ViewHolder>(), Filterable {
 
     private var data: ArrayList<String>? = arrayListOf()
@@ -33,12 +35,16 @@ class EventAdapter(private val eventFragment: MainEventFragment) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.apply {
-            eventFragment.eventRecyclerView?.visibility = View.VISIBLE
+            presenter.fragment.eventRecyclerView?.visibility = View.VISIBLE
             titleEventView.text = data?.get(position) ?: "Bad"
             dateEventView.text = data?.get(position) ?: "Bad"
 
             setOnClickListener {
-                eventFragment.presenter.onItemClick(position)
+                presenter.onItemClick(position)
+            }
+
+            favoriteEventButton.setOnClickListener {
+                data?.get(position)?.let { it1 -> presenter.onItemLike(it1) }
             }
         }
     }

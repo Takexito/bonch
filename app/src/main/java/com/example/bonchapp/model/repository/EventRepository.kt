@@ -1,13 +1,18 @@
 package com.example.bonchapp.model.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.bonchapp.model.network.NetworkService
+import com.example.bonchapp.model.pojo.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-object TestRep {
+object EventRepository {
+
+    private val liveData: LiveData<ArrayList<String>> = MutableLiveData<ArrayList<String>>().apply { value = arrayListOf("Load!") }
+
     fun getGroups(liveData: MutableLiveData<ArrayList<String>>) {
         NetworkService
             .TABLE_API
@@ -29,4 +34,13 @@ object TestRep {
             })
     }
 
+
+    fun getLikeEvent(): LiveData<ArrayList<String>> {
+        return liveData
+    }
+
+    fun addLikeEvent(event: String){
+        liveData.value?.add(event)
+        Log.d("Like","add $event")
+    }
 }

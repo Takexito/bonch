@@ -3,24 +3,31 @@ package com.example.bonchapp.presenter.event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bonchapp.R
 import com.example.bonchapp.coordinator.MainCoordinator
-import com.example.bonchapp.model.repository.TestRep
+import com.example.bonchapp.model.repository.EventRepository
 import com.example.bonchapp.ui.event.main.EventAdapter
 import com.example.bonchapp.ui.event.main.MainEventFragment
+import kotlinx.android.synthetic.main.item_event.*
 
-class EventPresenter(val context: MainEventFragment) {
+class EventPresenter(override val fragment: MainEventFragment): Presenter {
 
     private val _testData =
         MutableLiveData<ArrayList<String>>().apply { value = arrayListOf("Load!") }
 
     var testData: LiveData<ArrayList<String>> = _testData
 
-    fun onItemClick(pos: Int) {
-        MainCoordinator.navigateToFullEvent(context, pos)
+    override fun onItemClick(position: Int) {
+        MainCoordinator.navigateToFullEvent(fragment, position)
+    }
+
+    override fun onItemLike(it1: String) {
+        fragment.favoriteEventButton.setBackgroundColor(R.color.colorOrange)
+        EventRepository.addLikeEvent(it1)
     }
 
     fun onViewCreate() {
-        TestRep.getGroups(_testData)
+        EventRepository.getGroups(_testData)
     }
 
     fun onSearchQueryUpdate(
@@ -31,7 +38,8 @@ class EventPresenter(val context: MainEventFragment) {
     }
 
     fun onFabClick() {
-        MainCoordinator.navigateToAddEvent(context)
+        MainCoordinator.navigateToAddEvent(fragment)
     }
+
 
 }

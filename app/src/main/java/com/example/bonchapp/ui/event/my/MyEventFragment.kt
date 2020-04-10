@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
 import com.example.bonchapp.presenter.event.MyEventPresenter
+import com.example.bonchapp.ui.event.main.EventAdapter
+import kotlinx.android.synthetic.main.fragment_main_event.*
 import kotlinx.android.synthetic.main.fragment_my_event.*
 
 private const val ARG_PARAM1 = "param1"
@@ -37,15 +40,32 @@ class MyEventFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_my_event, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         presenter.onStart()
         init()
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun init(){
-        event_block1.setOnClickListener { presenter.onChangeTab(0) }
-        event_block2.setOnClickListener { presenter.onChangeTab(1) }
-        event_block3.setOnClickListener { presenter.onChangeTab(2) }
+        initRecycler()
+//        event_block1.setOnClickListener { presenter.onChangeTab(0) }
+//        event_block2.setOnClickListener { presenter.onChangeTab(1) }
+//        event_block3.setOnClickListener { presenter.onChangeTab(2) }
+    }
+
+    private fun initRecycler(){
+            myEventRecycler.apply {
+                adapter = EventAdapter(presenter)
+                layoutManager = LinearLayoutManager(context)
+            }
+
+            presenter.testData.observe(
+                viewLifecycleOwner,
+                androidx.lifecycle.Observer {
+                    (myEventRecycler.adapter as EventAdapter).setData(
+                        presenter.testData.value ?: arrayListOf()
+                    )
+                    myEventRecycler.adapter?.notifyDataSetChanged()
+                })
     }
 
     fun getPastEventFragment(): PastEventFragment {
