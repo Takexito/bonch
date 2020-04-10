@@ -6,15 +6,11 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:src="@drawable/auth_image_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="450dp"
-        app:layout_constraintHeight_percent="0.42"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:id="@+id/auth_title"
@@ -51,13 +47,29 @@
 
     <Button
         android:id="@+id/auth_next_btn"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#fff"
+        android:letterSpacing="0"
+        android:paddingEnd="32dp"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="18sp"
+        android:minHeight="50dp"
+        android:paddingRight="32dp"
         android:text="@string/auth_next"
-        android:layout_marginTop="12dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/auth_welcome"
+        android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/auth_welcome" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="14dp"
+        app:layout_constraintRight_toRightOf="@id/auth_next_btn"
+        app:layout_constraintTop_toTopOf="@id/auth_next_btn"
+        app:layout_constraintBottom_toBottomOf="@id/auth_next_btn"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_next_arrow"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

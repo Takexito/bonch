@@ -40,4 +40,8 @@
     <string name="auth_welcome_title">Мы рады приветствовать Вас в Bonch.App!</string>
     <string name="auth_welcome">Войдите в личный кабинет, чтобы получить возможность просматривать расписание в удобной форме, ленту мероприятий, навигатор по университету и секретные архивы студентов! Это займёт всего пару минут.</string>
     <string name="auth_next">Продолжить</string>
+    <string name="auth_input_data">Введите свои данные для входа в личный кабинет СПбГУТ.</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Пароль</string>
+    <string name="auth_sign_in">Завершить</string>
 </resources>
