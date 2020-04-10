@@ -16,7 +16,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
     var mModel = ModelTimetable()
     val fragment = fr
 
-    var name = ""
+    var name = "ИКПИ-84"
     var type = "group"
 
     lateinit var timetable: List<SubjectDTO>

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
@@ -23,6 +24,7 @@ import com.example.bonchapp.ui.event.FullEventFragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
+import com.shrikanthravi.collapsiblecalendarview.data.Day
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar.CalendarListener
 
@@ -125,14 +127,17 @@ class TimetableFragment : Fragment(), MainContract.View {
 
         val calendar = view.findViewById<CollapsibleCalendar>(R.id.calendar)
 
+        calendar.firstDayOfWeek = 1
+
+        val textMonth = view.findViewById<TextView>(R.id.month)
+        textMonth.text = resources.getStringArray(R.array.Months)[(calendar.selectedDay?.month ?: 1) - 1]
+
 
         calendar.setCalendarListener(object : CalendarListener {
             override fun onDaySelect() {
-                /*val day: Day = calendar.getSelectedDay()
-                Log.i(
-                    javaClass.name, "Selected Day: "
-                            + day.year + "/" + (day.month + 1) + "/" + day.day
-                )*/
+                val day = calendar.selectedDay
+                val s: String = "${day?.year}-${1 + day?.month!!}-${day?.day}"
+            mPresenter.switchDayTimetable(s)
             }
 
             override fun onItemClick(view: View) {}
@@ -142,10 +147,11 @@ class TimetableFragment : Fragment(), MainContract.View {
 
             override fun onDataUpdate() {}
             override fun onDayChanged() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
-            override fun onMonthChange() {}
+            override fun onMonthChange() {
+                textMonth.text = resources.getStringArray(R.array.Months)[(calendar.month ?: 1)]
+            }
             override fun onWeekChange(i: Int) {}
         })
 
@@ -180,7 +186,7 @@ class TimetableFragment : Fragment(), MainContract.View {
     }
 
     private fun initSelectTypeTimetable() {
-        val button = root.findViewById<AppCompatButton>(R.id.filter)
+        val button = root.findViewById<ImageView>(R.id.filter)
         button.setOnClickListener {
             //MainCoordinator.navigateToSelectTypeTimetable(this)
             activity!!.supportFragmentManager.beginTransaction().add(SelectTypeTimetableFragment(), null)
