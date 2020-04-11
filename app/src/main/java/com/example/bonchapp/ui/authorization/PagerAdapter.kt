@@ -1,10 +1,7 @@
 package com.example.bonchapp.ui.authorization
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.ShapeDrawable
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
@@ -15,7 +12,6 @@ import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-import com.google.android.material.shape.Shapeable
 import kotlinx.android.synthetic.main.auth_page_1.view.*
 import kotlinx.android.synthetic.main.auth_page_2.view.*
 
@@ -23,30 +19,35 @@ class PagerAdapter(authFragment: AuthFragment): RecyclerView.Adapter<PagerAdapte
 
     private var fragment: AuthFragment = authFragment
 
-    inner class PagerVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        lateinit var emailET: EditText
-        lateinit var passET: EditText
-        lateinit var showPassBtn: ImageButton
+    inner class PagerVH(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-        fun showHidePass() {
-            if (passET.transformationMethod == PasswordTransformationMethod.getInstance()) {
-                passET.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                showPassBtn.setImageResource(R.drawable.ic_hide_pass)
-                passET.setSelection(passET.text.length)
+    private lateinit var emailET: EditText
+    private lateinit var passET: EditText
+    private lateinit var showPassBtn: ImageButton
 
-            } else {
-                passET.transformationMethod = PasswordTransformationMethod.getInstance()
-                showPassBtn.setImageResource(R.drawable.ic_show_pass)
-                passET.setSelection(passET.text.length)
-            }
+    private fun showHidePass() {
+        if (passET.transformationMethod == PasswordTransformationMethod.getInstance()) {
+            passET.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            showPassBtn.setImageResource(R.drawable.ic_hide_pass)
+            passET.setSelection(passET.text.length)
+
+        } else {
+            passET.transformationMethod = PasswordTransformationMethod.getInstance()
+            showPassBtn.setImageResource(R.drawable.ic_show_pass)
+            passET.setSelection(passET.text.length)
         }
+    }
 
-        fun signInError() {
-            val background = passET.background as LayerDrawable
-            val color = background.findDrawableByLayerId(R.id.bottom_line) as GradientDrawable
+    fun signInError() {
+        val background = passET.background as LayerDrawable
+        val color = background.findDrawableByLayerId(R.id.bottom_line) as GradientDrawable
+        color.setColor(ContextCompat.getColor(fragment.context!!, R.color.errorSignIn))
+    }
 
-            color.setColor(ContextCompat.getColor(fragment.context!!, R.color.errorSignIn))
-        }
+    fun previousPage() {
+        val background = passET.background as LayerDrawable
+        val color = background.findDrawableByLayerId(R.id.bottom_line) as GradientDrawable
+        color.setColor(ContextCompat.getColor(fragment.context!!, R.color.colorOrange))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerVH {
@@ -81,21 +82,20 @@ class PagerAdapter(authFragment: AuthFragment): RecyclerView.Adapter<PagerAdapte
             }
         } else {
             holder.itemView.run {
-                holder.passET = password
-                holder.emailET = email
-                holder.showPassBtn = show_pass_toggle
+                passET = password
+                emailET = email
+                showPassBtn = show_pass_toggle
 
                 back.setOnClickListener {
                     fragment.previousPage()
                 }
 
                 show_pass_toggle.setOnClickListener {
-                    holder.showHidePass()
+                    showHidePass()
                 }
 
                 sign_in.setOnClickListener {
                     fragment.presenter!!.signIn(email.text.toString(), password.text.toString())
-                    holder.signInError()
                 }
             }
         }
