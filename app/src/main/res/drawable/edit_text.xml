@@ -16,7 +16,7 @@
         </shape>
     </item>
 
-    <item android:gravity="bottom">
+    <item android:gravity="bottom" android:id="@+id/bottom_line">
         <shape android:shape="rectangle">
             <size
                 android:height="2dp"/>

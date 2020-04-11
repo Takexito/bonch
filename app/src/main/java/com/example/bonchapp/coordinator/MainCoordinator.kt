@@ -1,10 +1,15 @@
 package com.example.bonchapp.coordinator
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
+import androidx.navigation.NavOptionsBuilder
+import androidx.navigation.NavOptionsDsl
 import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.event.FullEventFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 object MainCoordinator {
 
@@ -28,5 +33,10 @@ object MainCoordinator {
         val bundle = Bundle()
         bundle.putString("cabinet", cabinet)
         context.findNavController().navigate(R.id.navigation_navgut, bundle)
+    }
+
+    fun navigateToTimetable(context: Fragment) {
+        context.activity!!.nav_view.visibility = View.VISIBLE
+        context.findNavController().navigate(R.id.action_navigation_authorization_to_navigation_timetable)
     }
 }

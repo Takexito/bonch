@@ -8,7 +8,7 @@
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@drawable/auth_image_1"
+        android:src="@drawable/ic_auth_1"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"/>
 
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/auth_title" />
 
     <Button
-        android:id="@+id/auth_next_btn"
+        android:id="@+id/next_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -66,9 +66,9 @@
     <ImageView
         android:layout_width="18dp"
         android:layout_height="14dp"
-        app:layout_constraintRight_toRightOf="@id/auth_next_btn"
-        app:layout_constraintTop_toTopOf="@id/auth_next_btn"
-        app:layout_constraintBottom_toBottomOf="@id/auth_next_btn"
+        app:layout_constraintRight_toRightOf="@id/next_page"
+        app:layout_constraintTop_toTopOf="@id/next_page"
+        app:layout_constraintBottom_toBottomOf="@id/next_page"
         android:layout_marginRight="10dp"
         android:src="@drawable/ic_next_arrow"/>
 

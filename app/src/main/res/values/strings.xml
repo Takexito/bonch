@@ -44,4 +44,5 @@
     <string name="e_mail">E-mail</string>
     <string name="password">Пароль</string>
     <string name="auth_sign_in">Завершить</string>
+    <string name="sign_in_error">Проверьте, введены ли почта и пароль.</string>
 </resources>
