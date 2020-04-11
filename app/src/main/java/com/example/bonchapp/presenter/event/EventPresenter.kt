@@ -3,42 +3,50 @@ package com.example.bonchapp.presenter.event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bonchapp.R
 import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.model.repository.EventRepository
+import com.example.bonchapp.model.repository.IEventRepository
+import com.example.bonchapp.ui.event.IEventView
 import com.example.bonchapp.ui.event.main.EventAdapter
 import com.example.bonchapp.ui.event.main.MainEventFragment
-import kotlinx.android.synthetic.main.item_event.*
 
-class EventPresenter(override val fragment: MainEventFragment): Presenter {
+class EventPresenter(override val view: IEventView): IEventPresenter {
 
+    private val repository: IEventRepository = EventRepository()
     private val _testData =
         MutableLiveData<ArrayList<String>>().apply { value = arrayListOf("Load!") }
 
     var testData: LiveData<ArrayList<String>> = _testData
+    override fun onStart() {
+        repository.getAllEvents(_testData)
+    }
+
+    override fun onResume() {
+    }
+
+    override fun onPause() {
+    }
+
+    override fun onDestroy() {
+    }
 
     override fun onItemClick(position: Int) {
-        MainCoordinator.navigateToFullEvent(fragment, position)
+        MainCoordinator.navigateToFullEvent(view.getFragment(), position)
     }
 
     override fun onItemLike(it1: String) {
-        fragment.favoriteEventButton.setBackgroundColor(R.color.colorOrange)
-        EventRepository.addLikeEvent(it1)
+        repository.addFavoriteEvent(it1)
     }
 
-    fun onViewCreate() {
-        EventRepository.getGroups(_testData)
-    }
-
-    fun onSearchQueryUpdate(
-        eventRecyclerView: RecyclerView,
+    override fun onSearchQueryUpdate(
+        recyclerView: RecyclerView,
         query: String?
     ) {
-        (eventRecyclerView.adapter as EventAdapter).filter.filter(query)
+        view.getRecyclerFilter().filter(query)
     }
 
     fun onFabClick() {
-        MainCoordinator.navigateToAddEvent(fragment)
+        MainCoordinator.navigateToAddEvent(view.getFragment())
     }
 
 

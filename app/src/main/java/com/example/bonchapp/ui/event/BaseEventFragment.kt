@@ -9,8 +9,7 @@ import com.example.bonchapp.R
 import com.example.bonchapp.ui.event.main.EventPagerAdapter
 import kotlinx.android.synthetic.main.fragment_event.*
 
-class EventFragment : Fragment() {
-
+class BaseEventFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater,

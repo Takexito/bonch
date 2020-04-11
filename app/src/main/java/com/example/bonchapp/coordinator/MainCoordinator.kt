@@ -1,25 +1,23 @@
 package com.example.bonchapp.coordinator
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.event.FullEventFragment
 
 object MainCoordinator {
 
-    fun navigateToFullEvent(context: Fragment, eventId: Int) {
-        context.arguments = Bundle().apply { putInt(Keys.FULL_EVENT_ID, eventId) }
-        context.activity!!.supportFragmentManager.beginTransaction().add(FullEventFragment(), null)
+    fun navigateToFullEvent(fragment: Fragment, eventId: Int) {
+        val bundle = Bundle().apply { putInt(Keys.FULL_EVENT_ID, eventId) }
+        fragment.activity!!.supportFragmentManager.beginTransaction().add(FullEventFragment().apply { arguments = bundle }, null)
             .commit()
     }
 
     fun navigateToAddEvent(fragment: Fragment) {
         fragment.findNavController().navigate(R.id.action_navigation_event_to_addEvent)
-    }
-
-    fun changeMyEventFragment(context: Fragment, fragment: Fragment){
-       // context.activity!!.supportFragmentManager.beginTransaction().replace(R.id.my_event_fragment_view, fragment).commit()
     }
 
     //Function for open navigator fragment with showing cabinet

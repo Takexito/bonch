@@ -2,17 +2,11 @@ package com.example.bonchapp.presenter.event
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.RecyclerView
-import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.model.repository.EventRepository
 import com.example.bonchapp.model.repository.IEventRepository
 import com.example.bonchapp.ui.event.IEventView
-import com.example.bonchapp.ui.event.main.EventAdapter
-import com.example.bonchapp.ui.event.my.ApplicationEventFragment
-import com.example.bonchapp.ui.event.my.FutureEventFragment
-import com.example.bonchapp.ui.event.my.PastEventFragment
 
-class MyEventPresenter(override val view: IEventView): IEventPresenter {
+class FavoriteEventPresenter(override val view: IEventView) : IEventPresenter {
 
     private val repository: IEventRepository = EventRepository()
 
@@ -21,27 +15,18 @@ class MyEventPresenter(override val view: IEventView): IEventPresenter {
 
     var testData: LiveData<ArrayList<String>> = _testData
 
-    override fun onItemClick(position: Int) {
-        MainCoordinator.navigateToFullEvent(view.getFragment(), position)
-    }
-
-    override fun onItemLike(it1: String) {
-        repository.addFavoriteEvent(it1)
-    }
-
     override fun onSearchQueryUpdate(
-        recyclerView: RecyclerView,
+        recyclerView: androidx.recyclerview.widget.RecyclerView,
         query: String?
     ) {
         view.getRecyclerFilter().filter(query)
     }
 
-    override fun onStart(){
+    override fun onStart() {
         repository.getMyEvents(_testData)
     }
 
     override fun onResume() {
-
     }
 
     override fun onPause() {
@@ -50,4 +35,10 @@ class MyEventPresenter(override val view: IEventView): IEventPresenter {
     override fun onDestroy() {
     }
 
+    override fun onItemClick(position: Int) {
+    }
+
+    override fun onItemLike(it1: String) {
+        repository.addFavoriteEvent(it1)
+    }
 }

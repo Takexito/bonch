@@ -1,19 +1,22 @@
 package com.example.bonchapp.ui.event.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
 import com.example.bonchapp.presenter.event.EventPresenter
-import com.example.bonchapp.presenter.event.Presenter
+import com.example.bonchapp.ui.event.IEventView
 import kotlinx.android.synthetic.main.fragment_main_event.*
 
 
-class MainEventFragment : Fragment(){
+class MainEventFragment : Fragment(), IEventView{
 
     val presenter = EventPresenter(this)
 
@@ -28,10 +31,8 @@ class MainEventFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter.onViewCreate()
-
+        presenter.onStart()
         initUi()
-
     }
 
     private fun initUi() {
@@ -75,5 +76,26 @@ class MainEventFragment : Fragment(){
         addEventFab.setOnClickListener{
             presenter.onFabClick()
         }
+    }
+
+    override fun getFragmentContext(): Context {
+        return context!!
+    }
+
+    override fun getFragment(): Fragment {
+        return this
+    }
+
+    override fun setRecyclerVisible(isVisible: Boolean) {
+        if(isVisible)
+            eventRecyclerView.visibility = View.VISIBLE
+        else
+            eventRecyclerView.visibility = View.GONE
+
+    }
+
+    override fun getRecyclerFilter(): Filter {
+        return (eventRecyclerView.adapter as Filterable).filter
+
     }
 }

@@ -1,35 +1,27 @@
 package com.example.bonchapp.ui.event.my
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
 import com.example.bonchapp.presenter.event.MyEventPresenter
+import com.example.bonchapp.ui.event.IEventView
 import com.example.bonchapp.ui.event.main.EventAdapter
 import kotlinx.android.synthetic.main.fragment_main_event.*
 import kotlinx.android.synthetic.main.fragment_my_event.*
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-class MyEventFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
-    private var futureEventFragment: FutureEventFragment? = null
-    private var pastEventFragment: PastEventFragment? = null
-    private var applicationEventFragment: ApplicationEventFragment? = null
+class MyEventFragment : Fragment(), IEventView {
     val presenter = MyEventPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-        futureEventFragment = FutureEventFragment.newInstance()
     }
 
     override fun onCreateView(
@@ -47,9 +39,6 @@ class MyEventFragment : Fragment() {
 
     private fun init(){
         initRecycler()
-//        event_block1.setOnClickListener { presenter.onChangeTab(0) }
-//        event_block2.setOnClickListener { presenter.onChangeTab(1) }
-//        event_block3.setOnClickListener { presenter.onChangeTab(2) }
     }
 
     private fun initRecycler(){
@@ -68,30 +57,22 @@ class MyEventFragment : Fragment() {
                 })
     }
 
-    fun getPastEventFragment(): PastEventFragment {
-        if (pastEventFragment == null) pastEventFragment = PastEventFragment.newInstance()
-        return pastEventFragment as PastEventFragment
+    override fun getFragmentContext(): Context {
+        return context!!
     }
 
-    fun getApplicationEventFragment(): ApplicationEventFragment {
-        if (applicationEventFragment == null) applicationEventFragment =
-            ApplicationEventFragment.newInstance()
-        return applicationEventFragment as ApplicationEventFragment
+    override fun getFragment(): Fragment {
+        return this
     }
 
-    fun getFutureEventFragment(): FutureEventFragment {
-        if (futureEventFragment == null) futureEventFragment = FutureEventFragment.newInstance()
-        return futureEventFragment as FutureEventFragment
+    override fun setRecyclerVisible(isVisible: Boolean) {
+        if(isVisible)
+            myEventRecycler.visibility = View.VISIBLE
+        else
+            myEventRecycler.visibility = View.GONE
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MyEventFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun getRecyclerFilter(): Filter {
+        return (myEventRecycler.adapter as Filterable).filter
     }
 }
