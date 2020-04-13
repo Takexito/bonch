@@ -2,6 +2,7 @@ package com.example.bonchapp.presenter.event
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.model.repository.EventRepository
@@ -13,21 +14,16 @@ import com.example.bonchapp.ui.event.main.MainEventFragment
 class EventPresenter(override val view: IEventView): IEventPresenter {
 
     private val repository: IEventRepository = EventRepository()
-    private val _testData =
-        MutableLiveData<ArrayList<String>>().apply { value = arrayListOf("Load!") }
 
-    var testData: LiveData<ArrayList<String>> = _testData
     override fun onStart() {
-        repository.getAllEvents(_testData)
+        val data = repository.getAllEvents()
+        data.observe(view.getLifecycleOwner(), Observer {
+            view.updateRecycler(data.value.orEmpty())
+        })
     }
 
-    override fun onResume() {
-    }
-
-    override fun onPause() {
-    }
-
-    override fun onDestroy() {
+    fun updateData(){
+        repository.getAllEvents()
     }
 
     override fun onItemClick(position: Int) {
@@ -46,8 +42,16 @@ class EventPresenter(override val view: IEventView): IEventPresenter {
     }
 
     fun onFabClick() {
-        MainCoordinator.navigateToAddEvent(view.getFragment())
+        //MainCoordinator.navigateToAddEvent(view.getFragment())
+        updateData()
     }
 
+    override fun onResume() {
+    }
 
+    override fun onPause() {
+    }
+
+    override fun onDestroy() {
+    }
 }

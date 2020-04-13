@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
 import com.example.bonchapp.presenter.event.MyEventPresenter
@@ -74,5 +75,13 @@ class MyEventFragment : Fragment(), IEventView {
 
     override fun getRecyclerFilter(): Filter {
         return (myEventRecycler.adapter as Filterable).filter
+    }
+
+    override fun getLifecycleOwner(): LifecycleOwner {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun updateRecycler(data: List<String>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

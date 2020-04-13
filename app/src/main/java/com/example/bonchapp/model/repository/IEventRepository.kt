@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 
 interface IEventRepository {
 
-    fun getAllEvents(liveData: MutableLiveData<ArrayList<String>>)
-    fun getFavoriteEvent(liveData: MutableLiveData<ArrayList<String>>)
-    fun getMyEvents(liveData: MutableLiveData<ArrayList<String>>)
+    fun getAllEvents(): MutableLiveData<ArrayList<String>>
+    fun getFavoriteEvent(): MutableLiveData<ArrayList<String>>
+    fun getMyEvents(): MutableLiveData<ArrayList<String>>
     fun addFavoriteEvent(event: String)
 
 }

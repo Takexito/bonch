@@ -19,8 +19,8 @@ class EventAdapter(private val presenter: IEventPresenter) :
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    fun setData(data: ArrayList<String>) {
-        this.data = data
+    fun setData(data: List<String>) {
+        this.data = data as ArrayList<String>
         newData = data
     }
 

@@ -10,43 +10,41 @@ import retrofit2.Response
 
 class EventRepository : IEventRepository {
 
-    private lateinit var liveData: LiveData<ArrayList<String>>
+    val allEventLiveData = MutableLiveData<ArrayList<String>>()
+    val favoriteEventLiveData = MutableLiveData<ArrayList<String>>()
+    val myEventLiveData = MutableLiveData<ArrayList<String>>()
+    var isRev = false
 
-    override fun getAllEvents(liveData: MutableLiveData<ArrayList<String>>) {
-        NetworkService
-            .TABLE_API
-            .getGroups()
-            .enqueue(object : Callback<ArrayList<String>> {
-                override fun onResponse(
-                    call: Call<ArrayList<String>>,
-                    resp: Response<ArrayList<String>>
-                ) {
-                    Log.d("Test", "Good")
-                    liveData.value = resp.body() ?: arrayListOf(
-                        "Error!",
-                        "LOL",
-                        "statr"
-                    ) //TODO: create adapter to handle error response
-
-                }
-
-                override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
-                    Log.d("Test", t.localizedMessage ?: "Error!")
-
-                }
-            })
+    override fun getAllEvents():MutableLiveData<ArrayList<String>> {
+        return getAllEventsRetrofit()
     }
 
-    override fun getFavoriteEvent(liveData: MutableLiveData<ArrayList<String>>) {
+    private fun getAllEventsRetrofit(): MutableLiveData<ArrayList<String>>{
+        Log.d("EventRepository", "request")
+        NetworkService.TABLE_API.getGroups().enqueue(object : Callback<ArrayList<String>> {
+            override fun onResponse(call: Call<ArrayList<String>>, resp: Response<ArrayList<String>>) {
+                Log.d("EventRepository", "Good")
+                if(isRev) allEventLiveData.value = resp.body() //TODO: handle error response
+                else allEventLiveData.value = resp.body()?.reversed() as ArrayList<String>
+                isRev = !isRev
+            }
 
+            override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
+                Log.d("EventRepository", t.localizedMessage ?: "Error!")
+            }
+        })
+        return allEventLiveData
+    }
+
+    override fun getFavoriteEvent(): MutableLiveData<ArrayList<String>> {
+        return favoriteEventLiveData
     }
 
     override fun addFavoriteEvent(event: String) {
-        liveData.value?.add(event)
         Log.d("Like", "add $event")
     }
 
-    override fun getMyEvents(liveData: MutableLiveData<ArrayList<String>>) {
-
+    override fun getMyEvents(): MutableLiveData<ArrayList<String>>{
+        return myEventLiveData
     }
 }

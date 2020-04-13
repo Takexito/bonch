@@ -37,7 +37,7 @@ class MyEventPresenter(override val view: IEventView): IEventPresenter {
     }
 
     override fun onStart(){
-        repository.getMyEvents(_testData)
+        repository.getMyEvents()
     }
 
     override fun onResume() {
