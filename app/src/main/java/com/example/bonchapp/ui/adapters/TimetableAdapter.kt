@@ -68,7 +68,7 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
 
 
         textCabinet.setOnClickListener {
-            MainCoordinator.showCabinetInNavigator(fragment, stringer(subject.place))
+           // MainCoordinator.showCabinetInNavigator(fragment, stringer(subject.place))
         }
 
 

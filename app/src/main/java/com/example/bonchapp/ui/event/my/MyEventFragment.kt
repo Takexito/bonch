@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
+import com.example.bonchapp.model.pojo.Event
 import com.example.bonchapp.presenter.event.MyEventPresenter
 import com.example.bonchapp.ui.event.IEventView
 import com.example.bonchapp.ui.event.main.EventAdapter
-import kotlinx.android.synthetic.main.fragment_main_event.*
 import kotlinx.android.synthetic.main.fragment_my_event.*
 
 
@@ -34,7 +34,7 @@ class MyEventFragment : Fragment(), IEventView {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.onStart()
+        presenter.firstLoad()
         init()
     }
 
@@ -81,7 +81,8 @@ class MyEventFragment : Fragment(), IEventView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun updateRecycler(data: List<String>) {
+
+    override fun updateRecycler(data: List<Event>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

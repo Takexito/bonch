@@ -3,48 +3,45 @@ package com.example.bonchapp.model.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.bonchapp.coordinator.ResponseState
 import com.example.bonchapp.model.network.NetworkService
+import com.example.bonchapp.model.pojo.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class EventRepository : IEventRepository {
 
-    val allEventLiveData = MutableLiveData<ArrayList<String>>()
-    val favoriteEventLiveData = MutableLiveData<ArrayList<String>>()
-    val myEventLiveData = MutableLiveData<ArrayList<String>>()
-    var isRev = false
-
-    override fun getAllEvents():MutableLiveData<ArrayList<String>> {
-        return getAllEventsRetrofit()
-    }
-
-    private fun getAllEventsRetrofit(): MutableLiveData<ArrayList<String>>{
+    override fun getAllEvents(callback: (data: List<Event>?, error: String?) -> Unit) {
         Log.d("EventRepository", "request")
-        NetworkService.TABLE_API.getGroups().enqueue(object : Callback<ArrayList<String>> {
-            override fun onResponse(call: Call<ArrayList<String>>, resp: Response<ArrayList<String>>) {
+        NetworkService.TABLE_API.getGroups().enqueue(object : Callback<List<Event>> {
+            override fun onResponse(call: Call<List<Event>>, resp: Response<List<Event>>) {
                 Log.d("EventRepository", "Good")
-                if(isRev) allEventLiveData.value = resp.body() //TODO: handle error response
-                else allEventLiveData.value = resp.body()?.reversed() as ArrayList<String>
-                isRev = !isRev
+                callback(resp.body(), resp.errorBody()?.string())
             }
 
-            override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Event>>, t: Throwable) {
                 Log.d("EventRepository", t.localizedMessage ?: "Error!")
+                callback(null, t.localizedMessage)
             }
         })
-        return allEventLiveData
     }
 
-    override fun getFavoriteEvent(): MutableLiveData<ArrayList<String>> {
-        return favoriteEventLiveData
+    override fun getFavoriteEvent(callback: (data: List<Event>?, error: String?) -> Unit) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun addFavoriteEvent(event: String) {
-        Log.d("Like", "add $event")
+    override fun getMyEvents(callback: (data: List<Event>?, error: String?) -> Unit) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getMyEvents(): MutableLiveData<ArrayList<String>>{
-        return myEventLiveData
+    override fun addFavoriteEvent(eventId: Int, callback: (error: String?) -> Unit) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun deleteFavoriteEvent(eventId: Int, callback: (error: String?) -> Unit) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
 }

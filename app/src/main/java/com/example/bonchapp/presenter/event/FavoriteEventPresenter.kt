@@ -22,23 +22,15 @@ class FavoriteEventPresenter(override val view: IEventView) : IEventPresenter {
         view.getRecyclerFilter().filter(query)
     }
 
-    override fun onStart() {
-        repository.getMyEvents()
-    }
-
-    override fun onResume() {
-    }
-
-    override fun onPause() {
-    }
-
-    override fun onDestroy() {
+    override fun firstLoad() {
+        //repository.getMyEvents()
     }
 
     override fun onItemClick(position: Int) {
     }
 
-    override fun onItemLike(it1: String) {
-        repository.addFavoriteEvent(it1)
+
+    override fun onItemLike(eventId: Int) {
+        //repository.addFavoriteEvent(it1)
     }
 }

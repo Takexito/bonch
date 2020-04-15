@@ -22,11 +22,11 @@ class MyEventPresenter(override val view: IEventView): IEventPresenter {
     var testData: LiveData<ArrayList<String>> = _testData
 
     override fun onItemClick(position: Int) {
-        MainCoordinator.navigateToFullEvent(view.getFragment(), position)
+        //MainCoordinator.navigateToFullEvent(view.getFragment(), position)
     }
 
-    override fun onItemLike(it1: String) {
-        repository.addFavoriteEvent(it1)
+    override fun onItemLike(eventId: Int) {
+     //   repository.addFavoriteEvent(it1)
     }
 
     override fun onSearchQueryUpdate(
@@ -36,18 +36,8 @@ class MyEventPresenter(override val view: IEventView): IEventPresenter {
         view.getRecyclerFilter().filter(query)
     }
 
-    override fun onStart(){
-        repository.getMyEvents()
-    }
-
-    override fun onResume() {
-
-    }
-
-    override fun onPause() {
-    }
-
-    override fun onDestroy() {
+    override fun firstLoad(){
+    //    repository.getMyEvents()
     }
 
 }

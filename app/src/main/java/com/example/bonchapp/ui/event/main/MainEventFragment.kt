@@ -11,9 +11,9 @@ import android.widget.Filterable
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
+import com.example.bonchapp.model.pojo.Event
 import com.example.bonchapp.presenter.event.EventPresenter
 import com.example.bonchapp.ui.event.IEventView
 import kotlinx.android.synthetic.main.fragment_main_event.*
@@ -34,7 +34,7 @@ class MainEventFragment : Fragment(), IEventView{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.onStart()
+        presenter.firstLoad()
         initUi()
     }
 
@@ -52,9 +52,9 @@ class MainEventFragment : Fragment(), IEventView{
 
     }
 
-    override fun updateRecycler(data: List<String>){
+    override fun updateRecycler(data: List<Event>){
         eventAdapter.apply {
-            setData(data)
+            setData(arrayListOf("")) //TODO: FIX ME
             notifyDataSetChanged()
         }
     }
@@ -76,7 +76,7 @@ class MainEventFragment : Fragment(), IEventView{
 
     private fun initFab(){
         addEventFab.setOnClickListener{
-            presenter.onFabClick()
+            //presenter.onFabClick()
             Log.d("Fragment", "click")
         }
     }

@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.event.FullEventFragment
 
-object MainCoordinator {
+class MainCoordinator {
 
     fun navigateToFullEvent(fragment: Fragment, eventId: Int) {
         val bundle = Bundle().apply { putInt(Keys.FULL_EVENT_ID, eventId) }

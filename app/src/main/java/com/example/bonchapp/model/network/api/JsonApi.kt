@@ -1,5 +1,6 @@
 package com.example.bonchapp.model.network.api
 
+import com.example.bonchapp.model.pojo.Event
 import retrofit2.Call
 import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.model.pojo.RequestTutorsDTO
@@ -9,7 +10,7 @@ import retrofit2.http.*
 
 interface JsonApi {
     @GET("/api/groups")
-    fun getGroups(): Call<ArrayList<String>>
+    fun getGroups(): Call<List<Event>>
 
     //@FormUrlEncoded
     @POST("/api/timetable")

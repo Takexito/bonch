@@ -1,12 +1,12 @@
 package com.example.bonchapp.model.repository
 
-import androidx.lifecycle.MutableLiveData
+import com.example.bonchapp.model.pojo.Event
 
 interface IEventRepository {
 
-    fun getAllEvents(): MutableLiveData<ArrayList<String>>
-    fun getFavoriteEvent(): MutableLiveData<ArrayList<String>>
-    fun getMyEvents(): MutableLiveData<ArrayList<String>>
-    fun addFavoriteEvent(event: String)
-
+    fun getAllEvents(callback: (data: List<Event>?, error: String?) -> Unit)
+    fun getFavoriteEvent(callback: (data: List<Event>?, error: String?) -> Unit)
+    fun getMyEvents(callback: (data: List<Event>?, error: String?) -> Unit)
+    fun addFavoriteEvent(eventId: Int, callback: (error: String?) -> Unit)
+    fun deleteFavoriteEvent(eventId: Int, callback: (error: String?) -> Unit)
 }

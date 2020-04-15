@@ -44,7 +44,7 @@ class EventAdapter(private val presenter: IEventPresenter) :
             favoriteEventButton.setOnClickListener {
                 data?.get(position)?.let { it1 -> {
                     favoriteEventButton.setBackgroundColor(R.color.colorOrange)
-                    presenter.onItemLike(it1)
+                    //presenter.onItemLike(it1) TODO: FIX ME
                     }
                 }
             }

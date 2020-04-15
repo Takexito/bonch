@@ -10,6 +10,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.lifecycle.LifecycleOwner
 import com.example.bonchapp.R
+import com.example.bonchapp.model.pojo.Event
 import com.example.bonchapp.presenter.event.EventPresenter
 import com.example.bonchapp.ui.event.IEventView
 import kotlinx.android.synthetic.main.fragment_main_event.*
@@ -52,7 +53,7 @@ class FavoriteEventFragment : Fragment(), IEventView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun updateRecycler(data: List<String>) {
+    override fun updateRecycler(data: List<Event>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Filter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import com.example.bonchapp.model.pojo.Event
 
 interface IEventView {
     fun getFragmentContext(): Context
@@ -11,5 +12,5 @@ interface IEventView {
     fun setRecyclerVisible(isVisible: Boolean)
     fun getRecyclerFilter(): Filter
     fun getLifecycleOwner(): LifecycleOwner
-    fun updateRecycler(data: List<String>)
+    fun updateRecycler(data: List<Event>)
 }
