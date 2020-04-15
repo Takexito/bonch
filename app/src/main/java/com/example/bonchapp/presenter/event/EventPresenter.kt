@@ -1,25 +1,16 @@
 package com.example.bonchapp.presenter.event
 
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bonchapp.coordinator.Keys
-import com.example.bonchapp.coordinator.MainCoordinator
+import com.example.bonchapp.router.MainRouter
 import com.example.bonchapp.interactor.event.EventInteractor
 import com.example.bonchapp.interactor.event.IEventInteractor
-import com.example.bonchapp.model.pojo.Event
-import com.example.bonchapp.model.repository.EventRepository
-import com.example.bonchapp.model.repository.IEventRepository
 import com.example.bonchapp.ui.event.IEventView
-import com.example.bonchapp.ui.event.main.EventAdapter
-import com.example.bonchapp.ui.event.main.MainEventFragment
 
 class EventPresenter(override val view: IEventView): IEventPresenter {
 
     private val interactor: IEventInteractor = EventInteractor()
-    private val router = MainCoordinator()
+    private val router = MainRouter()
 
     override fun firstLoad() {
        interactor.getAllEvents(

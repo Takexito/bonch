@@ -1,6 +1,5 @@
 package com.example.bonchapp.interactor.event
 
-import com.example.bonchapp.coordinator.EventTags
 import com.example.bonchapp.model.pojo.Event
 
 
@@ -18,7 +17,7 @@ interface IEventInteractor{
     fun deleteFavoriteEvent(eventId: Int, callback: () -> Unit, errorCallback: (error: String) -> Unit)
     fun addToFavorite(eventId: Int, callback: () -> Unit, errorCallback: (error: String) -> Unit)
 
-    fun filterByTag(tag: EventTags)
+    fun filterByTag()
     fun searchEvents(query: String): List<Event>
 
 }

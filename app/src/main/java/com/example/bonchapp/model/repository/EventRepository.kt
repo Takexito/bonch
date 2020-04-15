@@ -1,9 +1,6 @@
 package com.example.bonchapp.model.repository
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.bonchapp.coordinator.ResponseState
 import com.example.bonchapp.model.network.NetworkService
 import com.example.bonchapp.model.pojo.Event
 import retrofit2.Call

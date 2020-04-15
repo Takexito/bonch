@@ -1,6 +1,5 @@
 package com.example.bonchapp.interactor.event
 
-import com.example.bonchapp.coordinator.EventTags
 import com.example.bonchapp.model.pojo.Event
 import com.example.bonchapp.model.repository.EventRepository
 import com.example.bonchapp.model.repository.IEventRepository
@@ -101,7 +100,7 @@ class EventInteractor : IEventInteractor {
         }
     }
 
-    override fun filterByTag(tag: EventTags) {
+    override fun filterByTag() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

@@ -1,14 +1,13 @@
-package com.example.bonchapp.coordinator
+package com.example.bonchapp.router
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.event.FullEventFragment
+import com.example.bonchapp.util.Keys
 
-class MainCoordinator {
+class MainRouter {
 
     fun navigateToFullEvent(fragment: Fragment, eventId: Int) {
         val bundle = Bundle().apply { putInt(Keys.FULL_EVENT_ID, eventId) }
