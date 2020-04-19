@@ -39,7 +39,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/fullEventFragment"
-        android:name="com.example.bonchapp.ui.event.FullEventFragment"
+        android:name="com.example.bonchapp.presentation.ui.event.FullEventFragment"
         android:label="fragment_full_event"
         tools:layout="@layout/fragment_full_event" >
         <argument
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/addEvent"
-        android:name="com.example.bonchapp.ui.event.AddEvent"
+        android:name="com.example.bonchapp.presentation.ui.event.AddEvent"
         android:label="fragment_add_event"
         tools:layout="@layout/fragment_add_event" />
 </navigation>
