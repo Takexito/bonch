@@ -97,7 +97,7 @@ class SelectGroupPostHolder(itemView: View, type: Int) : RecyclerView.ViewHolder
         else typeS = "tutor"
 
         itemView.setOnClickListener {
-            mPresenter.switchGroup(group, typeS)
+           mPresenter.switchGroup(group, typeS)
         }
     }
 }

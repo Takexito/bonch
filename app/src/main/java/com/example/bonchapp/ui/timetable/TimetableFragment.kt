@@ -27,14 +27,17 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.shrikanthravi.collapsiblecalendarview.data.Day
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar.CalendarListener
+import kotlinx.android.synthetic.main.fragment_timetable.*
 
 
 lateinit var mPresenter: PresenterTimeTable
 
-class TimetableFragment : Fragment(), MainContract.View {
+class TimetableFragment : Fragment(), MainContract.ITimeTableView {
 
     lateinit var timeTableAdapter: TimetableAdapter
     lateinit var selectGroupFragment: SelectGroupFragment
+
+    //val mPresenter = PresenterTimeTable(this, this)
 
     lateinit var root: View
 
@@ -92,9 +95,13 @@ class TimetableFragment : Fragment(), MainContract.View {
 
     private fun initRecyclerView(view: View) {
         timeTableAdapter = TimetableAdapter(view.context, this)
-        val recyclerViewDay = view.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
-        recyclerViewDay.layoutManager = LinearLayoutManager(view.context)
-        recyclerViewDay.adapter = timeTableAdapter
+        //val recyclerViewDay = view.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
+        //recyclerViewDay.layoutManager = LinearLayoutManager(view.context)
+        //recyclerViewDay.adapter = timeTableAdapter
+
+        timeTable_recyclerView.apply {
+            timeTableAdapter
+        }
     }
 
     private fun initCalender(view: View) {
@@ -127,7 +134,7 @@ class TimetableFragment : Fragment(), MainContract.View {
 
         val calendar = view.findViewById<CollapsibleCalendar>(R.id.calendar)
 
-        calendar.firstDayOfWeek = 1
+        //calendar.firstDayOfWeek = 1
 
         val textMonth = view.findViewById<TextView>(R.id.month)
         textMonth.text = resources.getStringArray(R.array.Months)[(calendar.selectedDay?.month ?: 1) - 1]

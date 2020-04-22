@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ModelTimetable() : MainContract.Model {
+class ModelTimetable() : MainContract.ITimeTableModel {
 
     override fun loadTimetable(body: RequestTimeTableDTO): LiveData<ArrayList<SubjectDTO>> {
 

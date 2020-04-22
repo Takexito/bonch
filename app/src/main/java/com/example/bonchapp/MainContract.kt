@@ -7,7 +7,7 @@ import kotlin.collections.ArrayList
 
 interface MainContract {
 
-    interface View {
+    interface ITimeTableView {
         fun showTimetable(timetable: List<SubjectDTO>)
         fun showGroupsList(list: List<String>)
         fun showSelectProfessorFragment()
@@ -17,7 +17,7 @@ interface MainContract {
         fun setWithoutClassesVisibility(b:Boolean)
     }
 
-    interface Presenter {
+    interface ITimeTablePresenter {
         fun switchDayTimetable(day: String)
         fun updateGroupsList()
         fun updateTutorsList()
@@ -25,7 +25,7 @@ interface MainContract {
         fun switchGroup(name:String, type:String)
     }
 
-    interface Model {
+    interface ITimeTableModel {
         fun loadTimetable(body: RequestTimeTableDTO): LiveData<ArrayList<SubjectDTO>>
         fun getGroups(): LiveData<ArrayList<String>>
         fun getTutors(): LiveData<ArrayList<String>>

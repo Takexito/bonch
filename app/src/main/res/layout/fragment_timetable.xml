@@ -111,6 +111,8 @@
 
             app:layout_constraintTop_toTopOf="parent"
 
+            app:firstDayOfWeek="monday"
+
 
             app:selectedItem_background="@drawable/selectedday_outline"
             app:state="collapsed"

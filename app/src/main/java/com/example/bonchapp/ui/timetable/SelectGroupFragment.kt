@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.adapters.SelectGroupAdapter
+import kotlinx.android.synthetic.main.fragment_timetable.*
 
 class SelectGroupFragment(type: Int) : Fragment() {
 
@@ -37,32 +38,38 @@ class SelectGroupFragment(type: Int) : Fragment() {
 
     }
 
-    fun initRecyclerView(root: View) {
+    private fun initRecyclerView(root: View) {
         groupsListAdapter = SelectGroupAdapter(root.context, type)
-        val recyclerView = root.findViewById<RecyclerView>(R.id.rv_selectGroup)
-        recyclerView.layoutManager = LinearLayoutManager(root.context)
-        recyclerView.adapter = groupsListAdapter
+        //val recyclerView = root.findViewById<RecyclerView>(R.id.rv_selectGroup)
+        //recyclerView.layoutManager = LinearLayoutManager(root.context)
+        //recyclerView.adapter = groupsListAdapter
+
+        timeTable_recyclerView.apply {
+            groupsListAdapter
+        }
     }
 
-    fun initSearchField(root: View) {
+    private fun initSearchField(root: View) {
         val textSearch = root.findViewById<EditText>(R.id.search_field)
         textSearch.doOnTextChanged { text, start, count, after ->
             findInArray(text.toString())
         }
     }
 
-    fun findInArray(str: String) {
+    private fun findInArray(str: String) {
 
         if (str == "")
             groupsListAdapter.setGroups(arrSubjects)
         else {
 
-            var arr: ArrayList<String> = arrayListOf()
-            for (i in arrSubjects) {
-                if (i.contains(str, true)) {
-                    arr.add(i)
+            val arr: ArrayList<String> = arrayListOf()
+
+            arr.forEach {
+                if (it.contains(str, true)) {
+                    arr.add(it)
                 }
             }
+
             groupsListAdapter.setGroups(arr)
         }
     }

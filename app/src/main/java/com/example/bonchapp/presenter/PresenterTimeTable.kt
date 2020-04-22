@@ -11,12 +11,13 @@ import com.example.bonchapp.pojo.SubjectDTO
 import java.text.SimpleDateFormat
 
 
-class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.Presenter {
-    val mView = view
-    var mModel = ModelTimetable()
-    val fragment = fr
+class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) : MainContract.ITimeTablePresenter {
+    private val mView = view
+    private val mModel = ModelTimetable()
 
-    var name = "ИКПИ-84"
+    private val fragment = fr
+
+    var name = ""
     var type = "group"
 
     lateinit var timetable: List<SubjectDTO>
@@ -89,7 +90,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.View) : MainContract.P
     fun loadSavedNameGroup() {
         mModel.loadSavedNameGroup(name)
 
-        //name = "ИКПИ-84"
+        name = "ИКПИ-84"
 
 
         if (name != "") {
