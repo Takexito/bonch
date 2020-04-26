@@ -4,14 +4,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.model.ModelTimetable
-import com.example.bonchapp.model.pojo.Date
-import com.example.bonchapp.model.pojo.Info
 import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
-import java.text.SimpleDateFormat
+import org.joda.time.DateTime
+import org.joda.time.DateTimeConstants
+import org.joda.time.format.DateTimeFormat
+import java.util.*
 
 
-class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) : MainContract.ITimeTablePresenter {
+class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
+    MainContract.ITimeTablePresenter {
     private val mView = view
     private val mModel = ModelTimetable()
 
@@ -24,33 +26,56 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) : Main
     lateinit var groupsList: List<String>
     lateinit var tutorsList: List<String>
 
-    var activeday: String
+    //var activeday: String
+    var currentDate = DateTime()
+
+    val dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
+
 
     init {
-        val sdf = SimpleDateFormat("yyyy-MM-dd")
-        activeday = sdf.format(java.util.Date())
+        //val sdf = SimpleDateFormat("dd-MM-yyyy")
+        //activeday = sdf.format(java.util.Date())
 
         loadSavedNameGroup()
 
         if (name != "")
-            switchDayTimetable(activeday)
+            switchDayTimetable("*")
     }
 
-    override fun switchDayTimetable(day: String) {
-        activeday = day
-        val body = RequestTimeTableDTO(0, Info(type, name), Date(activeday))
+    override fun switchDayTimetable(command: String) {
+        if (name != "") {
+            val start: DateTime
+            val end: DateTime
 
-        if (name != "")
+            if (command.equals("+")) {
+                currentDate.plusWeeks(1)
+            } else if (command.equals("-")) {
+                currentDate.minusWeeks(1)
+            }
+
+            start = currentDate.dayOfWeek().setCopy(DateTimeConstants.MONDAY)
+            end = currentDate.dayOfWeek().setCopy(DateTimeConstants.SUNDAY)
+
+            val body = RequestTimeTableDTO(dtf.print(start), dtf.print(end), name, type)
+
+
             mModel.loadTimetable(body).observe(fragment.viewLifecycleOwner, Observer {
                 timetable = it
 
                 mView.showTimetable(timetable)
 
-                if (timetable.size != 0) {
+                /*if (timetable.size != 0) {
                     mView.setWithoutClassesVisibility(false)
                 } else
                     mView.setWithoutClassesVisibility(true)
+                */
             })
+        }
+    }
+
+    fun switchDayTimetable(dt:DateTime) {
+        currentDate = dt
+        switchDayTimetable("*")
     }
 
     override fun updateGroupsList() {
@@ -79,7 +104,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) : Main
         this.name = name
         this.type = type
 
-        switchDayTimetable(activeday)
+        switchDayTimetable("*")
 
         mView.setNameGroup(name)
 

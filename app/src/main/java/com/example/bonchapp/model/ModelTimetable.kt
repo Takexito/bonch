@@ -35,6 +35,7 @@ class ModelTimetable() : MainContract.ITimeTableModel {
 
                 }
             })
+
         return data
     }
 

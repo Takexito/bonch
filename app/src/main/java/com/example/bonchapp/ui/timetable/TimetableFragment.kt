@@ -1,7 +1,5 @@
 package com.example.bonchapp.ui.timetable
 
-import android.app.Activity
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,32 +7,23 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.R
-import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
-import com.example.bonchapp.ui.adapters.TimetableAdapter
-import com.example.bonchapp.ui.event.FullEventFragment
-import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.DayViewDecorator
-import com.prolificinteractive.materialcalendarview.DayViewFacade
-import com.shrikanthravi.collapsiblecalendarview.data.Day
+import com.example.bonchapp.ui.adapters.DayTimeTableAdapter
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar.CalendarListener
-import kotlinx.android.synthetic.main.fragment_timetable.*
-
+import org.joda.time.DateTime
 
 lateinit var mPresenter: PresenterTimeTable
 
 class TimetableFragment : Fragment(), MainContract.ITimeTableView {
 
-    lateinit var timeTableAdapter: TimetableAdapter
+    lateinit var dayTimeTableAdapter: DayTimeTableAdapter
     lateinit var selectGroupFragment: SelectGroupFragment
 
     //val mPresenter = PresenterTimeTable(this, this)
@@ -60,7 +49,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
     }
 
     override fun showTimetable(timetable: List<SubjectDTO>) {
-        timeTableAdapter.setSubjects(timetable)
+        dayTimeTableAdapter.setList(timetable)
     }
 
     override fun showGroupsList(list: List<String>) {
@@ -94,57 +83,42 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
     }
 
     private fun initRecyclerView(view: View) {
-        timeTableAdapter = TimetableAdapter(view.context, this)
-        //val recyclerViewDay = view.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
-        //recyclerViewDay.layoutManager = LinearLayoutManager(view.context)
-        //recyclerViewDay.adapter = timeTableAdapter
 
-        timeTable_recyclerView.apply {
-            timeTableAdapter
-        }
+        dayTimeTableAdapter = DayTimeTableAdapter(view.context, this)
+
+        val recyclerViewDay = view.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
+        recyclerViewDay.layoutManager = LinearLayoutManager(view.context)
+        recyclerViewDay.adapter = dayTimeTableAdapter
+
+        recyclerViewDay.smoothScrollToPosition(5)
     }
 
     private fun initCalender(view: View) {
-        /*val calendar = view.findViewById<MaterialCalendarView>(R.id.calendar)
-        calendar.setTopbarVisible(false)
-
-        val textMonth = view.findViewById<TextView>(R.id.month)
-
-        val cur = CurrentDayDecorator(activity, CalendarDay.today(), calendar.selectedDate)
-        calendar.addDecorators(cur)
-
-        calendar.setOnDateChangedListener(OnDateSelectedListener { widget, date, selected ->
-            val s: String = "${date.year}-${date.month}-${date.day}"
-            mPresenter.switchDayTimetable(s)
-
-            cur.myDay = CalendarDay.from(2020,3,22)
-            cur.shouldDecorate(CalendarDay.from(2020,3,22))
-        })
-
-        textMonth.text = resources.getStringArray(R.array.Months)[calendar.currentDate.month - 1]
-
-        calendar.setOnMonthChangedListener { widget, date ->
-            textMonth.text =
-                resources.getStringArray(R.array.Months)[calendar.currentDate.month - 1]
-
-        }
-
-        calendar.setSelectedDate(CalendarDay.today())
-         */
 
         val calendar = view.findViewById<CollapsibleCalendar>(R.id.calendar)
 
-        //calendar.firstDayOfWeek = 1
-
         val textMonth = view.findViewById<TextView>(R.id.month)
-        textMonth.text = resources.getStringArray(R.array.Months)[(calendar.selectedDay?.month ?: 1) - 1]
+        textMonth.text =
+            resources.getStringArray(R.array.Months)[(calendar.selectedDay?.month ?: 1) - 1]
+
+        var currentWeek = DateTime.now().weekOfWeekyear
 
 
         calendar.setCalendarListener(object : CalendarListener {
             override fun onDaySelect() {
                 val day = calendar.selectedDay
-                val s: String = "${day?.year}-${1 + day?.month!!}-${day?.day}"
-            mPresenter.switchDayTimetable(s)
+                //val s: String = "${day?.day}-${1 + day?.month!!}-${day?.year}"
+                //mPresenter.switchDayTimetable(s)
+                val dt = DateTime(day!!.year, day.month + 1, day.day, 0, 0)
+
+                val recyclerViewDay = view.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
+
+                if(dt.weekOfWeekyear != currentWeek){
+                    currentWeek = dt.dayOfWeek
+                    mPresenter.switchDayTimetable(dt)
+                }
+
+                recyclerViewDay.scrollToPosition(dt.dayOfWeek-1)
             }
 
             override fun onItemClick(view: View) {}
@@ -159,6 +133,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
             override fun onMonthChange() {
                 textMonth.text = resources.getStringArray(R.array.Months)[(calendar.month ?: 1)]
             }
+
             override fun onWeekChange(i: Int) {}
         })
 
@@ -196,7 +171,8 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         val button = root.findViewById<ImageView>(R.id.filter)
         button.setOnClickListener {
             //MainCoordinator.navigateToSelectTypeTimetable(this)
-            activity!!.supportFragmentManager.beginTransaction().add(SelectTypeTimetableFragment(), null)
+            activity!!.supportFragmentManager.beginTransaction()
+                .add(SelectTypeTimetableFragment(), null)
                 .commit()
         }
     }
@@ -227,24 +203,5 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
 
         val spinner_groupName = root.findViewById<TextView>(R.id.spinner)
         spinner_groupName.text = name
-    }
-}
-
-class CurrentDayDecorator(context: Activity?, currentDay: CalendarDay, selectedDay: CalendarDay?) :
-    DayViewDecorator {
-    private val drawable: Drawable?
-    var myDay = currentDay
-    val sel = selectedDay
-    override fun shouldDecorate(day: CalendarDay): Boolean {
-        return day == myDay
-    }
-
-    override fun decorate(view: DayViewFacade) {
-        view.setSelectionDrawable(drawable!!)
-    }
-
-    init {
-// You can set background for Decorator via drawable here
-        drawable = ContextCompat.getDrawable(context!!, R.drawable.selectedday_outline)
     }
 }

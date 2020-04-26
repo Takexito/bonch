@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="16dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="5dp"
     android:layout_marginEnd="16dp"
+    android:layout_marginBottom="5dp"
     android:theme="@style/CardView"
+    android:elevation="2dp"
     android:stateListAnimator="@null"
     app:cardCornerRadius="4dp">
 
@@ -19,7 +21,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/subject_time"
@@ -27,8 +30,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="5dp"
             android:text="9:00-10:35"
+            android:lineHeight="19sp"
             android:textColor="#000000"
             android:textSize="16sp" />
 
@@ -37,10 +41,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/roboto"
+            android:lineHeight="21sp"
             android:text="Экономика отрасли"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -49,9 +55,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="3dp"
             android:text="Практическое занятие"
             android:textColor="#000000"
+            android:lineHeight="19sp"
             android:textSize="16sp"
             android:textStyle="italic" />
 
@@ -61,8 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             android:text="Слуцкий Михаил Григорьевич"
+            android:lineHeight="19sp"
             android:textColor="#000000"
             android:textSize="16sp" />
 
@@ -72,8 +80,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="6dp"
+            android:lineHeight="19sp"
             android:text="404/1"
             android:textColor="@color/colorTextBlue"
             android:textSize="16sp" />

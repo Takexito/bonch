@@ -3,6 +3,7 @@ package com.example.bonchapp
 import androidx.lifecycle.LiveData
 import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
+import org.joda.time.DateTime
 import kotlin.collections.ArrayList
 
 interface MainContract {
@@ -21,7 +22,7 @@ interface MainContract {
         fun switchDayTimetable(day: String)
         fun updateGroupsList()
         fun updateTutorsList()
-        fun switchTimetable(type: String)
+        fun switchTimetable(command: String)
         fun switchGroup(name:String, type:String)
     }
 

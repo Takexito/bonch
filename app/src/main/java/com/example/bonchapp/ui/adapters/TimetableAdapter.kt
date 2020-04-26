@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.pojo.SubjectDTO
 import org.xmlpull.v1.XmlPullParser
 
+var g:Int = 0
 
 class TimetableAdapter(val context: Context, fragment: Fragment) :
     RecyclerView.Adapter<TimetablePostHolder>() {
@@ -64,7 +66,9 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
         textName.text = subject.subject
         textType.text = subject.subject_type
         textProfessor.text = subject.tutor
-        //textCabinet.text = subject.place
+
+        g++
+        Log.d("BIND", "BINDING $g")
 
         setGradient(number)
 
@@ -91,9 +95,6 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
     }
 
     fun setGradient(number: Int){
-
-
-
         val imageG = when(number){
             0  -> GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(imageGradient.resources.getColor(R.color.colorOne), imageGradient.resources.getColor(R.color.colorTwo)))
             1  -> GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(imageGradient.resources.getColor(R.color.colorTwo), imageGradient.resources.getColor(R.color.colorThree)))

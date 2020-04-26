@@ -12,9 +12,11 @@ interface JsonApi {
     fun getGroups(): Call<ArrayList<String>>
 
     //@FormUrlEncoded
-    @POST("/api/timetable")
+    @POST("/api/timetable/")
     fun getTimeTable(
-        @Header("Accept") accept: String = "application/json",
+
+        //@Header("Accept") accept: String = "application/json",
+        @Header("Authorization") token:String = "Token 250332a63214da763d276a20c0ad4b586312db2b",
         @Body body: RequestTimeTableDTO?
     ): Call<ArrayList<SubjectDTO>>
 

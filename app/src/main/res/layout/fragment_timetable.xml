@@ -20,6 +20,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="100dp"
             android:background="#F5F3F5"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +140,8 @@
                 android:padding="16dp"
                 android:text="ФЕВРАЛЬ"
                 android:textColor="#FF8117"
-                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -163,7 +165,7 @@
 
                 android:padding="20dp"
 
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_filter" />
 
