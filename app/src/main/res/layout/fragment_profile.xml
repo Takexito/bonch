@@ -3,21 +3,116 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.storage.StorageFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_profile"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="15dp"
+        >
+
+        <ImageView
+            android:id="@+id/profileStudentImage"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_profile_empty_ava"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profileStudentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:textSize="14sp"
+            android:text="Ерофеев Серегй Анатольевич"
+            app:layout_constraintStart_toEndOf="@+id/profileStudentImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profileGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            android:text="ИКПИ-84"
+            app:layout_constraintStart_toEndOf="@+id/profileStudentImage"
+            app:layout_constraintTop_toBottomOf="@id/profileStudentName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            android:text="Староста"
+            app:layout_constraintStart_toEndOf="@+id/profileGroup"
+            app:layout_constraintTop_toBottomOf="@id/profileStudentName" />
+
+        <ImageView
+            android:id="@+id/settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="#FFFFFF"
+            android:paddingTop="11dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="15dp"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/profileTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileConstraintLayout"
+        android:elevation="15dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/profileDebtTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Задолженность" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/profileRecordBookTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Зачетка" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/profileElectivesTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Факультативы" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/profileViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/profileTabLayout">
+
+    </androidx.viewpager.widget.ViewPager>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
