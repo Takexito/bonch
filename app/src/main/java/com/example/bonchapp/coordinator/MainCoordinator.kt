@@ -9,6 +9,7 @@ import com.example.bonchapp.R
 import com.example.bonchapp.ui.event.FullEventFragment
 import com.example.bonchapp.ui.event.my.ApplicationEventFragment
 
+
 object MainCoordinator {
 
     fun navigateToFullEvent(fragment: Fragment, eventId: Int) {
@@ -32,5 +33,10 @@ object MainCoordinator {
         val bundle = Bundle()
         bundle.putString("cabinet", cabinet)
         context.findNavController().navigate(R.id.navigation_navgut, bundle)
+    }
+
+    fun navigateToTimetable(context: Fragment) {
+        context.activity!!.nav_view.visibility = View.VISIBLE
+        context.findNavController().navigate(R.id.action_navigation_authorization_to_navigation_timetable)
     }
 }
