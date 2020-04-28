@@ -7,7 +7,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-object TestRep {
+/*object TestRep {
     fun getGroups(liveData: MutableLiveData<ArrayList<String>>) {
         NetworkService
             .TABLE_API
@@ -29,4 +29,4 @@ object TestRep {
             })
     }
 
-}
+}*/

@@ -10,15 +10,34 @@ import com.example.bonchapp.ui.adapters.SelectGroupAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SelectTypeTimetableFragment() : BottomSheetDialogFragment() {
-
+lateinit var root:View
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_type_timetable, container, false)
+        root = inflater.inflate(R.layout.fragment_type_timetable, container, false)
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btnInit()
+    }
+
+    private fun btnInit(){
+        val btn_select_group = root.findViewById<View>(R.id.btn_select_group)
+        val btn_select_professor = root.findViewById<View>(R.id.btn_select_tutor)
+
+        btn_select_group.setOnClickListener {
+            mPresenter.switchTimetable("group")
+
+        }
+
+        btn_select_professor.setOnClickListener {
+            mPresenter.switchTimetable("tutor")
+        }
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.model.network.NetworkService
+import com.example.bonchapp.model.pojo.GroupDTO
 import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.model.pojo.RequestTutorsDTO
 import com.example.bonchapp.pojo.SubjectDTO
@@ -39,24 +40,24 @@ class ModelTimetable() : MainContract.ITimeTableModel {
         return data
     }
 
-    override fun getGroups(): LiveData<ArrayList<String>>  {
+    override fun getGroups(): LiveData<ArrayList<ArrayList<String>>>  {
 
-        val data = MutableLiveData<ArrayList<String>>()
+        val data = MutableLiveData<ArrayList<ArrayList<String>>>()
 
         NetworkService
             .TABLE_API
             .getGroups()
-            .enqueue(object : Callback<ArrayList<String>> {
+            .enqueue(object : Callback<ArrayList<ArrayList<String>>> {
                 override fun onResponse(
-                    call: Call<ArrayList<String>>,
-                    resp: Response<ArrayList<String>>
+                    call: Call<ArrayList<ArrayList<String>>>,
+                    resp: Response<ArrayList<ArrayList<String>>>
                 ){
                     Log.d("Test", "Good")
-                    data.value = resp.body() ?: arrayListOf("Error!", "LOL", "statr")
+                    data.value = resp.body()
 
                 }
 
-                override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
+                override fun onFailure(call: Call<ArrayList<ArrayList<String>>>, t: Throwable) {
                     Log.d("Test", t.localizedMessage ?: "Error!")
 
                 }
@@ -71,7 +72,7 @@ class ModelTimetable() : MainContract.ITimeTableModel {
 
         NetworkService
             .TABLE_API
-            .getTutors(body = RequestTutorsDTO(0))
+            .getTutors()
             .enqueue(object : Callback<ArrayList<String>> {
                 override fun onResponse(
                     call: Call<ArrayList<String>>,

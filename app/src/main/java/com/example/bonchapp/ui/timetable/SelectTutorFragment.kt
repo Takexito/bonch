@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.model.pojo.GroupDTO
 import com.example.bonchapp.ui.adapters.SelectGroupAdapter
+import com.example.bonchapp.ui.adapters.SelectTutorAdapter
 import kotlinx.android.synthetic.main.fragment_timetable.*
 
-class SelectGroupFragment() : Fragment() {
+class SelectTutorFragment() : Fragment() {
 
-    lateinit var groupsListAdapter: SelectGroupAdapter
-    lateinit var arrSubjects: List<ArrayList<String>>
+    lateinit var tutorListAdapter: SelectTutorAdapter
+    lateinit var arrSubjects: ArrayList<String>
     lateinit var root: View
 
     override fun onCreateView(
@@ -41,13 +42,13 @@ class SelectGroupFragment() : Fragment() {
     }
 
     private fun initRecyclerView(root: View) {
-        groupsListAdapter = SelectGroupAdapter(root.context)
+        tutorListAdapter = SelectTutorAdapter(root.context)
         val recyclerView = root.findViewById<RecyclerView>(R.id.rv_selectGroup)
         recyclerView.layoutManager = LinearLayoutManager(root.context)
-        recyclerView.adapter = groupsListAdapter
+        recyclerView.adapter = tutorListAdapter
 
         //timeTable_recyclerView.apply {
-          //  groupsListAdapter
+        //  groupsListAdapter
         //}
     }
 
@@ -61,17 +62,17 @@ class SelectGroupFragment() : Fragment() {
     private fun findInArray(str: String) {
 
         if (str == "")
-            groupsListAdapter.setGroups(arrSubjects)
+            tutorListAdapter.setGroups(arrSubjects)
         else {
-            val arr: ArrayList<ArrayList<String>> = arrayListOf()
+            val arr: ArrayList<String> = arrayListOf()
 
             arrSubjects.forEach {
-                if (it[1].contains(str, true)) {
+                if (it.contains(str, true)) {
                     arr.add(it)
                 }
             }
 
-            groupsListAdapter.setGroups(arr)
+            tutorListAdapter.setGroups(arr)
         }
     }
 }

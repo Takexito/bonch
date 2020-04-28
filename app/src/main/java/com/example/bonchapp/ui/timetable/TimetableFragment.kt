@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.R
+import com.example.bonchapp.model.pojo.GroupDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.adapters.DayTimeTableAdapter
@@ -25,6 +26,8 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
 
     lateinit var dayTimeTableAdapter: DayTimeTableAdapter
     lateinit var selectGroupFragment: SelectGroupFragment
+    lateinit var selectTutorFragment: SelectTutorFragment
+
 
     //val mPresenter = PresenterTimeTable(this, this)
 
@@ -40,7 +43,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
 
         initRecyclerView(root)
         initCalender(root)
-        initSwitchTimetable(root)
+        //initSwitchTimetable(root)
         initSelectTypeTimetable()
 
         mPresenter = PresenterTimeTable(this, this)
@@ -52,18 +55,24 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         dayTimeTableAdapter.setList(timetable)
     }
 
-    override fun showGroupsList(list: List<String>) {
+    override fun showGroupsList(list: List<ArrayList<String>>) {
         selectGroupFragment.groupsListAdapter.setGroups(list)
         selectGroupFragment.arrSubjects = list
 
     }
 
+    override fun showTutorsList(list: ArrayList<String>) {
+        selectTutorFragment.tutorListAdapter.setGroups(list)
+        selectTutorFragment.arrSubjects = list
+
+    }
+
     override fun showSelectProfessorFragment() {
-        selectGroupFragment = SelectGroupFragment(1)
+        selectTutorFragment = SelectTutorFragment()
 
         activity!!.supportFragmentManager.beginTransaction().add(
             R.id.nav_host_fragment,
-            selectGroupFragment, null
+            selectTutorFragment, null
         ).addToBackStack(null).commit()
 
         //MainCoordinator.navigateToSelectGroup(this)
@@ -71,7 +80,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
     }
 
     override fun showSelectGroupFragment() {
-        selectGroupFragment = SelectGroupFragment(0)
+        selectGroupFragment = SelectGroupFragment()
 
         activity!!.supportFragmentManager.beginTransaction().add(
             R.id.nav_host_fragment,
@@ -139,7 +148,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
 
     }
 
-    private fun initSwitchTimetable(view: View) {
+    /*private fun initSwitchTimetable(view: View) {
         val spinner = view.findViewById<TextView>(R.id.spinner)
         val groupName = view.findViewById<TextView>(R.id.groupName)
         val itemSwitchTimeTable = view.findViewById<View>(R.id.item_swithTimeTable)
@@ -165,14 +174,14 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
             mPresenter.switchTimetable("tutor")
             itemSwitchTimeTable.setVisibility(View.INVISIBLE)
         }
-    }
+    }*/
 
     private fun initSelectTypeTimetable() {
         val button = root.findViewById<ImageView>(R.id.filter)
         button.setOnClickListener {
             //MainCoordinator.navigateToSelectTypeTimetable(this)
             activity!!.supportFragmentManager.beginTransaction()
-                .add(SelectTypeTimetableFragment(), null)
+                .add(SelectTypeTimetableFragment(), null).addToBackStack("1")
                 .commit()
         }
     }
@@ -198,10 +207,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
     }
 
     override fun setNameGroup(name: String) {
-        val groupName = root.findViewById<TextView>(R.id.groupName)
-        groupName.text = name
-
-        val spinner_groupName = root.findViewById<TextView>(R.id.spinner)
-        spinner_groupName.text = name
+        val nameGroup = root.findViewById<TextView>(R.id.nameGroup)
+        nameGroup.text = name
     }
 }

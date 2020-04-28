@@ -4,12 +4,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.model.ModelTimetable
+import com.example.bonchapp.model.pojo.GroupDTO
 import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import org.joda.time.format.DateTimeFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
@@ -23,8 +25,8 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
     var type = "group"
 
     lateinit var timetable: List<SubjectDTO>
-    lateinit var groupsList: List<String>
-    lateinit var tutorsList: List<String>
+    lateinit var groupsList: List<ArrayList<String>>
+    lateinit var tutorsList: ArrayList<String>
 
     //var activeday: String
     var currentDate = DateTime()
@@ -88,16 +90,20 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
     override fun updateTutorsList() {
         mModel.getTutors().observe(fragment.viewLifecycleOwner, Observer {
             tutorsList = it
-            mView.showGroupsList(tutorsList)
+            mView.showTutorsList(tutorsList)
         })
     }
 
     override fun switchTimetable(type: String) {
         this.type = type
+        fragment.activity?.onBackPressed()
+
         if (type == "group")
             mView.showSelectGroupFragment()
         else
             mView.showSelectProfessorFragment()
+
+
     }
 
     override fun switchGroup(name: String, type: String) {

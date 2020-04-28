@@ -8,17 +8,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
+import com.example.bonchapp.model.pojo.GroupDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.timetable.mPresenter
 
-class SelectGroupAdapter(val context: Context, type: Int) :
+class SelectGroupAdapter(val context: Context) :
     RecyclerView.Adapter<SelectGroupPostHolder>() {
 
-    var subject = ArrayList<String>()
-    val type = type
+    var subject = ArrayList<ArrayList<String>>()
 
-    fun setGroups(groupList: List<String>) {
+    fun setGroups(groupList: List<ArrayList<String>>) {
         this.subject.clear()
         this.subject.addAll(groupList)
         notifyDataSetChanged()
@@ -28,7 +28,7 @@ class SelectGroupAdapter(val context: Context, type: Int) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectGroupPostHolder {
         return SelectGroupPostHolder(
             LayoutInflater.from(context)
-                .inflate(R.layout.item_group, parent, false), type
+                .inflate(R.layout.item_group, parent, false)
         )
     }
 
@@ -41,43 +41,34 @@ class SelectGroupAdapter(val context: Context, type: Int) :
 
 }
 
-class SelectGroupPostHolder(itemView: View, type: Int) : RecyclerView.ViewHolder(itemView) {
+class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val imageSrc = itemView.findViewById<ImageView>(R.id.faculty_icon)
     val textName = itemView.findViewById<TextView>(R.id.item_group_nameGroup)
-    val type = type
-
     lateinit var group: String
 
-    fun bind(str: String, pos: Int) {
+    fun bind(groupLGr: ArrayList<String>, pos: Int) {
 
-        group = str
-        if (type == 0)
-            when {
-                group.indexOf("РТС/") != -1 -> {
-                    group = group.replace("РТС/", "")
-                    imageSrc.setImageResource(R.drawable.rts)
-                }
-                group.indexOf("ИС и Т/") != -1 -> {
-                    group = group.replace("ИС и Т/", "")
-                    imageSrc.setImageResource(R.drawable.isit)
-                }
-                group.indexOf("ИКСС/") != -1 -> {
-                    group = group.replace("ИКСС/", "")
-                    imageSrc.setImageResource(R.drawable.ikss_pushka)
-                }
-                group.indexOf("ЦЭУБИ/") != -1 -> {
-                    group = group.replace("ЦЭУБИ/", "")
-                    imageSrc.setImageResource(R.drawable.ceubi)
-                }
-                group.indexOf("ГФ/") != -1 -> {
-                    group = group.replace("ГФ/", "")
-                    imageSrc.setImageResource(R.drawable.gf)
-                }
-                else -> {
-                    group = group.substring(group.indexOf("/") + 1)
-                    imageSrc.setImageResource(R.drawable.empty)
-                }
+        group = groupLGr[1]
+        when {
+            groupLGr[0].equals("РТС") -> {
+                imageSrc.setImageResource(R.drawable.rts)
             }
+            groupLGr[0].equals("ИС и Т") -> {
+                imageSrc.setImageResource(R.drawable.isit)
+            }
+            groupLGr[0].equals("ИКСС") -> {
+                imageSrc.setImageResource(R.drawable.ikss_pushka)
+            }
+            groupLGr[0].equals("ЦЭУБИ") -> {
+                imageSrc.setImageResource(R.drawable.ceubi)
+            }
+            groupLGr[0].equals("ГФ") -> {
+                imageSrc.setImageResource(R.drawable.gf)
+            }
+            else -> {
+                imageSrc.setImageResource(R.drawable.empty)
+            }
+        }
         textName.text = group
 
         val background: Int
@@ -89,15 +80,8 @@ class SelectGroupPostHolder(itemView: View, type: Int) : RecyclerView.ViewHolder
 
         itemView.setBackgroundColor(background)
 
-
-        var typeS = ""
-
-        if (type == 0)
-            typeS = "group"
-        else typeS = "tutor"
-
         itemView.setOnClickListener {
-           mPresenter.switchGroup(group, typeS)
+            mPresenter.switchGroup(group, "group")
         }
     }
 }

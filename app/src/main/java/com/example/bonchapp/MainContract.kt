@@ -1,6 +1,7 @@
 package com.example.bonchapp
 
 import androidx.lifecycle.LiveData
+import com.example.bonchapp.model.pojo.GroupDTO
 import com.example.bonchapp.model.pojo.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import org.joda.time.DateTime
@@ -10,12 +11,13 @@ interface MainContract {
 
     interface ITimeTableView {
         fun showTimetable(timetable: List<SubjectDTO>)
-        fun showGroupsList(list: List<String>)
+        fun showGroupsList(list: List<ArrayList<String>>)
+        fun showTutorsList(list: ArrayList<String>)
         fun showSelectProfessorFragment()
         fun showSelectGroupFragment()
-        fun setNameGroup(name:String)
-        fun setMissingGroupVisibility(b:Boolean)
-        fun setWithoutClassesVisibility(b:Boolean)
+        fun setNameGroup(name: String)
+        fun setMissingGroupVisibility(b: Boolean)
+        fun setWithoutClassesVisibility(b: Boolean)
     }
 
     interface ITimeTablePresenter {
@@ -23,12 +25,12 @@ interface MainContract {
         fun updateGroupsList()
         fun updateTutorsList()
         fun switchTimetable(command: String)
-        fun switchGroup(name:String, type:String)
+        fun switchGroup(name: String, type: String)
     }
 
     interface ITimeTableModel {
         fun loadTimetable(body: RequestTimeTableDTO): LiveData<ArrayList<SubjectDTO>>
-        fun getGroups(): LiveData<ArrayList<String>>
+        fun getGroups(): LiveData<ArrayList<ArrayList<String>>>
         fun getTutors(): LiveData<ArrayList<String>>
     }
 }

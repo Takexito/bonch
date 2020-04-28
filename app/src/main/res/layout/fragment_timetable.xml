@@ -28,16 +28,6 @@
             tools:listitem="@layout/item_subject"
             tools:visibility="invisible" />
 
-        <include
-            android:id="@+id/item_swithTimeTable"
-            layout="@layout/item_select_timetable"
-            android:layout_width="215dp"
-            android:layout_height="132dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <LinearLayout
             android:id="@+id/missing_teacher"
             android:layout_width="match_parent"
@@ -145,17 +135,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/spinner"
+                android:id="@+id/nameGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="Выбор группы"
+                android:maxWidth="270dp"
+                android:text="Группа"
                 android:textAlignment="center"
                 android:textColor="@color/colorOrange"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/filter"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
