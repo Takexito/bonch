@@ -7,12 +7,18 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.event.FullEventFragment
+import com.example.bonchapp.ui.event.my.ApplicationEventFragment
 
 object MainCoordinator {
 
     fun navigateToFullEvent(fragment: Fragment, eventId: Int) {
         val bundle = Bundle().apply { putInt(Keys.FULL_EVENT_ID, eventId) }
         fragment.activity!!.supportFragmentManager.beginTransaction().add(FullEventFragment().apply { arguments = bundle }, null)
+            .commit()
+    }
+
+    fun navigateToCalendarEvent(fragment: Fragment) {
+        fragment.activity!!.supportFragmentManager.beginTransaction().add(ApplicationEventFragment(), null)
             .commit()
     }
 

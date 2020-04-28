@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
+import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.presenter.event.MyEventPresenter
 import com.example.bonchapp.ui.event.IEventView
 import com.example.bonchapp.ui.event.main.EventAdapter
@@ -40,6 +41,9 @@ class MyEventFragment : Fragment(), IEventView {
 
     private fun init(){
         initRecycler()
+        imageView3.setOnClickListener {
+            MainCoordinator.navigateToCalendarEvent(this)
+        }
     }
 
     private fun initRecycler(){
