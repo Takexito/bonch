@@ -10,7 +10,7 @@ import kotlin.collections.ArrayList
 interface MainContract {
 
     interface ITimeTableView {
-        fun showTimetable(timetable: List<SubjectDTO>)
+        fun showTimetable(timetable: List<SubjectDTO>, datesWeeks: List<String>)
         fun showGroupsList(list: List<ArrayList<String>>)
         fun showTutorsList(list: ArrayList<String>)
         fun showSelectProfessorFragment()

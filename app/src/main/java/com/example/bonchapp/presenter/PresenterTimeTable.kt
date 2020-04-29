@@ -21,8 +21,8 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
 
     private val fragment = fr
 
-    var name = ""
-    var type = "group"
+    private var name = ""
+    private var type = "group"
 
     lateinit var timetable: List<SubjectDTO>
     lateinit var groupsList: List<ArrayList<String>>
@@ -61,10 +61,21 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
             val body = RequestTimeTableDTO(dtf.print(start), dtf.print(end), name, type)
 
 
+            val arrDatesWeeks = arrayListOf<String>(
+                dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.MONDAY)),
+                dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.TUESDAY)),
+                dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.WEDNESDAY)),
+                dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.THURSDAY)),
+                dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.FRIDAY)),
+                dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.SATURDAY)),
+                dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.SUNDAY))
+            )
+
+
             mModel.loadTimetable(body).observe(fragment.viewLifecycleOwner, Observer {
                 timetable = it
 
-                mView.showTimetable(timetable)
+                mView.showTimetable(timetable, arrDatesWeeks)
 
                 /*if (timetable.size != 0) {
                     mView.setWithoutClassesVisibility(false)
@@ -75,7 +86,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
         }
     }
 
-    fun switchDayTimetable(dt:DateTime) {
+    fun switchDayTimetable(dt: DateTime) {
         currentDate = dt
         switchDayTimetable("*")
     }
@@ -100,9 +111,10 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
 
         if (type == "group")
             mView.showSelectGroupFragment()
-        else
+        else if (type == "tutor")
             mView.showSelectProfessorFragment()
-
+        else
+            switchDayTimetable("*")
 
     }
 

@@ -30,6 +30,7 @@ lateinit var root:View
     private fun btnInit(){
         val btn_select_group = root.findViewById<View>(R.id.btn_select_group)
         val btn_select_professor = root.findViewById<View>(R.id.btn_select_tutor)
+        val btn_select_exam = root.findViewById<View>(R.id.btn_exams)
 
         btn_select_group.setOnClickListener {
             mPresenter.switchTimetable("group")
@@ -38,6 +39,10 @@ lateinit var root:View
 
         btn_select_professor.setOnClickListener {
             mPresenter.switchTimetable("tutor")
+        }
+
+        btn_select_exam.setOnClickListener {
+            mPresenter.switchTimetable("exam")
         }
     }
 }

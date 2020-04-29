@@ -51,8 +51,8 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         return root
     }
 
-    override fun showTimetable(timetable: List<SubjectDTO>) {
-        dayTimeTableAdapter.setList(timetable)
+    override fun showTimetable(timetable: List<SubjectDTO>, datesWeeks: List<String>) {
+        dayTimeTableAdapter.setList(timetable, datesWeeks)
     }
 
     override fun showGroupsList(list: List<ArrayList<String>>) {
@@ -99,7 +99,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         recyclerViewDay.layoutManager = LinearLayoutManager(view.context)
         recyclerViewDay.adapter = dayTimeTableAdapter
 
-        recyclerViewDay.smoothScrollToPosition(5)
+        recyclerViewDay.smoothScrollToPosition(0)
     }
 
     private fun initCalender(view: View) {
