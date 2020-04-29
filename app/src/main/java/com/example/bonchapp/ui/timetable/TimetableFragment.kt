@@ -1,24 +1,24 @@
 package com.example.bonchapp.ui.timetable
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.View.OnTouchListener
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.MainContract
 import com.example.bonchapp.R
-import com.example.bonchapp.model.pojo.GroupDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.adapters.DayTimeTableAdapter
+import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar.CalendarListener
+import kotlinx.android.synthetic.main.fragment_timetable.view.*
 import org.joda.time.DateTime
+
 
 lateinit var mPresenter: PresenterTimeTable
 
@@ -41,10 +41,11 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
 
         root = inflater.inflate(R.layout.fragment_timetable, container, false)
 
-        initRecyclerView(root)
-        initCalender(root)
+        initRecyclerView()
+        initCalender()
         //initSwitchTimetable(root)
         initSelectTypeTimetable()
+        initSwipes()
 
         mPresenter = PresenterTimeTable(this, this)
 
@@ -91,22 +92,23 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         mPresenter.updateGroupsList()
     }
 
-    private fun initRecyclerView(view: View) {
+    private fun initRecyclerView() {
 
-        dayTimeTableAdapter = DayTimeTableAdapter(view.context, this)
+        dayTimeTableAdapter = DayTimeTableAdapter(root.context, this)
 
-        val recyclerViewDay = view.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
-        recyclerViewDay.layoutManager = LinearLayoutManager(view.context)
+        val recyclerViewDay = root.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
+        recyclerViewDay.layoutManager = LinearLayoutManager(root.context)
         recyclerViewDay.adapter = dayTimeTableAdapter
 
         recyclerViewDay.smoothScrollToPosition(0)
     }
 
-    private fun initCalender(view: View) {
 
-        val calendar = view.findViewById<CollapsibleCalendar>(R.id.calendar)
+    private fun initCalender() {
 
-        val textMonth = view.findViewById<TextView>(R.id.month)
+        val calendar = root.findViewById<CollapsibleCalendar>(R.id.calendar)
+
+        val textMonth = root.findViewById<TextView>(R.id.month)
         textMonth.text =
             resources.getStringArray(R.array.Months)[(calendar.selectedDay?.month ?: 1) - 1]
 
@@ -120,19 +122,18 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
                 //mPresenter.switchDayTimetable(s)
                 val dt = DateTime(day!!.year, day.month + 1, day.day, 0, 0)
 
-                val recyclerViewDay = view.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
+                val recyclerViewDay = root.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
 
-                if(dt.weekOfWeekyear != currentWeek){
+                if (dt.weekOfWeekyear != currentWeek) {
                     currentWeek = dt.dayOfWeek
                     mPresenter.switchDayTimetable(dt)
                 }
 
-                recyclerViewDay.scrollToPosition(dt.dayOfWeek-1)
+                recyclerViewDay.scrollToPosition(dt.dayOfWeek - 1)
             }
 
             override fun onItemClick(view: View) {}
             override fun onClickListener() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onDataUpdate() {}
@@ -186,24 +187,39 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         }
     }
 
-    override fun setMissingGroupVisibility(b: Boolean) {
-        val r = root.findViewById<LinearLayout>(R.id.missing_teacher)
+    private fun initSwipes() {
 
-        if (b)
-            r.setVisibility(View.VISIBLE)
-        else
-            r.setVisibility(View.INVISIBLE)
+        val gdt =
+            GestureDetector(GestureListener())
 
-    }
+        root.mainCL.setOnTouchListener(OnTouchListener() { view, event ->
+            gdt.onTouchEvent(event)
+            true
+        })
 
-    override fun setWithoutClassesVisibility(b: Boolean) {
-        val r = root.findViewById<LinearLayout>(R.id.without_classes)
 
-        if (b)
-            r.setVisibility(View.VISIBLE)
-        else
-            r.setVisibility(View.INVISIBLE)
+        /*root.mainCL.
+        setOnTouchListener(object : OnSwipeTouchListener(root.context) {
 
+
+            override fun onSwipeLeft() {
+                mPresenter.switchDayTimetable("-")
+            }
+
+            override fun onSwipeRight() {
+                mPresenter.switchDayTimetable("+")
+            }
+
+            override fun onSwipeTop() {
+                mPresenter.switchDayTimetable("+")
+
+            }
+
+            override fun onSwipeBottom() {
+                mPresenter.switchDayTimetable("+")
+
+            }
+        })*/
     }
 
     override fun setNameGroup(name: String) {
@@ -211,3 +227,30 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         nameGroup.text = name
     }
 }
+
+private class GestureListener : GestureDetector.SimpleOnGestureListener() {
+    private val SWIPE_MIN_DISTANCE = 120
+    private val SWIPE_THRESHOLD_VELOCITY = 200
+    override fun onFling(
+        e1: MotionEvent?,
+        e2: MotionEvent?,
+        velocityX: Float,
+        velocityY: Float
+    ): Boolean {
+        if (e1!!.getX() - e2!!.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+            mPresenter.switchDayTimetable("-")
+            return false; // справа налево
+        } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+            mPresenter.switchDayTimetable("+")
+            return false; // слева направо
+        }
+
+        if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+            return false; // снизу вверх
+        } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+            return false; // сверху вниз
+        }
+        return false;
+    }
+}
+

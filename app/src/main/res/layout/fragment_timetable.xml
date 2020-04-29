@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
+        android:id="@+id/mainCL"
         android:orientation="vertical"
         tools:context=".ui.timetable.TimetableFragment">
 
@@ -28,67 +29,6 @@
             tools:listitem="@layout/item_subject"
             tools:visibility="invisible" />
 
-        <LinearLayout
-            android:id="@+id/missing_teacher"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="83dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="40dp"
-                android:text="Выберите группу или преподавателя."
-                app:layout_constraintBottom_toTopOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_missing_teacher" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/without_classes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="83dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="40dp"
-                android:text="В этот день занятий нет."
-                app:layout_constraintBottom_toTopOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_without_classes" />
-        </LinearLayout>
 
         <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
             android:id="@+id/calendar"

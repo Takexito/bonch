@@ -127,7 +127,6 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
         mView.setNameGroup(name)
 
         fragment.activity?.onBackPressed()
-        mView.setMissingGroupVisibility(false)
     }
 
     fun loadSavedNameGroup() {
@@ -137,7 +136,6 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
 
 
         if (name != "") {
-            mView.setMissingGroupVisibility(false)
             mView.setNameGroup(name)
         }
     }
