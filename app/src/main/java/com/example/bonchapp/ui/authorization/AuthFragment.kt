@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bonchapp.R
 import com.example.bonchapp.presenter.AuthPresenter
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+//import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import kotlinx.android.synthetic.main.auth_page_2.view.*
 
 class AuthFragment : Fragment() {
 
     lateinit var pager: ViewPager2
-    private lateinit var dotsIndicator: DotsIndicator
+    //private lateinit var dotsIndicator: DotsIndicator
 
     private lateinit var pagerAdapter: PagerAdapter
 
@@ -38,8 +38,8 @@ class AuthFragment : Fragment() {
         pager.adapter = pagerAdapter
         pager.isUserInputEnabled = false
 
-        dotsIndicator = view.findViewById(R.id.dots_indicator)
-        dotsIndicator.setViewPager2(pager)
+        //dotsIndicator = view.findViewById(R.id.dots_indicator)
+        //dotsIndicator.setViewPager2(pager)
     }
 
     fun nextPage() {

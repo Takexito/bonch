@@ -10,16 +10,16 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"/>
 
-    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-        android:id="@+id/dots_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        app:dotsColor="#C3BFDD"
-        app:dotsSize="6dp"
-        app:dotsSpacing="2dp"
-        android:layout_alignBottom="@id/auth_pager"
-        android:layout_centerHorizontal="true"
-        app:selectedDotColor="#C3BFDD" />
+<!--    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator-->
+<!--        android:id="@+id/dots_indicator"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        app:dotsColor="#C3BFDD"-->
+<!--        app:dotsSize="6dp"-->
+<!--        app:dotsSpacing="2dp"-->
+<!--        android:layout_alignBottom="@id/auth_pager"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        app:selectedDotColor="#C3BFDD" />-->
 
 </RelativeLayout>

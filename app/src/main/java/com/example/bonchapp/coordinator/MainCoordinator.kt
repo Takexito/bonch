@@ -1,6 +1,7 @@
 package com.example.bonchapp.coordinator
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.event.FullEventFragment
 import com.example.bonchapp.ui.event.my.ApplicationEventFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 object MainCoordinator {
