@@ -1,6 +1,8 @@
 package com.example.bonchapp.ui.timetable
 
+import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.View.OnTouchListener
 import android.widget.ImageView
@@ -13,7 +15,6 @@ import com.example.bonchapp.R
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.adapters.DayTimeTableAdapter
-import com.shrikanthravi.collapsiblecalendarview.view.OnSwipeTouchListener
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar.CalendarListener
 import kotlinx.android.synthetic.main.fragment_timetable.view.*
@@ -45,7 +46,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         initCalender()
         //initSwitchTimetable(root)
         initSelectTypeTimetable()
-        initSwipes()
+        //initSwipes()
 
         mPresenter = PresenterTimeTable(this, this)
 
@@ -189,37 +190,15 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
 
     private fun initSwipes() {
 
-        val gdt =
-            GestureDetector(GestureListener())
+        val gdt = GestureDetector(context, GestureListener())
 
-        root.mainCL.setOnTouchListener(OnTouchListener() { view, event ->
+        val touchListener = OnTouchListener { v, event ->
             gdt.onTouchEvent(event)
-            true
-        })
+        }
 
+        val k = root.findViewById<View>(R.id.timeTable_recyclerView)
 
-        /*root.mainCL.
-        setOnTouchListener(object : OnSwipeTouchListener(root.context) {
-
-
-            override fun onSwipeLeft() {
-                mPresenter.switchDayTimetable("-")
-            }
-
-            override fun onSwipeRight() {
-                mPresenter.switchDayTimetable("+")
-            }
-
-            override fun onSwipeTop() {
-                mPresenter.switchDayTimetable("+")
-
-            }
-
-            override fun onSwipeBottom() {
-                mPresenter.switchDayTimetable("+")
-
-            }
-        })*/
+        k.setOnTouchListener(touchListener)
     }
 
     override fun setNameGroup(name: String) {
@@ -229,28 +208,35 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
 }
 
 private class GestureListener : GestureDetector.SimpleOnGestureListener() {
-    private val SWIPE_MIN_DISTANCE = 120
-    private val SWIPE_THRESHOLD_VELOCITY = 200
+    private val SWIPE_MIN_DISTANCE = 12
+    private val SWIPE_THRESHOLD_VELOCITY = 20
+
+
     override fun onFling(
         e1: MotionEvent?,
         e2: MotionEvent?,
         velocityX: Float,
         velocityY: Float
     ): Boolean {
-        if (e1!!.getX() - e2!!.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-            mPresenter.switchDayTimetable("-")
-            return false; // справа налево
-        } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-            mPresenter.switchDayTimetable("+")
-            return false; // слева направо
+        if (e1 != null && e2 != null) {
+            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                mPresenter.switchDayTimetable("-")
+                return true; // справа налево
+            } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                mPresenter.switchDayTimetable("+")
+                return true; // слева направо
+            }
         }
+        if (e1 != null && e2 != null) {
 
-        if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-            return false; // снизу вверх
-        } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
-            return false; // сверху вниз
+            if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+                return false; // снизу вверх
+            } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+                return false; // сверху вниз
+            }
         }
         return false;
+
     }
 }
 

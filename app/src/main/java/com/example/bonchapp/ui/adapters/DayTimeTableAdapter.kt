@@ -112,12 +112,10 @@ class DayTimetablePostHolder(itemView: View, fragment: Fragment) :
 
             recyclerViewDay.layoutManager = LinearLayoutManager(itemView.context)
             recyclerViewDay.adapter = timeTableAdapter
-            timeTableAdapter.setSubjects(arrayList)
+            timeTableAdapter.setSubjects(arrayList, date)
         }
 
-        var s: String = "${dayOfWeek[number]} ${date.substring(0, 5)}"
-
-        viewDate.text = s
+        viewDate.text = "${dayOfWeek[number]} ${date.substring(0, 5)}"
 
 
     }

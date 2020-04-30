@@ -3,6 +3,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainCL"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
-        android:id="@+id/mainCL"
         android:orientation="vertical"
         tools:context=".ui.timetable.TimetableFragment">
 
@@ -67,10 +67,13 @@
                 android:id="@+id/month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:fontFamily="@font/roboto"
+                android:padding="15dp"
+                android:textSize="12sp"
                 android:text="ФЕВРАЛЬ"
                 android:textColor="#FF8117"
 
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

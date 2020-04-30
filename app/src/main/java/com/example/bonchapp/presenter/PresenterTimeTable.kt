@@ -61,7 +61,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
             val body = RequestTimeTableDTO(dtf.print(start), dtf.print(end), name, type)
 
 
-            val arrDatesWeeks = arrayListOf<String>(
+            val datesWeeks = arrayListOf<String>(
                 dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.MONDAY)),
                 dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.TUESDAY)),
                 dtf.print(currentDate.dayOfWeek().setCopy(DateTimeConstants.WEDNESDAY)),
@@ -75,7 +75,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
             mModel.loadTimetable(body).observe(fragment.viewLifecycleOwner, Observer {
                 timetable = it
 
-                mView.showTimetable(timetable, arrDatesWeeks)
+                mView.showTimetable(timetable, datesWeeks)
 
                 /*if (timetable.size != 0) {
                     mView.setWithoutClassesVisibility(false)

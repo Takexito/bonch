@@ -18,7 +18,7 @@
             android:layout_marginBottom="20dp"
             android:src="@drawable/ic_slider" />
 
-        <androidx.appcompat.widget.AppCompatToggleButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_exams"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -30,11 +30,10 @@
             android:padding="5dp"
             android:textColor="@drawable/switch_color"
             android:textAllCaps="false"
-            android:textOff="Зачеты и экзамены"
-            android:textOn="Зачеты и экзамены"
+            android:text="Зачеты и экзамены"
             android:textSize="16dp" />
 
-        <androidx.appcompat.widget.AppCompatToggleButton
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="40dp"
@@ -45,11 +44,10 @@
             android:stateListAnimator="@null"
             android:textAllCaps="false"
             android:textColor="@drawable/switch_color"
-            android:textOff="Факультативы"
-            android:textOn="Факультативы"
+            android:text="Факультативы"
             android:textSize="16dp" />
 
-        <androidx.appcompat.widget.AppCompatToggleButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_select_group"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -62,11 +60,10 @@
             android:stateListAnimator="@null"
             android:textAllCaps="false"
             android:textColor="@color/colorOrange"
-            android:textOff="Моя группа"
-            android:textOn="Другая группа"
+            android:text="Другая группа"
             android:textSize="16dp" />
 
-        <androidx.appcompat.widget.AppCompatToggleButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_select_tutor"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -78,8 +75,7 @@
             android:stateListAnimator="@null"
             android:textAllCaps="false"
             android:textColor="@drawable/switch_color"
-            android:textOff="Преподаватель"
-            android:textOn="Преподаватель"
+            android:text="Преподаватель"
             android:textSize="16dp" />
 
     </LinearLayout>
