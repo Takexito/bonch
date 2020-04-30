@@ -22,6 +22,7 @@ import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import org.joda.time.DateTimeFieldType.dayOfWeek
 import org.joda.time.Interval
+import org.joda.time.ReadableInterval
 import org.joda.time.format.DateTimeFormat
 import org.xmlpull.v1.XmlPullParser
 
@@ -75,7 +76,7 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
         textType.text = subject.subject_type
         textProfessor.text = subject.tutor
 
-        setGradient(number, true)
+        setGradient(number, checkActiveSubject(date, subject.time))
 
         if (subject.place != null) {
             val content = SpannableString(subject.place)
@@ -185,18 +186,32 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
             val s1 = time.substring(0, 5)
             val s2 = time.substring(6, 11)
 
-            val dt = DateTime(
+            val ss1 = date.substring(6, 10)
+            val ss2 = date.substring(3, 5)
+            val ss3 = date.substring(0, 2)
+            val ss4 = s1.substring(0, 2)
+            val ss5 = s1.substring(2, 4)
+
+
+            val dt1 = DateTime(
                 date.substring(6, 10).toInt(),
-                date.substring(2, 4).toInt(),
+                date.substring(3, 5).toInt(),
                 date.substring(0, 2).toInt(),
                 s1.substring(0, 2).toInt(),
-                s1.substring(2, 4).toInt()
+                s1.substring(3, 5).toInt()
+            )
+            val dt2 = DateTime(
+                date.substring(6, 10).toInt(),
+                date.substring(3, 5).toInt(),
+                date.substring(0, 2).toInt(),
+                s2.substring(0, 2).toInt(),
+                s2.substring(3, 5).toInt()
             )
 
-            var subjtime =
-                Interval(DateTime(), DateTime.parse(s2))
-
-            return false
+            if (DateTime.now() > dt1 && DateTime.now() < dt2)
+                return true
+            else
+                return false
         } else
             return true
     }
