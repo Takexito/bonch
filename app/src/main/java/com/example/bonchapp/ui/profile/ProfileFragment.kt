@@ -9,23 +9,39 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.bonchapp.R
+import com.example.bonchapp.coordinator.MainCoordinator
+import com.example.bonchapp.ui.event.main.EventPagerAdapter
+import com.example.bonchapp.ui.profile.main.ProfilePagerAdapter
+import kotlinx.android.synthetic.main.fragment_event.*
+import kotlinx.android.synthetic.main.fragment_main_event.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
-
-    private lateinit var profileViewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        profileViewModel =
-            ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
-        val textView: TextView = root.findViewById(R.id.text_profile)
-        profileViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        profileViewPager.adapter =
+            ProfilePagerAdapter(this)
+        profileTabLayout.setupWithViewPager(profileViewPager)
+        initBtn()
+    }
+
+    private fun initBtn(){
+        settings.setOnClickListener{
+            //presenter.onFabClick()
+            MainCoordinator.navigateToSettings(this)
+        }
     }
 }

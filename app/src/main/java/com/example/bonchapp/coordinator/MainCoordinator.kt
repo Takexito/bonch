@@ -22,6 +22,10 @@ object MainCoordinator {
         fragment.findNavController().navigate(R.id.action_navigation_event_to_addEvent)
     }
 
+    fun navigateToSettings(fragment: Fragment) {
+        fragment.findNavController().navigate(R.id.action_navigation_profile_to_SettingsFragment)
+    }
+
     //Function for open navigator fragment with showing cabinet
     //Accepts cabinet number as argument. Example: 552/4; 522/4/1; 122 (for college)
 

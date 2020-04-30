@@ -31,7 +31,11 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.bonchapp.ui.profile.ProfileFragment"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_SettingsFragment"
+            app:destination="@id/settings"/>
+    </fragment>
     <fragment
         android:id="@+id/fullEventFragment"
         android:name="com.example.bonchapp.ui.event.FullEventFragment"
@@ -67,4 +71,11 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+
+    <fragment
+
+        android:id="@+id/settings"
+        android:name="com.example.bonchapp.ui.profile.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>
