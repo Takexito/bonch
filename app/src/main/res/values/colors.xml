@@ -12,4 +12,15 @@
     <color name="colorItemWhite">#FFFFFF</color>
     <color name="colorOrange">#FF8117</color>
     <color name="colorTextBlue">#1E67A2</color>
- </resources>
+
+    <color name="colorOne">#73FF2020</color>
+    <color name="colorTwo">#A1FF8E0A</color>
+    <color name="colorThree">#80FFE920</color>
+    <color name="colorFour">#CFFFE920</color>
+    <color name="colorFive">#806EEC32</color>
+    <color name="colorSix">#802DD9FF</color>
+    <color name="colorSeven">#800047FF</color>
+    <color name="colorEight">#807000FF</color>
+    <color name="colorNine">#E6FF0000</color>
+
+</resources>

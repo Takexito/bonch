@@ -4,18 +4,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
+import com.example.bonchapp.model.pojo.GroupDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presenter.PresenterTimeTable
 import com.example.bonchapp.ui.timetable.mPresenter
 
-class SelectGroupAdapter(val context: Context) : RecyclerView.Adapter<SelectGroupPostHolder>() {
+class SelectGroupAdapter(val context: Context) :
+    RecyclerView.Adapter<SelectGroupPostHolder>() {
 
-    var subject = ArrayList<String>()
+    var subject = ArrayList<ArrayList<String>>()
 
-    fun setGroups(groupList: List<String>) {
+    fun setGroups(groupList: List<ArrayList<String>>) {
         this.subject.clear()
         this.subject.addAll(groupList)
         notifyDataSetChanged()
@@ -39,13 +42,33 @@ class SelectGroupAdapter(val context: Context) : RecyclerView.Adapter<SelectGrou
 }
 
 class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    //val imageSrc = itemView.findViewById<TextView>(R.id.subject_time)
-
-    lateinit var group: String
+    val imageSrc = itemView.findViewById<ImageView>(R.id.faculty_icon)
     val textName = itemView.findViewById<TextView>(R.id.item_group_nameGroup)
+    lateinit var group: String
 
-    fun bind(group: String, pos: Int) {
-        this.group = group
+    fun bind(groupLGr: ArrayList<String>, pos: Int) {
+
+        group = groupLGr[1]
+        when {
+            groupLGr[0].equals("РТС") -> {
+                imageSrc.setImageResource(R.drawable.rts)
+            }
+            groupLGr[0].equals("ИС и Т") -> {
+                imageSrc.setImageResource(R.drawable.isit)
+            }
+            groupLGr[0].equals("ИКСС") -> {
+                imageSrc.setImageResource(R.drawable.ikss_pushka)
+            }
+            groupLGr[0].equals("ЦЭУБИ") -> {
+                imageSrc.setImageResource(R.drawable.ceubi)
+            }
+            groupLGr[0].equals("ГФ") -> {
+                imageSrc.setImageResource(R.drawable.gf)
+            }
+            else -> {
+                imageSrc.setImageResource(R.drawable.empty)
+            }
+        }
         textName.text = group
 
         val background: Int
@@ -57,11 +80,8 @@ class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         itemView.setBackgroundColor(background)
 
-
         itemView.setOnClickListener {
             mPresenter.switchGroup(group, "group")
         }
-
     }
-
 }

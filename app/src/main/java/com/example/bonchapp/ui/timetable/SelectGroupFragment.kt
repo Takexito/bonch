@@ -10,57 +10,68 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bonchapp.MainContract
 import com.example.bonchapp.R
-import com.example.bonchapp.presenter.PresenterTimeTable
+import com.example.bonchapp.model.pojo.GroupDTO
 import com.example.bonchapp.ui.adapters.SelectGroupAdapter
+import kotlinx.android.synthetic.main.fragment_timetable.*
 
 class SelectGroupFragment() : Fragment() {
 
     lateinit var groupsListAdapter: SelectGroupAdapter
-    lateinit var arrSubjects:List<String>
+    lateinit var arrSubjects: List<ArrayList<String>>
+    lateinit var root: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_switch_group, container, false)
 
-        initRecyclerView(root)
-        initSearchField(root)
+        root = inflater.inflate(R.layout.fragment_select_group, container, false)
 
         return root
 
     }
 
-    fun initRecyclerView(root: View) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initRecyclerView(root)
+        initSearchField(root)
+    }
+
+    private fun initRecyclerView(root: View) {
         groupsListAdapter = SelectGroupAdapter(root.context)
         val recyclerView = root.findViewById<RecyclerView>(R.id.rv_selectGroup)
         recyclerView.layoutManager = LinearLayoutManager(root.context)
         recyclerView.adapter = groupsListAdapter
+
+        //timeTable_recyclerView.apply {
+          //  groupsListAdapter
+        //}
     }
 
-    fun initSearchField(root: View) {
+    private fun initSearchField(root: View) {
         val textSearch = root.findViewById<EditText>(R.id.search_field)
         textSearch.doOnTextChanged { text, start, count, after ->
-            Log.d("lol", text.toString())
             findInArray(text.toString())
         }
     }
 
-    fun findInArray(str: String) {
+    private fun findInArray(str: String) {
 
-        if(str == "")
+        if (str == "")
             groupsListAdapter.setGroups(arrSubjects)
-            else{
+        else {
+            val arr: ArrayList<ArrayList<String>> = arrayListOf()
 
-        var arr: ArrayList<String> = arrayListOf()
-        for (i in arrSubjects) {
-            if(i.contains(str, true)){
-                arr.add(i)
+            arrSubjects.forEach {
+                if (it[1].contains(str, true)) {
+                    arr.add(it)
+                }
             }
+
+            groupsListAdapter.setGroups(arr)
         }
-        groupsListAdapter.setGroups(arr)
-    }}
+    }
 }

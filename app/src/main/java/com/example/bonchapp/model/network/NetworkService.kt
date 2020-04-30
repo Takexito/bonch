@@ -14,7 +14,7 @@ object NetworkService {
         val okHttpClient = OkHttpClient.Builder().build()
 
         retrofit = Retrofit.Builder()
-            .baseUrl("http://165.22.199.70/")
+            .baseUrl("https://delta-axis.me")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

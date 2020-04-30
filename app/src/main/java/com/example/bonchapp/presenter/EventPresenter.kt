@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.coordinator.MainCoordinator
-import com.example.bonchapp.model.repository.TestRep
+//import com.example.bonchapp.model.repository.TestRep
 import com.example.bonchapp.ui.event.main.EventAdapter
 import com.example.bonchapp.ui.event.main.MainEventFragment
 
@@ -19,8 +19,12 @@ class EventPresenter(val context: MainEventFragment) {
         MainCoordinator.navigateToFullEvent(context, pos)
     }
 
+
     fun onViewCreate() {
         TestRep.getGroups(_testData)
+	}
+    fun setDataFromApi() {
+        //TestRep.getGroups(_testData)
     }
 
     fun onSearchQueryUpdate(
