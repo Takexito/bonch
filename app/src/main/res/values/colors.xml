@@ -2,16 +2,17 @@
 <resources>
     <color name="colorPrimary">#FF9800</color>
     <color name="colorPrimaryDark">#BD7101</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#FF8117</color>
 
     <color name="colorPrimaryText">#000000</color>
-    <color name="colorSecondaryText">#888888</color>
+    <color name="colorSecondaryText">#666666</color>
     <color name="colorBackground">#F5F3F5</color>
 
     <color name="colorItemGrey">#F8F6F8</color>
     <color name="colorItemWhite">#FFFFFF</color>
     <color name="colorOrange">#FF8117</color>
     <color name="colorTextBlue">#1E67A2</color>
+
 
     <color name="colorOne">#73FF2020</color>
     <color name="colorTwo">#A1FF8E0A</color>
@@ -22,5 +23,10 @@
     <color name="colorSeven">#800047FF</color>
     <color name="colorEight">#807000FF</color>
     <color name="colorNine">#E6FF0000</color>
+	<color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="errorSignIn">#EB5757</color>
 
 </resources>
+
+

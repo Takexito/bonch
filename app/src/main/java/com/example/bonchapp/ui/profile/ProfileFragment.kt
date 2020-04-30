@@ -24,8 +24,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_profile, container, false)
-
+        val root = inflater.inflate(R.layout.fragment_authorization, container, false)
         return root
     }
 

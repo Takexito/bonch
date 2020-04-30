@@ -8,10 +8,10 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-import kotlinx.android.synthetic.main.fragment_main_event.*
+import com.example.bonchapp.presenter.event.IEventPresenter
 import kotlinx.android.synthetic.main.item_event.view.*
 
-class EventAdapter(private val eventFragment: MainEventFragment) :
+class EventAdapter(private val presenter: IEventPresenter) :
         RecyclerView.Adapter<EventAdapter.ViewHolder>(), Filterable {
 
     private var data: ArrayList<String>? = arrayListOf()
@@ -19,8 +19,8 @@ class EventAdapter(private val eventFragment: MainEventFragment) :
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    fun setData(data: ArrayList<String>) {
-        this.data = data
+    fun setData(data: List<String>) {
+        this.data = data as ArrayList<String>
         newData = data
     }
 
@@ -33,12 +33,20 @@ class EventAdapter(private val eventFragment: MainEventFragment) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.apply {
-            eventFragment.eventRecyclerView?.visibility = View.VISIBLE
+            presenter.view.setRecyclerVisible(true)
             titleEventView.text = data?.get(position) ?: "Bad"
             dateEventView.text = data?.get(position) ?: "Bad"
 
             setOnClickListener {
-                eventFragment.presenter.onItemClick(position)
+                presenter.onItemClick(position)
+            }
+
+            favoriteEventButton.setOnClickListener {
+                data?.get(position)?.let { it1 -> {
+                    favoriteEventButton.setBackgroundColor(R.color.colorOrange)
+                    presenter.onItemLike(it1)
+                    }
+                }
             }
         }
     }
@@ -54,7 +62,6 @@ class EventAdapter(private val eventFragment: MainEventFragment) :
                 if (constraint.isNullOrBlank()) {
                     filterResult.count = newData.size
                     filterResult.values = newData
-
                     return filterResult
                 }
                 val result = data?.filter {

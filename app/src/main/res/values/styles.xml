@@ -28,6 +28,10 @@
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
+    <style name="LikeButton" parent="Widget.MaterialComponents.Button">
+        <item name="background">@drawable/ic_favorite_btn_stroke</item>
+    </style>
+
     <!--Bottom Dialog-->
     <style name="CustomBottomSheetDialog" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
@@ -50,6 +54,7 @@
         <item name="tabTextAppearance">@style/TabsText</item>
         <item name="tabTextColor">@color/colorPrimary</item>
     </style>
+
     <style name="TabsText" parent="Widget.AppCompat.Light.ActionBar.TabText">
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
@@ -64,7 +69,17 @@
     <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
         <item name="android:layout_marginBottom">8dp</item>
     </style>
-    <style name="spinnerDropdownItemStyle" parent = "android:TextAppearance.Widget.TextView.SpinnerItem">
+
+    <style name="spinnerDropdownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
         <item name="android:layout_marginBottom">8dp</item>
     </style>
+
+    <style name="AppTheme.NoActionBar.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

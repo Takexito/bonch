@@ -1,4 +1,4 @@
-package com.example.bonchapp.presenter
+package com.example.bonchapp.presenter.event
 
 import android.animation.ObjectAnimator
 import android.view.View

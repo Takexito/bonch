@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.bonchapp.ui.event.favorite.FavoriteEventFragment
+import com.example.bonchapp.ui.event.my.ApplicationEventFragment
 import com.example.bonchapp.ui.event.my.MyEventFragment
 
 class EventPagerAdapter(val fragment: Fragment): FragmentPagerAdapter(fragment.fragmentManager!!) {
@@ -20,7 +21,7 @@ class EventPagerAdapter(val fragment: Fragment): FragmentPagerAdapter(fragment.f
             }
             2 -> {
                 Log.d("Lol", "start 2")
-                MyEventFragment()
+                ApplicationEventFragment()//MyEventFragment()
             }
             else -> {
                 Log.d("Lol", "start else")
