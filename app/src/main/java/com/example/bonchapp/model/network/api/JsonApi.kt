@@ -9,17 +9,17 @@ import retrofit2.http.*
 
 
 interface JsonApi {
-    @GET("/groups")
+    @GET("/api/groups")
     fun getGroups(): Call<ArrayList<String>>
 
     //@FormUrlEncoded
-    @POST("/timetable")
+    @POST("/api/timetable")
     fun getTimeTable(
         @Header("Accept") accept: String = "application/json",
         @Body body: RequestTimeTableDTO?
     ): Call<ArrayList<SubjectDTO>>
 
-    @GET("/tutors")
+    @GET("/api/tutors")
     fun getTutors(
         @Header("Accept") accept: String = "application/json",
         @Body body: RequestTutorsDTO?

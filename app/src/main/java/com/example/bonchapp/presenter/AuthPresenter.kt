@@ -15,7 +15,7 @@ class AuthPresenter(val fragment: AuthFragment) {
             fragment.onSignInError()
         } else {
             repository.logIn(Auth(email, pass)) {
-                Toast.makeText(fragment.context, it, Toast.LENGTH_LONG).show()
+                Toast.makeText(fragment.context, it.value, Toast.LENGTH_LONG).show()
                 MainCoordinator.navigateToTimetable(fragment)
             }
         }

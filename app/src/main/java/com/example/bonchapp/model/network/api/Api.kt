@@ -1,6 +1,7 @@
 package com.example.bonchapp.model.network.api
 
 import com.example.bonchapp.model.pojo.Auth
+import com.example.bonchapp.model.pojo.Token
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -11,5 +12,5 @@ interface Api {
     fun getToken(
         @Header("Accept") accept: String = "application/json",
         @Body body: Auth?
-    ): Call<String>
+    ): Call<Token>
 }
