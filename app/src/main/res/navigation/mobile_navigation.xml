@@ -56,6 +56,9 @@
             android:name="eventId"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_fullEventFragment_to_blankFragment"
+            app:destination="@id/orgInfo" />
     </fragment>
     <fragment
         android:id="@+id/addEvent"
@@ -88,5 +91,10 @@
         android:id="@+id/settings"
         android:name="com.example.bonchapp.ui.profile.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/orgInfo"
+        android:name="com.example.bonchapp.ui.event.OrgFragment"
+        android:label="fragment_orgInfo"
+        tools:layout="@layout/fragment_org" />
 
 </navigation>

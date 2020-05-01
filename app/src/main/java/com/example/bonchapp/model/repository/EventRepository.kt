@@ -13,7 +13,6 @@ class EventRepository : IEventRepository {
     val allEventLiveData = MutableLiveData<ArrayList<String>>()
     val favoriteEventLiveData = MutableLiveData<ArrayList<String>>()
     val myEventLiveData = MutableLiveData<ArrayList<String>>()
-    var isRev = false
 
     override fun getAllEvents():MutableLiveData<ArrayList<String>> {
         return getAllEventsRetrofit()
@@ -21,15 +20,17 @@ class EventRepository : IEventRepository {
 
     private fun getAllEventsRetrofit(): MutableLiveData<ArrayList<String>>{
         Log.d("EventRepository", "request")
-        NetworkService.TABLE_API.getGroups().enqueue(object : Callback<ArrayList<String>> {
-            override fun onResponse(call: Call<ArrayList<String>>, resp: Response<ArrayList<String>>) {
+        NetworkService.TABLE_API.getNews().enqueue(object : Callback<ArrayList<ArrayList<String>>> {
+            override fun onResponse(call: Call<ArrayList<ArrayList<String>>>, resp: Response<ArrayList<ArrayList<String>>>) {
                 Log.d("EventRepository", "Good")
-                if(isRev) allEventLiveData.value = resp.body() //TODO: handle error response
-                else allEventLiveData.value = resp.body()?.reversed() as ArrayList<String>
-                isRev = !isRev
+                var events = arrayListOf<String>()
+                resp.body()?.forEach {
+                    events.add(it[1])
+                }
+                allEventLiveData.value = events.toCollection(arrayListOf()) //TODO: handle error response
             }
 
-            override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<ArrayList<String>>>, t: Throwable) {
                 Log.d("EventRepository", t.localizedMessage ?: "Error!")
             }
         })

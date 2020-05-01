@@ -25,8 +25,12 @@ object MainCoordinator {
     }
 
     fun navigateToCalendarEvent(fragment: Fragment) {
-        fragment.activity!!.supportFragmentManager.beginTransaction().add(ApplicationEventFragment(), null)
+        fragment.activity!!.supportFragmentManager.beginTransaction().add(R.id.myEventContainer, ApplicationEventFragment(), null)
             .commit()
+    }
+
+    fun navigateToOrgInfo(fragment: Fragment){
+        fragment.findNavController().navigate(R.id.action_fullEventFragment_to_blankFragment)
     }
 
     fun navigateToAddEvent(fragment: Fragment) {
@@ -64,7 +68,7 @@ object MainCoordinator {
             R.id.nav_host_fragment,
            SelectTypeTimetableFragment(), null
         ).addToBackStack(null).commit()
-
+   }
     fun navigateToTimetable(context: Fragment) {
         context.activity!!.nav_view.visibility = View.VISIBLE
         context.findNavController().navigate(R.id.action_navigation_authorization_to_navigation_timetable)

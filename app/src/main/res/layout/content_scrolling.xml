@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:layout_marginTop="80dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.event.OrgActivity"
-    tools:showIn="@layout/activity_org">
+    tools:context=".ui.event.OrgFragment"
+    tools:showIn="@layout/fragment_org">
 
     <TextView
         android:layout_width="wrap_content"

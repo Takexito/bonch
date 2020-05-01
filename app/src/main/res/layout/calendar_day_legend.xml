@@ -8,22 +8,12 @@
     tools:ignore="HardcodedText">
 
     <TextView
-        android:id="@+id/legendText1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="SUN"
-        android:textColor="@color/colorOrange"
-        android:textSize="14sp" />
-
-    <TextView
         android:id="@+id/legendText2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="MON"
+        android:text="Пн"
         android:textColor="@color/colorOrange"
         android:textSize="14sp" />
 
@@ -33,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="TUE"
+        android:text="Вт"
         android:textColor="@color/colorOrange"
         android:textSize="14sp" />
 
@@ -43,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="WED"
+        android:text="Ср"
         android:textColor="@color/colorOrange"
         android:textSize="14sp" />
 
@@ -53,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="THU"
+        android:text="Чт"
         android:textColor="@color/colorOrange"
         android:textSize="14sp" />
 
@@ -63,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="FRI"
+        android:text="Пт"
         android:textColor="@color/colorOrange"
         android:textSize="14sp" />
 
@@ -73,7 +63,18 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="SAT"
+        android:text="Сб"
+        android:textColor="@color/colorOrange"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/legendText1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Вс"
         android:textColor="@color/colorOrange"
         android:textSize="14sp" />
 

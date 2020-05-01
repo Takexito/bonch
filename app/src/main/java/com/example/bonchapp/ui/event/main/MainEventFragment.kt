@@ -75,10 +75,10 @@ class MainEventFragment : Fragment(), IEventView{
     }
 
     private fun initFab(){
-        addEventFab.setOnClickListener{
-            presenter.onFabClick()
-            Log.d("Fragment", "click")
-        }
+//        addEventFab.setOnClickListener{
+//            presenter.onFabClick()
+//            Log.d("Fragment", "click")
+//        }
     }
 
     override fun getFragmentContext(): Context {

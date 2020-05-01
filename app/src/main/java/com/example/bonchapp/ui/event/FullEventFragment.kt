@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.bonchapp.R
+import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.presenter.event.FullEventPresenter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_full_event.*
@@ -26,5 +27,11 @@ class FullEventFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         fab.setOnClickListener { presenter.onRegButtonPress(it) }
         presenter.onCreate()
+
+        orgInfoView.setOnClickListener {
+            MainCoordinator.navigateToOrgInfo(this)
+        }
     }
+
+
 }

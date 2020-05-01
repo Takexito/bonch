@@ -41,25 +41,35 @@ class MyEventFragment : Fragment(), IEventView {
 
     private fun init(){
         initRecycler()
-        imageView3.setOnClickListener {
+        calendarEvent.setOnClickListener {
             MainCoordinator.navigateToCalendarEvent(this)
         }
     }
 
-    private fun initRecycler(){
-            myEventRecycler.apply {
-                adapter = EventAdapter(presenter)
-                layoutManager = LinearLayoutManager(context)
-            }
 
-            presenter.testData.observe(
-                viewLifecycleOwner,
-                androidx.lifecycle.Observer {
-                    (myEventRecycler.adapter as EventAdapter).setData(
-                        presenter.testData.value ?: arrayListOf()
-                    )
-                    myEventRecycler.adapter?.notifyDataSetChanged()
-                })
+//    <androidx.recyclerview.widget.RecyclerView
+//    android:id="@+id/myEventRecycler"
+//    android:layout_width="match_parent"
+//    android:layout_height="0dp"
+//    app:layout_constraintBottom_toBottomOf="parent"
+//    app:layout_constraintEnd_toEndOf="parent"
+//    app:layout_constraintStart_toStartOf="parent"
+//    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    private fun initRecycler(){
+//            myEventRecycler.apply {
+//                adapter = EventAdapter(presenter)
+//                layoutManager = LinearLayoutManager(context)
+//            }
+//
+//            presenter.testData.observe(
+//                viewLifecycleOwner,
+//                androidx.lifecycle.Observer {
+//                    (myEventRecycler.adapter as EventAdapter).setData(
+//                        presenter.testData.value ?: arrayListOf()
+//                    )
+//                    myEventRecycler.adapter?.notifyDataSetChanged()
+//                })
     }
 
     override fun getFragmentContext(): Context {
@@ -71,15 +81,20 @@ class MyEventFragment : Fragment(), IEventView {
     }
 
     override fun setRecyclerVisible(isVisible: Boolean) {
-        if(isVisible)
-            myEventRecycler.visibility = View.VISIBLE
-        else
-            myEventRecycler.visibility = View.GONE
+//        if(isVisible)
+//            myEventRecycler.visibility = View.VISIBLE
+//        else
+//            myEventRecycler.visibility = View.GONE
     }
 
     override fun getRecyclerFilter(): Filter {
-        return (myEventRecycler.adapter as Filterable).filter
+        TODO("Not yet implemented")
     }
+
+//    override fun getRecyclerFilter(): Filter {
+////        return (myEventRecycler.adapter as Filterable).filter
+//        return Filter()
+//    }
 
     override fun getLifecycleOwner(): LifecycleOwner {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

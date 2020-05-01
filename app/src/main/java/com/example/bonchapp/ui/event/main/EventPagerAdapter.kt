@@ -21,7 +21,7 @@ class EventPagerAdapter(val fragment: Fragment): FragmentPagerAdapter(fragment.f
             }
             2 -> {
                 Log.d("Lol", "start 2")
-                ApplicationEventFragment()//MyEventFragment()
+                MyEventFragment()
             }
             else -> {
                 Log.d("Lol", "start else")
