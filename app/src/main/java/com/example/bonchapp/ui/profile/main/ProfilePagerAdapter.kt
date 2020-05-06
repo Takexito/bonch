@@ -11,23 +11,22 @@ import com.example.bonchapp.ui.profile.electives.ProfileElectivesFragment
 import com.example.bonchapp.ui.profile.recordbook.ProfileRecordbookFragment
 
 class ProfilePagerAdapter(val fragment: Fragment): FragmentPagerAdapter(fragment.fragmentManager!!) {
-    private val tabs = arrayOf("Задолженность", "Зачетка","Факультативы")
+    private val tabs = arrayOf("Задолженность", "Зачетка","Файлы группы","Факультативы")
     override fun getItem(position: Int): Fragment {
         return when(position){
             0-> {
-                Log.d("Lol", "start 0")
                 ProfileDebtFragment()
             }
             1-> {
-                Log.d("Lol", "start 1")
                 ProfileRecordbookFragment()
             }
             2 -> {
-                Log.d("Lol", "start 2")
+                ProfileElectivesFragment()
+            }
+            3 -> {
                 ProfileElectivesFragment()
             }
             else -> {
-                Log.d("Lol", "start else")
                 ProfileDebtFragment()
             }
         }

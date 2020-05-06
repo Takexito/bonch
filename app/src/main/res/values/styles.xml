@@ -67,4 +67,9 @@
     <style name="spinnerDropdownItemStyle" parent = "android:TextAppearance.Widget.TextView.SpinnerItem">
         <item name="android:layout_marginBottom">8dp</item>
     </style>
+
+    <style name="MyCustomTabLayout" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="textAllCaps">false</item>
+    </style>
 </resources>

@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.bonchapp.R
 import com.example.bonchapp.coordinator.MainCoordinator
-import com.example.bonchapp.ui.event.main.EventPagerAdapter
+import com.example.bonchapp.model.pojo.AccountDTO
+import com.example.bonchapp.model.pojo.DebtDTO
+import com.example.bonchapp.model.pojo.ElectiveDTO
+import com.example.bonchapp.model.pojo.MarkDTO
+import com.example.bonchapp.presenter.ProfilePresenter
 import com.example.bonchapp.ui.profile.main.ProfilePagerAdapter
-import kotlinx.android.synthetic.main.fragment_event.*
-import kotlinx.android.synthetic.main.fragment_main_event.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
+
+    lateinit var profilePresenter: ProfilePresenter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,12 +37,29 @@ class ProfileFragment : Fragment() {
             ProfilePagerAdapter(this)
         profileTabLayout.setupWithViewPager(profileViewPager)
         initBtn()
+
+        profilePresenter = ProfilePresenter(this, this)
     }
 
-    private fun initBtn(){
-        settings.setOnClickListener{
-            //presenter.onFabClick()
+    private fun initBtn() {
+        settings.setOnClickListener {
             MainCoordinator.navigateToSettings(this)
         }
+    }
+
+    fun showUser(user: AccountDTO) {
+        val j = 5 + 5
+    }
+
+    fun showDebt(user: ArrayList<DebtDTO>) {
+        val j = 5 + 5
+    }
+
+    fun showElectives(user: ArrayList<ElectiveDTO>) {
+        val j = 5 + 5
+    }
+
+    fun showMark(user: ArrayList<MarkDTO>) {
+        val j = 5 + 5
     }
 }
