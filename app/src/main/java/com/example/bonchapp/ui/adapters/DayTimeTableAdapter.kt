@@ -27,7 +27,6 @@ class DayTimeTableAdapter(val context: Context, fragment: Fragment) :
 
     val fragment = fragment
 
-    //val list = ArrayList<ArrayList<SubjectDTO>>()
     val list = arrayListOf(
         ArrayList<SubjectDTO>(),
         ArrayList<SubjectDTO>(),
@@ -44,23 +43,23 @@ class DayTimeTableAdapter(val context: Context, fragment: Fragment) :
         this.datesWeeks.clear()
         this.datesWeeks.addAll(datesWeeks)
 
-
-
         for (i in 0..6)
             list[i].clear()
 
         subjectList.forEach {
+            try {
+                val s = it.date
+                val dt = DateTime(
+                    s.substring(0, 4).toInt(),
+                    s.substring(5, 7).toInt(),
+                    s.substring(8, 10).toInt(),
+                    0,
+                    0
+                )
 
-            val s = it.date
-            val dt = DateTime(
-                s.substring(0, 4).toInt(),
-                s.substring(5, 7).toInt(),
-                s.substring(8, 10).toInt(),
-                0,
-                0
-            )
-
-            list[dt.dayOfWeek - 1].add(it)
+                list[dt.dayOfWeek - 1].add(it)
+            } finally {
+            }
         }
 
         notifyDataSetChanged()
@@ -77,14 +76,13 @@ class DayTimeTableAdapter(val context: Context, fragment: Fragment) :
     override fun getItemCount() = 7
 
     override fun onBindViewHolder(holder: DayTimetablePostHolder, position: Int) {
-        if(!datesWeeks.isEmpty())
-        holder.bind(list[position], datesWeeks[position], position)
+        if (!datesWeeks.isEmpty())
+            holder.bind(list[position], datesWeeks[position], position)
     }
 }
 
-class DayTimetablePostHolder(itemView: View, fragment: Fragment) :
+class DayTimetablePostHolder(itemView: View, val fragment: Fragment) :
     RecyclerView.ViewHolder(itemView) {
-    val timeTableAdapter = TimetableAdapter(itemView.context, fragment)
     val recyclerViewDay = itemView.findViewById<RecyclerView>(R.id.dayRecyclerView)
     val withoutClasses = itemView.findViewById<LinearLayout>(R.id.without_classes)
 
@@ -100,23 +98,35 @@ class DayTimetablePostHolder(itemView: View, fragment: Fragment) :
 
     val viewDate = itemView.findViewById<TextView>(R.id.dateTimeTable)
 
-    fun bind(arrayList: ArrayList<SubjectDTO>, date:String, number: Int) {
+    fun bind(arrayList: ArrayList<SubjectDTO>, date: String, number: Int) {
 
         if (arrayList.isEmpty()) {
             withoutClasses.visibility = View.VISIBLE
             recyclerViewDay.visibility = View.INVISIBLE
-        }
-        else {
+
+            recyclerViewDay.layoutManager = LinearLayoutManager(itemView.context)
+            recyclerViewDay.adapter = TimetableAdapter(itemView.context, fragment, arrayListOf(), date) //Pass an empty array so that the element does not stretch
+
+        } else {
             withoutClasses.visibility = View.INVISIBLE
             recyclerViewDay.visibility = View.VISIBLE
 
+
+            arrayList.forEach {
+                if(it.pair.length > 1){
+                    it.pair = it.pair.substring(1)
+                }
+            }
+
+            val sortArrayList = arrayList.sortedBy { it.pair }
+
+
+            //timeTableAdapter.setSubjects(sortArrayList, date)
             recyclerViewDay.layoutManager = LinearLayoutManager(itemView.context)
-            recyclerViewDay.adapter = timeTableAdapter
-            timeTableAdapter.setSubjects(arrayList, date)
+            recyclerViewDay.adapter = TimetableAdapter(itemView.context, fragment, sortArrayList, date)
+
         }
 
         viewDate.text = "${dayOfWeek[number]} ${date.substring(0, 5)}"
-
-
     }
 }

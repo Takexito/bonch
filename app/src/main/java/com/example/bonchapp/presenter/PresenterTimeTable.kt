@@ -1,5 +1,8 @@
 package com.example.bonchapp.presenter
 
+import android.content.Context
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.bonchapp.MainContract
@@ -28,16 +31,12 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
     lateinit var groupsList: List<ArrayList<String>>
     lateinit var tutorsList: ArrayList<String>
 
-    //var activeday: String
     var currentDate = DateTime()
 
     val dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
 
 
     init {
-        //val sdf = SimpleDateFormat("dd-MM-yyyy")
-        //activeday = sdf.format(java.util.Date())
-
         loadSavedNameGroup()
 
         if (name != "")
@@ -77,11 +76,6 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
 
                 mView.showTimetable(timetable, datesWeeks)
 
-                /*if (timetable.size != 0) {
-                    mView.setWithoutClassesVisibility(false)
-                } else
-                    mView.setWithoutClassesVisibility(true)
-                */
             })
         }
     }
@@ -119,6 +113,12 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
     }
 
     override fun switchGroup(name: String, type: String) {
+
+        val imm = fragment.activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm?.hideSoftInputFromWindow(
+            fragment.activity?.getCurrentFocus()?.getWindowToken(), 0
+        )
+
         this.name = name
         this.type = type
 

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.SearchView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +40,8 @@ class SelectGroupFragment() : Fragment() {
 
         initRecyclerView(root)
         initSearchField(root)
+        initBackButton(root)
+
     }
 
     private fun initRecyclerView(root: View) {
@@ -52,9 +56,23 @@ class SelectGroupFragment() : Fragment() {
     }
 
     private fun initSearchField(root: View) {
-        val textSearch = root.findViewById<EditText>(R.id.search_field)
-        textSearch.doOnTextChanged { text, start, count, after ->
-            findInArray(text.toString())
+        val textSearch = root.findViewById<SearchView>(R.id.search_field)
+        textSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                findInArray(newText.toString())
+                return false
+            }
+        })
+    }
+
+    private fun initBackButton(root: View) {
+        val btn = root.findViewById<ImageButton>(R.id.backButton)
+        btn.setOnClickListener {
+            activity?.onBackPressed()
         }
     }
 

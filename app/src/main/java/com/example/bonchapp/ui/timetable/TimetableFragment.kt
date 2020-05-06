@@ -73,7 +73,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         selectTutorFragment = SelectTutorFragment()
 
         activity!!.supportFragmentManager.beginTransaction().add(
-            R.id.nav_host_fragment,
+            R.id.mainTimetable,
             selectTutorFragment, null
         ).addToBackStack(null).commit()
 
@@ -85,7 +85,7 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         selectGroupFragment = SelectGroupFragment()
 
         activity!!.supportFragmentManager.beginTransaction().add(
-            R.id.nav_host_fragment,
+            R.id.mainTimetable,
             selectGroupFragment, null
         ).addToBackStack(null).commit()
 
@@ -119,8 +119,6 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         calendar.setCalendarListener(object : CalendarListener {
             override fun onDaySelect() {
                 val day = calendar.selectedDay
-                //val s: String = "${day?.day}-${1 + day?.month!!}-${day?.year}"
-                //mPresenter.switchDayTimetable(s)
                 val dt = DateTime(day!!.year, day.month + 1, day.day, 0, 0)
 
                 val recyclerViewDay = root.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
@@ -149,34 +147,6 @@ class TimetableFragment : Fragment(), MainContract.ITimeTableView {
         })
 
     }
-
-    /*private fun initSwitchTimetable(view: View) {
-        val spinner = view.findViewById<TextView>(R.id.spinner)
-        val groupName = view.findViewById<TextView>(R.id.groupName)
-        val itemSwitchTimeTable = view.findViewById<View>(R.id.item_swithTimeTable)
-
-        val btn_select_group = view.findViewById<View>(R.id.btn_select_group)
-        val btn_select_professor = view.findViewById<View>(R.id.btn_select_tutor)
-
-
-        spinner.setOnClickListener {
-            itemSwitchTimeTable.setVisibility(View.VISIBLE)
-        }
-
-        groupName.setOnClickListener {
-            itemSwitchTimeTable.setVisibility(View.INVISIBLE)
-        }
-
-        btn_select_group.setOnClickListener {
-            mPresenter.switchTimetable("group")
-            itemSwitchTimeTable.setVisibility(View.INVISIBLE)
-        }
-
-        btn_select_professor.setOnClickListener {
-            mPresenter.switchTimetable("tutor")
-            itemSwitchTimeTable.setVisibility(View.INVISIBLE)
-        }
-    }*/
 
     private fun initSelectTypeTimetable() {
         val button = root.findViewById<ImageView>(R.id.filter)
@@ -238,5 +208,7 @@ private class GestureListener : GestureDetector.SimpleOnGestureListener() {
         return false;
 
     }
+
+
 }
 

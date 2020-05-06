@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface JsonApi {
 
     @GET("/api/timetable/group")
-    fun getGroups(@Header("Authorization") token: String = "Token 250332a63214da763d276a20c0ad4b586312db2b"
+    fun getGroups(@Header("Authorization") token: String = "Token e06656026b80699b5d286f482518f0791522b42b"
     ): Call<ArrayList<ArrayList<String>>>
 
     //@FormUrlEncoded
@@ -19,12 +19,12 @@ interface JsonApi {
     fun getTimeTable(
 
         //@Header("Accept") accept: String = "application/json",
-        @Header("Authorization") token: String = "Token 250332a63214da763d276a20c0ad4b586312db2b",
+        @Header("Authorization") token: String = "Token e06656026b80699b5d286f482518f0791522b42b",
         @Body body: RequestTimeTableDTO?
     ): Call<ArrayList<SubjectDTO>>
 
     @GET("/api/timetable/tutor/long")
     fun getTutors(
-        @Header("Authorization") token: String = "Token 250332a63214da763d276a20c0ad4b586312db2b"
+        @Header("Authorization") token: String = "Token e06656026b80699b5d286f482518f0791522b42b"
     ): Call<ArrayList<String>>
 }
