@@ -6,24 +6,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:id="@+id/profilEmptyImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:gravity="center"
-        android:visibility="invisible"
+        android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39">
+        app:layout_constraintVertical_bias="0.38">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_profile_debt"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:src="@drawable/ic_profile_debt" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,8 +32,7 @@
             android:gravity="center"
             android:text="Академическая задолженность\n отсутсвует"
             android:textColor="#666666"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
     </LinearLayout>
 
 
@@ -43,8 +40,10 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profileRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
         tools:listitem="@layout/item_profile_debt"
         tools:itemCount="5"
         />
