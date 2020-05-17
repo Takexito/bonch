@@ -8,18 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.pojo.SubjectDTO
 import org.joda.time.DateTime
-import org.w3c.dom.Text
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.format.TextStyle
-import java.util.*
 import kotlin.collections.ArrayList
 
 class DayTimeTableAdapter(val context: Context, fragment: Fragment) :
@@ -46,18 +40,21 @@ class DayTimeTableAdapter(val context: Context, fragment: Fragment) :
         for (i in 0..6)
             list[i].clear()
 
+
         subjectList.forEach {
             try {
-                val s = it.date
-                val dt = DateTime(
-                    s.substring(0, 4).toInt(),
-                    s.substring(5, 7).toInt(),
-                    s.substring(8, 10).toInt(),
-                    0,
-                    0
-                )
+                if (it.date != "") {
+                    val s = it.date
+                    val dt = DateTime(
+                        s.substring(0, 4).toInt(),
+                        s.substring(5, 7).toInt(),
+                        s.substring(8, 10).toInt(),
+                        0,
+                        0
+                    )
 
-                list[dt.dayOfWeek - 1].add(it)
+                    list[dt.dayOfWeek - 1].add(it)
+                }
             } finally {
             }
         }
@@ -105,7 +102,12 @@ class DayTimetablePostHolder(itemView: View, val fragment: Fragment) :
             recyclerViewDay.visibility = View.INVISIBLE
 
             recyclerViewDay.layoutManager = LinearLayoutManager(itemView.context)
-            recyclerViewDay.adapter = TimetableAdapter(itemView.context, fragment, arrayListOf(), date) //Pass an empty array so that the element does not stretch
+            recyclerViewDay.adapter = TimetableAdapter(
+                itemView.context,
+                fragment,
+                arrayListOf(),
+                date
+            ) //Pass an empty array so that the element does not stretch
 
         } else {
             withoutClasses.visibility = View.INVISIBLE
@@ -113,7 +115,7 @@ class DayTimetablePostHolder(itemView: View, val fragment: Fragment) :
 
 
             arrayList.forEach {
-                if(it.pair.length > 1){
+                if (it.pair.length > 1) {
                     it.pair = it.pair.substring(1)
                 }
             }
@@ -123,7 +125,8 @@ class DayTimetablePostHolder(itemView: View, val fragment: Fragment) :
 
             //timeTableAdapter.setSubjects(sortArrayList, date)
             recyclerViewDay.layoutManager = LinearLayoutManager(itemView.context)
-            recyclerViewDay.adapter = TimetableAdapter(itemView.context, fragment, sortArrayList, date)
+            recyclerViewDay.adapter =
+                TimetableAdapter(itemView.context, fragment, sortArrayList, date)
 
         }
 

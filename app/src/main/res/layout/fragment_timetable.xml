@@ -30,6 +30,7 @@
             tools:visibility="invisible" />
 
 
+
         <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
             android:id="@+id/calendar"
             android:layout_width="match_parent"
