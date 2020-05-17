@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_authorization"
-        android:name="com.example.bonchapp.ui.authorization.AuthFragment"
+        android:name="com.example.bonchapp.presentation.ui.authorization.AuthFragment"
         tools:layout="@layout/fragment_authorization">
         <action
             android:id="@+id/action_navigation_authorization_to_navigation_timetable"
