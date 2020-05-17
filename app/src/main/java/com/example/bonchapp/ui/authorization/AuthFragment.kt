@@ -1,15 +1,19 @@
 package com.example.bonchapp.ui.authorization
 
 import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bonchapp.R
+import com.example.bonchapp.coordinator.Keys
 import com.example.bonchapp.presenter.AuthPresenter
 //import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import kotlinx.android.synthetic.main.auth_page_2.view.*
+import java.security.Key
 
 class AuthFragment : Fragment() {
 
@@ -30,6 +34,10 @@ class AuthFragment : Fragment() {
         initView(view)
 
         return view
+    }
+
+    fun getSharedPreference(): SharedPreferences {
+       return activity!!.getSharedPreferences(Keys.APP_PREFERENCE, Context.MODE_PRIVATE)
     }
 
     private fun initView(view: View) {

@@ -57,7 +57,7 @@
             app:argType="integer"
             android:defaultValue="0" />
         <action
-            android:id="@+id/action_fullEventFragment_to_blankFragment"
+            android:id="@+id/action_fullEventFragment_to_orgInfoFragment"
             app:destination="@id/orgInfo" />
     </fragment>
     <fragment
@@ -95,6 +95,6 @@
         android:id="@+id/orgInfo"
         android:name="com.example.bonchapp.ui.event.OrgFragment"
         android:label="fragment_orgInfo"
-        tools:layout="@layout/fragment_org" />
+        tools:layout="@layout/fragment_org" /><action android:id="@+id/action_global_orgInfo" app:destination="@id/orgInfo"/>
 
 </navigation>

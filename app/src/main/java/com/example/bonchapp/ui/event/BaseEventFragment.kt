@@ -26,5 +26,4 @@ class BaseEventFragment : Fragment() {
         eventTabLayout.setupWithViewPager(viewPager)
     }
 
-
 }

@@ -34,4 +34,9 @@ class FullEventFragment : BottomSheetDialogFragment() {
     }
 
 
+    companion object{
+        val fragment = FullEventFragment()
+    }
+
+
 }

@@ -1,16 +1,15 @@
 package com.example.bonchapp.coordinator
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.ui.event.FullEventFragment
-import com.example.bonchapp.ui.timetable.SelectGroupFragment
 import com.example.bonchapp.ui.timetable.SelectTypeTimetableFragment
-import com.example.bonchapp.ui.timetable.mPresenter
 
 import com.example.bonchapp.ui.event.my.ApplicationEventFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,7 +19,7 @@ object MainCoordinator {
 
     fun navigateToFullEvent(fragment: Fragment, eventId: Int) {
         val bundle = Bundle().apply { putInt(Keys.FULL_EVENT_ID, eventId) }
-        fragment.activity!!.supportFragmentManager.beginTransaction().add(FullEventFragment().apply { arguments = bundle }, null)
+        fragment.activity!!.supportFragmentManager.beginTransaction().add(FullEventFragment.fragment.apply { arguments = bundle }, null)
             .commit()
     }
 
@@ -30,7 +29,11 @@ object MainCoordinator {
     }
 
     fun navigateToOrgInfo(fragment: Fragment){
-        fragment.findNavController().navigate(R.id.action_fullEventFragment_to_blankFragment)
+        val fr = FullEventFragment.fragment
+        fragment.activity!!.findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_orgInfo)
+        fragment.activity!!.supportFragmentManager.beginTransaction().remove(fr).commitNow()
+        Log.d("Coordinator", "Delete")
+
     }
 
     fun navigateToAddEvent(fragment: Fragment) {
@@ -72,5 +75,9 @@ object MainCoordinator {
     fun navigateToTimetable(context: Fragment) {
         context.activity!!.nav_view.visibility = View.VISIBLE
         context.findNavController().navigate(R.id.action_navigation_authorization_to_navigation_timetable)
+    }
+    fun navigateToTimetable(context: Activity) {
+        context.nav_view.visibility = View.VISIBLE
+        context.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_authorization_to_navigation_timetable)
     }
 }

@@ -10,31 +10,24 @@ import android.widget.TextView
 import androidx.core.view.children
 import androidx.core.view.get
 import com.example.bonchapp.R
+import com.example.bonchapp.coordinator.Month
 import com.kizitonwose.calendarview.model.*
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
+import kotlinx.android.synthetic.main.calendar_day.*
 import kotlinx.android.synthetic.main.calendar_day.view.*
+import kotlinx.android.synthetic.main.calendar_day.view.threeDotView
 import kotlinx.android.synthetic.main.calendar_day_legend.*
 import kotlinx.android.synthetic.main.calendar_header.view.*
 import kotlinx.android.synthetic.main.fragment_application_event.*
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
-import org.threeten.bp.Month
+
 import org.threeten.bp.YearMonth
 import org.threeten.bp.temporal.WeekFields
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ApplicationEventFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ApplicationEventFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -42,14 +35,11 @@ class ApplicationEventFragment : Fragment() {
 
     var currDay: LocalDate = LocalDate.now()
     var pickDay: LocalDate? = null
-    var pickDayView: View? = null
+    var lastPickDay: LocalDate? = null
+   // var pickDayView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
 
 
     }
@@ -78,6 +68,7 @@ class ApplicationEventFragment : Fragment() {
             override fun create(view: View) = MonthViewContainer(view)
 
         }
+
         calendarView.dayBinder = object : DayBinder<DayViewContainer> {
             // Called only when a new container is needed.
             override fun create(view: View) = DayViewContainer(view)
@@ -86,15 +77,20 @@ class ApplicationEventFragment : Fragment() {
             override fun bind(container: DayViewContainer, day: CalendarDay) {
                 container.day = day
                 container.textView.text = day.date.dayOfMonth.toString()
-                if (day.owner == DayOwner.THIS_MONTH) {
-                    container.textView.setTextColor(resources.getColor(R.color.colorOrange))
-                } else {
-                    container.textView.setTextColor(Color.WHITE)
-                }
+
+                if(lastPickDay == day.date) container.textView.background = null
 
                 if(currDay == day.date) container.textView.setBackgroundResource(R.color.colorPrimary)
 
+                if(pickDay == day.date) container.textView.setBackgroundResource(R.drawable.ic_event_bg)
 
+
+                if (day.owner == DayOwner.THIS_MONTH) {
+                    container.textView.setTextColor(resources.getColor(R.color.colorOrange))
+                } else {
+                    container.textView.visibility = View.GONE
+                    container.view.visibility = View.GONE
+                }
             }
         }
 
@@ -110,17 +106,9 @@ class ApplicationEventFragment : Fragment() {
     }
 
     fun pickDate(day: CalendarDay, view: View){
-        if(pickDay == null) {
-            view.setBackgroundResource(R.color.colorAccent)
-            pickDay = day.date
-            calendarView.notifyDateChanged(day.date)
-        }
-        else {
-            pickDayView?.background = null
-            pickDay = day.date
-            view.setBackgroundResource(R.color.colorAccent)
-            calendarView.notifyDateChanged(day.date)
-        }
+        lastPickDay = pickDay
+        pickDay = day.date
+        calendarView.notifyDateChanged(day.date)
     }
 
     companion object {
@@ -135,8 +123,6 @@ class ApplicationEventFragment : Fragment() {
                 pickDate(day, it)
             }
         }
-
-
     }
 }
 

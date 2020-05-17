@@ -33,7 +33,7 @@ class EventAdapter(private val presenter: IEventPresenter) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.apply {
-            presenter.view.setRecyclerVisible(true)
+            //presenter.view.setRecyclerVisible(true)
             titleEventView.text = data?.get(position) ?: "Bad"
             dateEventView.text = data?.get(position) ?: "Bad"
 

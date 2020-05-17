@@ -7,24 +7,25 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.event.OrgFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="171dp"
-        android:background="@drawable/ic_org_background"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay" />
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_org_background" />
 
-    <include layout="@layout/content_scrolling" />
+    <include
+        layout="@layout/content_scrolling"
+        app:layout_anchor="@id/imageView2" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/orgCardView"
 
         android:layout_width="264dp"
         android:layout_height="144dp"
-        android:translationZ="0dp"
+        android:translationZ="1dp"
         app:cardCornerRadius="8dp"
-        app:layout_anchor="@id/app_bar"
+        app:layout_anchor="@id/imageView2"
         app:layout_anchorGravity="bottom|center">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="100dp"
+        android:translationZ="2dp"
         app:layout_anchor="@id/orgCardView"
         app:layout_anchorGravity="top|center"
         app:srcCompat="@drawable/ic_org_foto" />
