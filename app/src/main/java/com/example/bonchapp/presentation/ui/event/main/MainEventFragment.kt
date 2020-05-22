@@ -1,6 +1,5 @@
 package com.example.bonchapp.presentation.ui.event.main
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,23 +7,22 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.Event
 import com.example.bonchapp.presentation.App
-import com.example.bonchapp.presentation.presenter.event.EventPresenter
-import com.example.bonchapp.presentation.presenter.event.IEventPresenter
-import com.example.bonchapp.presentation.ui.event.IEventView
+import com.example.bonchapp.presentation.presenter.event.IMainEventPresenter
 import kotlinx.android.synthetic.main.fragment_main_event.*
 import javax.inject.Inject
 
 
-class MainEventFragment : Fragment(), IEventView {
+class MainEventFragment : Fragment(), IMainEventView {
 
     @Inject
-    lateinit var presenter: IEventPresenter
+    lateinit var presenter: IMainEventPresenter
     @Inject lateinit var eventAdapter: EventAdapter
 
     init {
@@ -48,17 +46,17 @@ class MainEventFragment : Fragment(), IEventView {
 
     override fun updateRecycler(data: List<Event>){
         eventAdapter.apply {
-            setData(arrayListOf("")) //TODO: FIX ME
+            setData(data)
             notifyDataSetChanged()
         }
     }
 
-    override fun getFragmentContext(): Context {
-        return requireContext()
+    override fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun getFragment(): Fragment {
-        return this
+    override fun addToFavorite(event: Event) {
+        TODO("Not yet implemented")
     }
 
     override fun setRecyclerVisible(isVisible: Boolean) {

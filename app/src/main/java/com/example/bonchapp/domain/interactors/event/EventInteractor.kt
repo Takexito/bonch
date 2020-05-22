@@ -1,15 +1,16 @@
-package com.example.bonchapp.domain.interactors
+package com.example.bonchapp.domain.interactors.event
 
 import com.example.bonchapp.domain.entities.Event
 import com.example.bonchapp.domain.repository.IEventRepository
 import javax.inject.Inject
 
-class EventInteractor @Inject constructor(var repository: IEventRepository): IEventInteractor {
+class EventInteractor @Inject constructor(var repository: IEventRepository):
+    IEventInteractor {
     override fun getAllEvents(callback: (data: List<Event>) -> Unit,
                               errorCallback: (error: String) -> Unit) {
         repository.getAllEvents { data, error ->
             if (error != null) errorCallback(error)
-            if (data != null) callback(data)
+            else if (data != null) callback(data)
         }
     }
 
@@ -21,7 +22,9 @@ class EventInteractor @Inject constructor(var repository: IEventRepository): IEv
                 errorCallback(error)
                 repeatRequest(0, timeout, callback, errorCallback)
             }
-            if (data != null) callback(data)
+            else if (data != null) {
+                callback(data)
+            }
         }
     }
 
@@ -29,7 +32,7 @@ class EventInteractor @Inject constructor(var repository: IEventRepository): IEv
                                    errorCallback: (error: String) -> Unit) {
         repository.getFavoriteEvent { data, error ->
             if (error != null) errorCallback(error)
-            if (data != null) callback(data)
+            else if (data != null) callback(data)
         }
     }
 
@@ -41,7 +44,7 @@ class EventInteractor @Inject constructor(var repository: IEventRepository): IEv
                 errorCallback(error)
                 repeatRequest(0, timeout, callback, errorCallback)
             }
-            if (data != null) callback(data)
+            else if (data != null) callback(data)
         }
     }
 
@@ -49,7 +52,7 @@ class EventInteractor @Inject constructor(var repository: IEventRepository): IEv
                              errorCallback: (error: String) -> Unit) {
         repository.getMyEvents { data, error ->
             if (error != null) errorCallback(error)
-            if (data != null) callback(data)
+            else if (data != null) callback(data)
         }
     }
 
@@ -61,23 +64,23 @@ class EventInteractor @Inject constructor(var repository: IEventRepository): IEv
                 errorCallback(error)
                 repeatRequest(0, timeout, callback, errorCallback)
             }
-            if (data != null) callback(data)
+            else if (data != null) callback(data)
         }
     }
 
-    override fun deleteFavoriteEvent(eventId: Int,
+    override fun deleteFavoriteEvent(event: Event,
                                      callback: () -> Unit,
                                      errorCallback: (error: String) -> Unit) {
-        repository.deleteFavoriteEvent(eventId) {
+        repository.deleteFavoriteEvent(event) {
             if (it != null) errorCallback(it)
             else callback()
         }
     }
 
-    override fun addToFavorite(eventId: Int,
+    override fun addToFavorite(event: Event,
                                callback: () -> Unit,
                                errorCallback: (error: String) -> Unit) {
-        repository.addFavoriteEvent(eventId) {
+        repository.addFavoriteEvent(event) {
             if (it != null) errorCallback(it)
             else callback()
         }

@@ -27,7 +27,7 @@ interface NetworkService {
     ): Call<ArrayList<ArrayList<String>>>
 
     //@FormUrlEncoded
-    @POST("/api/timetable/")
+    @POST("/api/timetable")
     fun getTimeTable(
         //@Header("Accept") accept: String = "application/json",
         @Header("Authorization") token: String = "Token ${User.token.value}",

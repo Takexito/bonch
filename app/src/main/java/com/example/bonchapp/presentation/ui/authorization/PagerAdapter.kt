@@ -41,13 +41,13 @@ class PagerAdapter(authFragment: AuthFragment): RecyclerView.Adapter<PagerAdapte
     fun signInError() {
         val background = passET.background as LayerDrawable
         val color = background.findDrawableByLayerId(R.id.bottom_line) as GradientDrawable
-        color.setColor(ContextCompat.getColor(fragment.context!!, R.color.errorSignIn))
+        color.setColor(ContextCompat.getColor(fragment.requireContext(), R.color.errorSignIn))
     }
 
     fun previousPage() {
         val background = passET.background as LayerDrawable
         val color = background.findDrawableByLayerId(R.id.bottom_line) as GradientDrawable
-        color.setColor(ContextCompat.getColor(fragment.context!!, R.color.colorOrange))
+        color.setColor(ContextCompat.getColor(fragment.requireContext(), R.color.colorOrange))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerAdapter.PagerVH {
@@ -95,7 +95,7 @@ class PagerAdapter(authFragment: AuthFragment): RecyclerView.Adapter<PagerAdapte
                 }
 
                 sign_in.setOnClickListener {
-                    fragment.presenter!!.signIn(email.text.toString(), password.text.toString())
+                    fragment.presenter.onSignInClick(email.text.toString(), password.text.toString())
                 }
             }
         }

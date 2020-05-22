@@ -2,6 +2,7 @@ package com.example.bonchapp.data.repository
 
 import android.util.Log
 import com.example.bonchapp.data.api.NetworkService
+import com.example.bonchapp.data.db.EventStorage
 import com.example.bonchapp.domain.entities.Event
 import com.example.bonchapp.domain.repository.IEventRepository
 import retrofit2.Call
@@ -9,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class EventRepository @Inject constructor(val networkService: NetworkService): IEventRepository {
+class EventRepository @Inject constructor(private val networkService: NetworkService): IEventRepository {
 
     override fun getAllEvents(callback: (data: List<Event>?, error: String?) -> Unit) {
         Log.d("EventRepository", "request")
@@ -17,6 +18,7 @@ class EventRepository @Inject constructor(val networkService: NetworkService): I
             override fun onResponse(call: Call<List<Event>>, resp: Response<List<Event>>) {
                 Log.d("EventRepository", "Good")
                 callback(resp.body(), resp.errorBody()?.string())
+                EventStorage.setAllEvents(resp.body()?.toCollection(ArrayList())?: arrayListOf())
             }
 
             override fun onFailure(call: Call<List<Event>>, t: Throwable) {
@@ -27,19 +29,31 @@ class EventRepository @Inject constructor(val networkService: NetworkService): I
     }
 
     override fun getFavoriteEvent(callback: (data: List<Event>?, error: String?) -> Unit) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        callback(EventStorage.favoriteEvents, null)
     }
 
     override fun getMyEvents(callback: (data: List<Event>?, error: String?) -> Unit) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        callback(EventStorage.myEvents, null)
     }
 
-    override fun addFavoriteEvent(eventId: Int, callback: (error: String?) -> Unit) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun addFavoriteEvent(event: Event, callback: (error: String?) -> Unit) {
+        EventStorage.addFavoriteEvent(event)
+        callback(null)
     }
 
-    override fun deleteFavoriteEvent(eventId: Int, callback: (error: String?) -> Unit) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun deleteFavoriteEvent(event: Event, callback: (error: String?) -> Unit) {
+        EventStorage.deleteFavoriteEvent(event)
+        callback(null)
+    }
+
+    override fun addMyEvent(event: Event, callback: (error: String?) -> Unit) {
+        EventStorage.addMyEvent(event)
+        callback(null)
+    }
+
+    override fun deleteMyEvent(event: Event, callback: (error: String?) -> Unit) {
+        EventStorage.deleteMyEvent(event)
+        callback(null)
     }
 
 

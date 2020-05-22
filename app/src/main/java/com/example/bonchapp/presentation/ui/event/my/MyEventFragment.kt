@@ -10,14 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.Event
-import com.example.bonchapp.router.MainRouter
 import com.example.bonchapp.presentation.presenter.event.MyEventPresenter
-import com.example.bonchapp.presentation.ui.event.IEventView
 import com.example.bonchapp.router.MainCoordinator
 import kotlinx.android.synthetic.main.fragment_my_event.*
 
 
-class MyEventFragment : Fragment(), IEventView {
+class MyEventFragment : Fragment(), IMyEventView {
     val presenter =
         MyEventPresenter(this)
 
@@ -71,11 +69,11 @@ class MyEventFragment : Fragment(), IEventView {
 //                })
     }
 
-    override fun getFragmentContext(): Context {
+    fun getFragmentContext(): Context {
         return requireContext()
     }
 
-    override fun getFragment(): Fragment {
+    fun getFragment(): Fragment {
         return this
     }
 
@@ -100,6 +98,14 @@ class MyEventFragment : Fragment(), IEventView {
     }
 
     override fun updateRecycler(data: List<Event>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showError(message: String) {
+
+    }
+
+    override fun addToFavorite(event: Event) {
         TODO("Not yet implemented")
     }
 

@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         navController = findNavController(R.id.nav_host_fragment)
+        router.navController = navController
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
@@ -46,12 +47,12 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
 
+
         val sharedPreferences = getSharedPreferences(Constants.APP_PREFERENCE, Context.MODE_PRIVATE)
         if(sharedPreferences.contains(Constants.TOKEN)) {
             User.addToken(Token(sharedPreferences.getString(Constants.TOKEN, "")!!))
             MainCoordinator.navigateToTimetable(this)
         }
 
-        router.navController = navController
     }
 }

@@ -1,22 +1,26 @@
 package com.example.bonchapp.presentation.ui.event.favorite
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.Event
-import com.example.bonchapp.presentation.presenter.event.EventPresenter
-import com.example.bonchapp.presentation.ui.event.IEventView
+import com.example.bonchapp.presentation.ui.event.main.EventAdapter
+import kotlinx.android.synthetic.main.fragment_favorite_event.*
 import kotlinx.android.synthetic.main.fragment_main_event.*
+import javax.inject.Inject
 
-class FavoriteEventFragment : Fragment(), IEventView {
+class FavoriteEventFragment : Fragment(), IFavoriteEventView {
 
+    @Inject
+    lateinit var eventAdapter: EventAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,21 +34,28 @@ class FavoriteEventFragment : Fragment(), IEventView {
         return inflater.inflate(R.layout.fragment_favorite_event, container, false)
     }
 
-
-    override fun getFragmentContext(): Context {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecycler()
     }
 
-    override fun getFragment(): Fragment {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun initRecycler() {
+        favoriteEventRecycler.apply {
+            adapter = eventAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     override fun setRecyclerVisible(isVisible: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        if(isVisible)
+            favoriteEventRecycler.visibility = View.VISIBLE
+        else
+            favoriteEventRecycler.visibility = View.GONE
     }
 
     override fun getRecyclerFilter(): Filter {
-        return (eventRecyclerView.adapter as Filterable).filter
+        return (favoriteEventRecycler.adapter as Filterable).filter
     }
 
     override fun getLifecycleOwner(): LifecycleOwner {
@@ -52,6 +63,17 @@ class FavoriteEventFragment : Fragment(), IEventView {
     }
 
     override fun updateRecycler(data: List<Event>) {
+        eventAdapter.apply {
+            setData(data)
+            notifyDataSetChanged()
+        }
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun addToFavorite(event: Event) {
         TODO("Not yet implemented")
     }
 

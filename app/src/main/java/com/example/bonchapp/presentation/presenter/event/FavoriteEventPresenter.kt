@@ -1,26 +1,27 @@
 package com.example.bonchapp.presentation.presenter.event
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.bonchapp.data.repository.EventRepository
-import com.example.bonchapp.domain.repository.IEventRepository
-import com.example.bonchapp.presentation.ui.event.IEventView
+import com.example.bonchapp.domain.entities.Event
+import com.example.bonchapp.domain.interactors.event.IEventInteractor
+import com.example.bonchapp.presentation.ui.event.favorite.IFavoriteEventView
+import com.example.bonchapp.presentation.ui.event.main.IEventView
+import com.example.bonchapp.presentation.ui.event.main.IMainEventView
+import com.example.bonchapp.router.MainRouter
+import javax.inject.Inject
 
-class FavoriteEventPresenter(val view: IEventView) :
-    IEventPresenter {
+class FavoriteEventPresenter @Inject constructor(val interactor: IEventInteractor, val router: MainRouter) : IFavoriteEventPresenter {
 
-//    private val repository: IEventRepository = EventRepository()
+    lateinit var view: IFavoriteEventView
 
-    private val _testData =
-        MutableLiveData<ArrayList<String>>().apply { value = arrayListOf("Load!") }
-
-    var testData: LiveData<ArrayList<String>> = _testData
-    override fun getAttachView(): IEventView {
-        TODO("Not yet implemented")
+    override fun getAttachView(): IFavoriteEventView {
+        return view
     }
 
     override fun attachView(view: IEventView) {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun attachView(view: IFavoriteEventView) {
+        this.view = view
     }
 
     override fun onSearchQueryUpdate(
@@ -31,15 +32,26 @@ class FavoriteEventPresenter(val view: IEventView) :
     }
 
     override fun firstLoad() {
-        TODO("Not yet implemented")
+        interactor.getFavoriteEvents(
+            callback = {
+                view.updateRecycler(it)
+            },
+            errorCallback = {
+                view.showError(it)
+            }
+        )
     }
 
-
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(event: Event) {
+        router.navigateToFullEvent(event.id)
     }
 
-    override fun onItemLike(eventId: Int) {
-        TODO("Not yet implemented")
+    override fun onItemLike(event: Event) {
+        interactor.deleteFavoriteEvent(event,{
+            view.updateRecycler(it)
+        },{
+            view.showError(it)
+        })
     }
 
 }

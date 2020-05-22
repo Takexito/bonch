@@ -1,7 +1,8 @@
 package com.example.bonchapp.presentation.presenter.event
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bonchapp.presentation.ui.event.IEventView
+import com.example.bonchapp.domain.entities.Event
+import com.example.bonchapp.presentation.ui.event.main.IEventView
 
 interface IEventPresenter {
 
@@ -9,7 +10,5 @@ interface IEventPresenter {
     fun attachView(view: IEventView)
     fun onSearchQueryUpdate(recyclerView: RecyclerView, query: String?)
     fun firstLoad()
-    fun onItemClick(position: Int)
-    fun onItemLike(eventId: Int)
-
+    fun onItemClick(event: Event)
 }

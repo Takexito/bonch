@@ -1,33 +1,63 @@
 package com.example.bonchapp.presentation.presenter.auth
 
 import android.util.Log
+import com.example.bonchapp.domain.entities.Token
+import com.example.bonchapp.domain.interactors.auth.IAuthInteractor
+import com.example.bonchapp.presentation.ui.authorization.IAuthView
+import com.example.bonchapp.router.Constants
 import com.example.bonchapp.router.MainRouter
 import com.example.bonchapp.router.User
-import com.example.bonchapp.data.repository.AuthRepository
-import com.example.bonchapp.presentation.ui.authorization.AuthFragment
-import com.example.bonchapp.router.Constants
-import com.example.bonchapp.router.MainCoordinator
+import javax.inject.Inject
 
-class AuthPresenter(val fragment: AuthFragment) {
+class AuthPresenter @Inject constructor(val interactor: IAuthInteractor, val router: MainRouter): IAuthPresenter {
 
-    private val repository = AuthRepository()
+    lateinit var view: IAuthView
 
-    fun signIn(email: String, pass: String) {
+    private fun signIn(email: String, pass: String) {
 
-        if (email.isEmpty() or pass.isEmpty()) {
-            fragment.onSignInError()
-        } else {
-            repository.logIn(User.create(email, pass)) {
-                User.addToken(it)
-                Log.d("Auth", "Token: ${it.value}")
-                //Toast.makeText(fragment.context, it.value, Toast.LENGTH_LONG).show()
-                saveTokenToPreference(it.value)
-                MainCoordinator.navigateToTimetable(fragment)
+        if (email.isEmpty() or pass.isEmpty()) view.showError("Bad Input")
+        else {
+            interactor.login(User.create(email, pass)) { token: Token?, s: String? ->
+                if (token != null) signInSuccess(token)
+                else signInError(s)
             }
         }
+//        else {
+//            repository.logIn(User.create(email, pass)) {
+//                User.addToken(it)
+//                Log.d("Auth", "Token: ${it.value}")
+//                //Toast.makeText(fragment.context, it.value, Toast.LENGTH_LONG).show()
+//                saveTokenToPreference(it.value)
+//                router.navigateToTimetable()
+//            }
+//        }
+    }
+
+    private fun signInSuccess(token: Token){
+        User.addToken(token)
+        Log.d("Auth", "Token: ${token.value}")
+        saveTokenToPreference(token.value)
+        router.navigateToTimetable()
+    }
+
+    private fun signInError(message: String?){
+        val mess = message ?: "Непредвиденная ошибка"
+        view.showError(mess)
     }
 
     private fun saveTokenToPreference(token: String){
-        fragment.getSharedPreference().edit().putString(Constants.TOKEN, token).apply()
+        view.getSharedPref().edit().putString(Constants.TOKEN, token).apply()
+    }
+
+    override fun getAttachView(): IAuthView {
+        return view
+    }
+
+    override fun attachView(view: IAuthView) {
+        this.view = view
+    }
+
+    override fun onSignInClick(email: String, pass: String) {
+        signIn(email, pass)
     }
 }

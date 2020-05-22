@@ -8,6 +8,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
+import com.example.bonchapp.domain.entities.Event
 import com.example.bonchapp.presentation.presenter.event.IEventPresenter
 import kotlinx.android.synthetic.main.item_event.view.*
 import javax.inject.Inject
@@ -15,13 +16,13 @@ import javax.inject.Inject
 class EventAdapter @Inject constructor(val presenter: IEventPresenter) :
         RecyclerView.Adapter<EventAdapter.ViewHolder>(), Filterable {
 
-    private var data: ArrayList<String>? = arrayListOf()
-    private var newData: ArrayList<String> = arrayListOf()
+    private var data: ArrayList<Event>? = arrayListOf()
+    private var newData: ArrayList<Event> = arrayListOf()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    fun setData(data: List<String>) {
-        this.data = data as ArrayList<String>
+    fun setData(data: List<Event>) {
+        this.data = data as ArrayList<Event>
         newData = data
     }
 
@@ -35,11 +36,11 @@ class EventAdapter @Inject constructor(val presenter: IEventPresenter) :
 
         holder.itemView.apply {
             //presenter.view.setRecyclerVisible(true)
-            titleEventView.text = data?.get(position) ?: "Bad"
-            dateEventView.text = data?.get(position) ?: "Bad"
+            titleEventView.text = data?.get(position)?.title ?: "Bad"
+            dateEventView.text = data?.get(position)?.title ?: "Bad"
 
             setOnClickListener {
-                presenter.onItemClick(position)
+                presenter.onItemClick(data?.get(position)!!)
             }
 
 //            favoriteEventButton.setOnClickListener {
@@ -66,7 +67,7 @@ class EventAdapter @Inject constructor(val presenter: IEventPresenter) :
                     return filterResult
                 }
                 val result = data?.filter {
-                    it.contains(constraint, true)
+                    it.title.contains(constraint, true)
                 }
                 return filterResult.apply {
                     count = result?.size ?: 0
@@ -76,7 +77,7 @@ class EventAdapter @Inject constructor(val presenter: IEventPresenter) :
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 Log.d("ss", "ss")
-                data = results?.values as ArrayList<String>
+                data = results?.values as ArrayList<Event>
                 notifyDataSetChanged()
             }
 

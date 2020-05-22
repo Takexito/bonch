@@ -1,4 +1,4 @@
-package com.example.bonchapp.domain.interactors
+package com.example.bonchapp.domain.interactors.event
 
 import com.example.bonchapp.domain.entities.Event
 
@@ -12,8 +12,8 @@ interface IEventInteractor {
     fun getMyEvents(callback: (data: List<Event>) -> Unit, errorCallback: (error: String) -> Unit)
     fun getMyEvents(timeout: Int, callback: (data: List<Event>) -> Unit, errorCallback: (error: String) -> Unit)
 
-    fun deleteFavoriteEvent(eventId: Int, callback: () -> Unit, errorCallback: (error: String) -> Unit)
-    fun addToFavorite(eventId: Int, callback: () -> Unit, errorCallback: (error: String) -> Unit)
+    fun deleteFavoriteEvent(event: Event, callback: (data: List<Event>) -> Unit, errorCallback: (error: String) -> Unit)
+    fun addToFavorite(event: Event, callback: () -> Unit, errorCallback: (error: String) -> Unit)
 
     fun filterByTag()
     fun searchEvents(query: String): List<Event>

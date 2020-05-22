@@ -3,37 +3,36 @@ package com.example.bonchapp.presentation.presenter.event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bonchapp.domain.entities.Event
+import com.example.bonchapp.domain.interactors.event.IEventInteractor
+import com.example.bonchapp.presentation.ui.event.main.IEventView
+import com.example.bonchapp.presentation.ui.event.main.IMainEventView
+import com.example.bonchapp.presentation.ui.event.my.IMyEventView
 import com.example.bonchapp.router.MainRouter
-import com.example.bonchapp.data.repository.EventRepository
-import com.example.bonchapp.domain.repository.IEventRepository
-import com.example.bonchapp.presentation.ui.event.IEventView
-import com.example.bonchapp.router.MainCoordinator
+import javax.inject.Inject
 
-class MyEventPresenter( val view: IEventView):
-    IEventPresenter {
+class MyEventPresenter @Inject constructor(val interactor: IEventInteractor, val router: MainRouter): IMyEventPresenter {
 
-    //private val repository: IEventRepository = EventRepository()
+    lateinit var view: IMyEventView
 
-    private val _testData =
-        MutableLiveData<ArrayList<String>>().apply { value = arrayListOf("Load!") }
-
-    var testData: LiveData<ArrayList<String>> = _testData
-
-    override fun onItemClick(position: Int) {
-        MainCoordinator.navigateToFullEvent(view.getFragment(), position)
+    override fun onItemClick(event: Event) {
+        router.navigateToFullEvent(event.id)
     }
 
-    override fun onItemLike(eventId: Int) {
+    override fun onItemLike(event: Event) {
         TODO("Not yet implemented")
     }
 
 
-    override fun getAttachView(): IEventView {
-        TODO("Not yet implemented")
+    override fun getAttachView(): IMyEventView {
+        return view
+    }
+
+    override fun attachView(view: IMyEventView) {
+        this.view = view
     }
 
     override fun attachView(view: IEventView) {
-        TODO("Not yet implemented")
     }
 
     override fun onSearchQueryUpdate(
@@ -44,7 +43,14 @@ class MyEventPresenter( val view: IEventView):
     }
 
     override fun firstLoad() {
-        TODO("Not yet implemented")
+        interactor.getMyEvents(
+            callback = {
+                view.updateRecycler(it)
+            },
+            errorCallback = {
+                view.showError(it)
+            }
+        )
     }
 
 
