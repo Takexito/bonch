@@ -22,7 +22,8 @@
         tools:layout="@layout/fragment_event">
         <action
             android:id="@+id/action_navigation_event_to_fullEventFragment"
-            app:destination="@id/fullEventFragment"/>
+            app:destination="@id/fullEventFragment"
+            app:popUpTo="@id/navigation_event" />
         <action
             android:id="@+id/action_navigation_event_to_addEvent"
             app:destination="@id/addEvent"
@@ -36,8 +37,12 @@
 
     <fragment
         android:id="@+id/navigation_storage"
-        android:name="com.example.bonchapp.presentation.ui.storage.StorageFragment"
-        tools:layout="@layout/fragment_storage" />
+        android:name="com.example.bonchapp.presentation.ui.message.MessageFragment"
+        tools:layout="@layout/fragment_storage" >
+        <action
+            android:id="@+id/action_navigation_storage_to_sendMessageFragment"
+            app:destination="@id/sendMessageFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
@@ -47,7 +52,7 @@
             android:id="@+id/action_navigation_profile_to_SettingsFragment"
             app:destination="@id/settings"/>
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/fullEventFragment"
         android:name="com.example.bonchapp.presentation.ui.event.FullEventFragment"
         android:label="fragment_full_event"
@@ -59,7 +64,7 @@
         <action
             android:id="@+id/action_fullEventFragment_to_orgInfoFragment"
             app:destination="@id/orgInfo" />
-    </fragment>
+    </dialog>
     <fragment
         android:id="@+id/addEvent"
         android:name="com.example.bonchapp.presentation.ui.event.AddEvent"
@@ -96,5 +101,10 @@
         android:name="com.example.bonchapp.presentation.ui.event.OrgFragment"
         android:label="fragment_orgInfo"
         tools:layout="@layout/fragment_org" /><action android:id="@+id/action_global_orgInfo" app:destination="@id/orgInfo"/>
+    <fragment
+        android:id="@+id/sendMessageFragment"
+        android:name="com.example.bonchapp.presentation.ui.message.SendMessageFragment"
+        android:label="fragment_send_message"
+        tools:layout="@layout/fragment_send_message" />
 
 </navigation>

@@ -1,4 +1,5 @@
-package com.example.bonchapp.presentation.ui.event.main
+package com.example.bonchapp.presentation.ui.event.my
+
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,13 +10,12 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.Event
-import com.example.bonchapp.presentation.presenter.event.IEventPresenter
-import com.example.bonchapp.presentation.presenter.event.MyEventPresenter
+import com.example.bonchapp.presentation.presenter.event.IMyEventPresenter
 import kotlinx.android.synthetic.main.item_event.view.*
 import javax.inject.Inject
 
-class EventAdapter @Inject constructor(val presenter: MyEventPresenter) :
-        RecyclerView.Adapter<EventAdapter.ViewHolder>(), Filterable {
+class MyEventAdapter @Inject constructor(val presenter: IMyEventPresenter) :
+    RecyclerView.Adapter<MyEventAdapter.ViewHolder>(), Filterable {
 
     private var data: ArrayList<Event>? = arrayListOf()
     private var newData: ArrayList<Event> = arrayListOf()
@@ -29,7 +29,7 @@ class EventAdapter @Inject constructor(val presenter: MyEventPresenter) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_event, parent, false)
+            .inflate(R.layout.item_event, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -77,12 +77,13 @@ class EventAdapter @Inject constructor(val presenter: MyEventPresenter) :
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                Log.d("ss", "ss")
+                Log.d("Adapter", "publish Result")
                 data = results?.values as ArrayList<Event>
                 notifyDataSetChanged()
             }
 
         }
     }
+
 
 }

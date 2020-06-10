@@ -177,7 +177,7 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
         if (date.equals(DateTimeFormat.forPattern("dd-MM-yyyy").print(DateTime()))) {
 
             val s1 = time.substring(0, 5)
-            val s2 = time.substring(6, 11)
+            val s2 = time.substring(6, 10)
 
             val ss1 = date.substring(6, 10)
             val ss2 = date.substring(3, 5)
@@ -190,15 +190,15 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
                 date.substring(6, 10).toInt(),
                 date.substring(3, 5).toInt(),
                 date.substring(0, 2).toInt(),
-                s1.substring(0, 2).toInt(),
-                s1.substring(3, 5).toInt()
+                s1.substring(0, 1).toInt(),
+                s1.substring(3, 4).toInt()
             )
             val dt2 = DateTime(
                 date.substring(6, 10).toInt(),
                 date.substring(3, 5).toInt(),
                 date.substring(0, 2).toInt(),
-                s2.substring(0, 2).toInt(),
-                s2.substring(3, 5).toInt()
+                s2.substring(0, 1).toInt(),
+                s2.substring(3, 4).toInt()
             )
 
             if (DateTime.now() > dt1 && DateTime.now() < dt2)

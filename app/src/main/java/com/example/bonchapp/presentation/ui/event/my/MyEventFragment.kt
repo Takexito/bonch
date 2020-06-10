@@ -10,17 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.Event
+import com.example.bonchapp.presentation.App
+import com.example.bonchapp.presentation.presenter.event.IMyEventPresenter
 import com.example.bonchapp.presentation.presenter.event.MyEventPresenter
 import com.example.bonchapp.router.MainCoordinator
 import kotlinx.android.synthetic.main.fragment_my_event.*
+import javax.inject.Inject
 
 
 class MyEventFragment : Fragment(), IMyEventView {
-    val presenter =
-        MyEventPresenter(this)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    @Inject
+    lateinit var presenter: IMyEventPresenter
+
+    @Inject
+    lateinit var adapter: MyEventAdapter
+
+    init {
+        App.appComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -32,6 +39,8 @@ class MyEventFragment : Fragment(), IMyEventView {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter.attachView(this)
+
         //presenter.onStart()
         init()
     }

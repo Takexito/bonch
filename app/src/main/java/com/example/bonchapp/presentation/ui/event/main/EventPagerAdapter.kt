@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.example.bonchapp.presentation.ui.event.favorite.FavoriteEventFragment
 import com.example.bonchapp.presentation.ui.event.my.MyEventFragment
 
-class EventPagerAdapter(val fragment: Fragment): FragmentPagerAdapter(fragment.fragmentManager!!) {
+class EventPagerAdapter(val fragment: Fragment): FragmentPagerAdapter(fragment.requireFragmentManager()) {
     private val tabs = arrayOf("Мероприятия", "Избранное", "Мои события")
     override fun getItem(position: Int): Fragment {
         return when(position){

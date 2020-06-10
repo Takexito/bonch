@@ -12,20 +12,33 @@ import javax.inject.Inject
 
 class EventRepository @Inject constructor(private val networkService: NetworkService): IEventRepository {
 
-    override fun getAllEvents(callback: (data: List<Event>?, error: String?) -> Unit) {
-        Log.d("EventRepository", "request")
-        networkService.getEvents().enqueue(object : Callback<List<Event>> {
-            override fun onResponse(call: Call<List<Event>>, resp: Response<List<Event>>) {
-                Log.d("EventRepository", "Good")
-                callback(resp.body(), resp.errorBody()?.string())
-                EventStorage.setAllEvents(resp.body()?.toCollection(ArrayList())?: arrayListOf())
-            }
+    var isLocal = true
 
-            override fun onFailure(call: Call<List<Event>>, t: Throwable) {
-                Log.d("EventRepository", t.localizedMessage ?: "Error!")
-                callback(null, t.localizedMessage)
-            }
-        })
+    override fun getAllEvents(callback: (data: List<Event>?, error: String?) -> Unit) {
+
+        if(isLocal){
+            callback(getAllEventsLocal(), null)
+        }
+        else {
+            Log.d("EventRepository", "request")
+            networkService.getEvents().enqueue(object : Callback<List<Event>> {
+                override fun onResponse(call: Call<List<Event>>, resp: Response<List<Event>>) {
+                    Log.d("EventRepository", "Good")
+                    callback(resp.body(), resp.errorBody()?.string())
+                    EventStorage.setAllEvents(resp.body()?.toCollection(ArrayList())?: arrayListOf())
+                }
+
+                override fun onFailure(call: Call<List<Event>>, t: Throwable) {
+                    Log.d("EventRepository", t.localizedMessage ?: "Error!")
+                    callback(null, t.localizedMessage)
+                }
+            })
+        }
+
+    }
+
+    private fun getAllEventsLocal(): ArrayList<Event>{
+        return EventStorage.events
     }
 
     override fun getFavoriteEvent(callback: (data: List<Event>?, error: String?) -> Unit) {

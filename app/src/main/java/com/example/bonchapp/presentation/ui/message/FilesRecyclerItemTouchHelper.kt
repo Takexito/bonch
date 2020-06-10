@@ -1,9 +1,9 @@
-package com.example.bonchapp.presentation.ui.storage
+package com.example.bonchapp.presentation.ui.message
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-class FilesRecyclerItemTouchHelper(adapter: FilesAdapter): ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+class FilesRecyclerItemTouchHelper(adapter: MessageAdapter): ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
     private val mAdapter = adapter
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.event.my.MyEventFragment">
+    tools:context=".presentation.ui.event.my.MyEventFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -100,7 +100,7 @@
 
     <fragment
         android:id="@+id/myEventContainer"
-        android:name="com.example.bonchapp.ui.event.my.FutureEventFragment"
+        android:name="com.example.bonchapp.presentation.ui.event.my.FutureEventFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"

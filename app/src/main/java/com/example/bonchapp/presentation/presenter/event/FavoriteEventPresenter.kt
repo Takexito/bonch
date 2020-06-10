@@ -47,11 +47,11 @@ class FavoriteEventPresenter @Inject constructor(val interactor: IEventInteracto
     }
 
     override fun onItemLike(event: Event) {
-        interactor.deleteFavoriteEvent(event,{
-            view.updateRecycler(it)
-        },{
-            view.showError(it)
-        })
+//        interactor.deleteFavoriteEvent(event,{
+//            view.updateRecycler(it)
+//        },{
+//            view.showError(it)
+//        })
     }
 
 }

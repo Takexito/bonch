@@ -44,26 +44,28 @@ class DayTimeTableAdapter(val context: Context, fragment: Fragment) :
         this.datesWeeks.clear()
         this.datesWeeks.addAll(datesWeeks)
 
+        if (subjectList.size > 1){ // TODO: FIX IT
+            for (i in 0..6)
+                list[i].clear()
 
+            subjectList.forEach {
 
-        for (i in 0..6)
-            list[i].clear()
+                val s = it.date
+                val dt = DateTime(
+                    s.substring(0, 4).toInt(),
+                    s.substring(5, 7).toInt(),
+                    s.substring(8, 10).toInt(),
+                    0,
+                    0
+                )
 
-        subjectList.forEach {
+                list[dt.dayOfWeek - 1].add(it)
+            }
 
-            val s = it.date
-            val dt = DateTime(
-                s.substring(0, 4).toInt(),
-                s.substring(5, 7).toInt(),
-                s.substring(8, 10).toInt(),
-                0,
-                0
-            )
-
-            list[dt.dayOfWeek - 1].add(it)
+            notifyDataSetChanged()
         }
 
-        notifyDataSetChanged()
+
 
     }
 

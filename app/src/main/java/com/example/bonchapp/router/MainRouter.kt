@@ -12,6 +12,7 @@ class MainRouter {
         val bundle = Bundle()
         bundle.putInt(Constants.FULL_EVENT_ID, eventId)
         navController.navigate(R.id.action_navigation_event_to_fullEventFragment)
+       // MainCoordinator.navigateToFullEvent( bundle)
     }
 
     fun navigateToAddEvent() {
@@ -27,6 +28,10 @@ class MainRouter {
     fun navigateToTimetable() {
         //context.requireActivity().nav_view.visibility = View.VISIBLE
         navController.navigate(R.id.action_navigation_authorization_to_navigation_timetable)
+    }
+
+    fun navigateToSendMessage() {
+        navController.navigate(R.id.action_navigation_storage_to_sendMessageFragment)
     }
 
 }

@@ -5,8 +5,9 @@ import com.example.bonchapp.data.repository.EventRepository
 import com.example.bonchapp.domain.interactors.event.EventInteractor
 import com.example.bonchapp.domain.interactors.event.IEventInteractor
 import com.example.bonchapp.domain.repository.IEventRepository
-import com.example.bonchapp.presentation.presenter.event.MainEventPresenter
-import com.example.bonchapp.presentation.presenter.event.IMainEventPresenter
+import com.example.bonchapp.presentation.presenter.event.*
+import com.example.bonchapp.presentation.ui.event.favorite.FavoriteEventAdapter
+import com.example.bonchapp.presentation.ui.event.main.EventAdapter
 import com.example.bonchapp.router.MainRouter
 import dagger.Module
 import dagger.Provides
@@ -14,8 +15,22 @@ import dagger.Provides
 @Module
 class EventModule {
     @Provides
-    fun providePresenter(eventInteractor: IEventInteractor, router: MainRouter): IMainEventPresenter {
+    fun provideMainPresenter(eventInteractor: IEventInteractor, router: MainRouter): IMainEventPresenter {
         return MainEventPresenter(
+            eventInteractor,
+            router
+        )
+    }
+    @Provides
+    fun provideFavoritePresenter(eventInteractor: IEventInteractor, router: MainRouter): IFavoriteEventPresenter {
+        return FavoriteEventPresenter(
+            eventInteractor,
+            router
+        )
+    }
+    @Provides
+    fun provideMyPresenter(eventInteractor: IEventInteractor, router: MainRouter): IMyEventPresenter {
+        return MyEventPresenter(
             eventInteractor,
             router
         )
@@ -31,6 +46,11 @@ class EventModule {
     @Provides
     fun provideRepository(networkService: NetworkService): IEventRepository{
         return EventRepository(networkService)
+    }
+
+    @Provides
+    fun provideFavoriteAdapter(presenter: IFavoriteEventPresenter): FavoriteEventAdapter{
+        return FavoriteEventAdapter(presenter)
     }
 
 }

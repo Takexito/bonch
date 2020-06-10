@@ -60,10 +60,10 @@ class MainEventFragment : Fragment(), IMainEventView {
     }
 
     override fun setRecyclerVisible(isVisible: Boolean) {
-        if(isVisible)
-            eventRecyclerView.visibility = View.VISIBLE
-        else
-            eventRecyclerView.visibility = View.GONE
+        //if(isVisible)
+           // eventRecyclerView.visibility = View.VISIBLE
+        //else
+            //eventRecyclerView.visibility = View.GONE
 
     }
 
