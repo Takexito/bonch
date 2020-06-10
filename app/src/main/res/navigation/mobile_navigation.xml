@@ -3,63 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_timetable">
-
-    <fragment
-        android:id="@+id/navigation_event"
-        android:name="com.example.bonchapp.ui.event.EventFragment"
-        tools:layout="@layout/fragment_event">
-        <action
-            android:id="@+id/action_navigation_event_to_fullEventFragment"
-            app:destination="@id/fullEventFragment"/>
-        <action
-            android:id="@+id/action_navigation_event_to_addEvent"
-            app:destination="@id/addEvent"
-            app:popUpTo="@id/navigation_event" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_navgut"
-        android:name="com.example.bonchapp.ui.navgut.NavgutFragment"
-        tools:layout="@layout/fragment_navgut"/>
+    app:startDestination="@+id/navigation_profile">
 
     <fragment
         android:id="@+id/navigation_timetable"
-        android:name="com.example.bonchapp.ui.timetable.TimetableFragment"
-        tools:layout="@layout/fragment_timetable" />
+        android:name="com.example.bonchapp.presentation.ui.timetable.TimetableFragment"
+        tools:layout="@layout/fragment_timetable">
 
-    <fragment
-        android:id="@+id/navigation_storage"
-        android:name="com.example.bonchapp.ui.storage.StorageFragment"
-        tools:layout="@layout/fragment_storage" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.bonchapp.ui.profile.ProfileFragment"
+        android:name="com.example.bonchapp.presentation.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_navigation_profile_to_SettingsFragment"
             app:destination="@id/settings"/>
     </fragment>
-    <fragment
-        android:id="@+id/fullEventFragment"
-        android:name="com.example.bonchapp.ui.event.FullEventFragment"
-        android:label="fragment_full_event"
-        tools:layout="@layout/fragment_full_event" >
-        <argument
-            android:name="eventId"
-            app:argType="integer"
-            android:defaultValue="0" />
-    </fragment>
-    <fragment
-        android:id="@+id/addEvent"
-        android:name="com.example.bonchapp.ui.event.AddEvent"
-        android:label="fragment_add_event"
-        tools:layout="@layout/fragment_add_event" />
 
-    <fragment
-        android:id="@+id/settings"
-        android:name="com.example.bonchapp.ui.profile.settings.SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
+
+
+
 
 </navigation>

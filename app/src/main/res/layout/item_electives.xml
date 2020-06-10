@@ -45,9 +45,10 @@
             android:id="@+id/profile_mark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="7dp"
             android:gravity="center"
+            android:padding="7dp"
             android:text="Оценка"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent" />

@@ -111,7 +111,7 @@
     </com.google.android.material.tabs.TabLayout>
 
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/profileViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -121,7 +121,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profileTabLayout"
         >
 
-    </androidx.viewpager.widget.ViewPager>
+    </androidx.viewpager2.widget.ViewPager2>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
