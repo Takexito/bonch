@@ -10,7 +10,7 @@ import com.example.bonchapp.presentation.presenter.profile.ProfilePresenter
 import com.example.bonchapp.presentation.ui.profile.IProfileView
 import javax.inject.Inject
 
-class TimetableFragment : Fragment(), IProfileView {
+class TimetableFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

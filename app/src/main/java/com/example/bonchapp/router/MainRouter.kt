@@ -31,6 +31,11 @@ class MainRouter {
         //navController.navigate(R.id.action_navigation_authorization_to_navigation_timetable)
     }
 
+    fun navigateToSettings(fragment:Fragment) {
+        fragment.findNavController().navigate(R.id.action_navigation_profile_to_SettingsFragment)
+    }
+
+
     fun showCabinetInNavigator(context: Fragment, cabinet: String) {
         val bundle = Bundle()
         bundle.putString("cabinet", cabinet)

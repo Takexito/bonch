@@ -20,6 +20,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="RadioButtonTheme" parent="@style/AppTheme">
+        <item name="colorControlActivated">@color/colorOrange</item>
+        <item name="colorControlNormal">#000000</item>
+    </style>
+
+
     <!--Button-->
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="strokeColor">@color/colorPrimary</item>

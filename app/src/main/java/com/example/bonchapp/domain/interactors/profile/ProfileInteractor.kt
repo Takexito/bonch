@@ -21,7 +21,8 @@ class ProfileInteractor @Inject constructor(val repository: IProfileRepository) 
     override fun getDebt(callback: (data: ArrayList<DebtDTO>?) -> Unit) {
         repository.loadDebt(
             callback = {
-                if (it.isSuccessful) callback(it.body())
+                if (it.isSuccessful)
+                    callback(it.body())
             },
             callbackError = {}
         )
@@ -30,7 +31,8 @@ class ProfileInteractor @Inject constructor(val repository: IProfileRepository) 
     override fun getElectives(callback: (data: ArrayList<ElectiveDTO>?) -> Unit) {
         repository.loadElectives(
             callback = {
-                if (it.isSuccessful) callback(it.body())
+                if (it.isSuccessful)
+                    callback(it.body())
             },
             callbackError = {}
         )
@@ -39,7 +41,8 @@ class ProfileInteractor @Inject constructor(val repository: IProfileRepository) 
     override fun getMark(callback: (data: ArrayList<MarkDTO>?) -> Unit) {
         repository.loadMark(
             callback = {
-                if (it.isSuccessful) callback(it.body())
+                if (it.isSuccessful)
+                    callback(it.body())
             },
             callbackError = {}
         )

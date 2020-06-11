@@ -1,3 +1,7 @@
 package com.example.bonchapp.presentation.ui.profile
 
-interface IProfileView {}
+import com.example.bonchapp.domain.entities.AccountDTO
+
+interface IProfileView {
+    fun setData(data: AccountDTO)
+}

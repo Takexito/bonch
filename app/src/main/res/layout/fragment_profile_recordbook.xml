@@ -21,7 +21,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="280dp"
-            android:src="@drawable/ic_profile_debt" />
+            android:src="@drawable/ic_profile_recordbook" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
-            android:text="Академическая задолженность\n отсутсвует"
+            android:text="На данный момент в зачетной книжке\n нет записей"
             android:textColor="#666666"
             android:textSize="16sp" />
     </LinearLayout>

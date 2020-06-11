@@ -9,7 +9,6 @@
         android:id="@+id/navigation_timetable"
         android:name="com.example.bonchapp.presentation.ui.timetable.TimetableFragment"
         tools:layout="@layout/fragment_timetable">
-
     </fragment>
 
     <fragment
@@ -18,7 +17,13 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_navigation_profile_to_SettingsFragment"
-            app:destination="@id/settings"/>
+            app:destination="@id/navigation_settings"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.bonchapp.presentation.ui.profile.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings">
     </fragment>
 
 

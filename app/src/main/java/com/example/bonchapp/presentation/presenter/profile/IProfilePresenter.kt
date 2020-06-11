@@ -6,4 +6,5 @@ import com.example.bonchapp.presentation.ui.profile.elective.IProfileElectivesVi
 interface IProfilePresenter {
     fun getAttachView(): IProfileView
     fun attachView(viewMain: IProfileView)
+    fun updateData()
 }

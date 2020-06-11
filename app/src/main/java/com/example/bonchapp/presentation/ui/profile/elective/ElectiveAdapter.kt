@@ -54,8 +54,6 @@ class ElectivePostHolder(itemView: View, val fragment: Fragment) :
             val divider = itemView.findViewById<View>(R.id.divider)
             divider.visibility = View.INVISIBLE
         }
-
-
         name.text = subject.subject
         status.text = subject.status
         mark.text = subject.mark

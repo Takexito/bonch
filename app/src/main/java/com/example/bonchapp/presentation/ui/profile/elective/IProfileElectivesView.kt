@@ -4,5 +4,5 @@ import com.example.bonchapp.domain.entities.ElectiveDTO
 
 interface IProfileElectivesView {
     fun setData(list: ArrayList<ElectiveDTO>)
-    fun hideRV(b:Boolean)
+    fun hideImg(b:Boolean)
 }

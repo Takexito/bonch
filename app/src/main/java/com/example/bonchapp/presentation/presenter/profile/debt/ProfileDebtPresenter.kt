@@ -38,7 +38,6 @@ class ProfileDebtPresenter @Inject constructor(
             viewMain.setData(list)
             viewMain.hideRV(false)
         }
-
     }
 
     fun sortArray(list: ArrayList<DebtDTO>): ArrayList<ArrayList<DebtDTO>> {

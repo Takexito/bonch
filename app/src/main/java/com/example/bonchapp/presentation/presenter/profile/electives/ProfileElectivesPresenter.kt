@@ -33,14 +33,14 @@ class ProfileElectivesPresenter @Inject constructor(
                     if (it!!.isNotEmpty()) {
                         list = it!!
                         viewMain.setData(list)
-                        viewMain.hideRV(false)
+                        viewMain.hideImg(false)
                     } else
-                        viewMain.hideRV(true)
+                        viewMain.hideImg(true)
                 }
             )
         else{
             viewMain.setData(list)
-            viewMain.hideRV(false)
+            viewMain.hideImg(false)
         }
 
     }

@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.bonchapp.R
+import com.example.bonchapp.domain.entities.AccountDTO
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.profile.ProfilePresenter
 import com.example.bonchapp.router.MainRouter
@@ -22,6 +24,8 @@ class ProfileFragment : Fragment(),IProfileView {
 
     lateinit var adapter: ProfilePagerAdapter
 
+    lateinit var root: View
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +33,7 @@ class ProfileFragment : Fragment(),IProfileView {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_profile, container, false)
+        root = inflater.inflate(R.layout.fragment_profile, container, false)
 
         return root
     }
@@ -42,6 +46,8 @@ class ProfileFragment : Fragment(),IProfileView {
         super.onViewCreated(view, savedInstanceState)
         initBtn()
         initAdapter()
+        presenter.attachView(this)
+        presenter.updateData()
     }
 
     private fun initAdapter() {
@@ -67,8 +73,13 @@ class ProfileFragment : Fragment(),IProfileView {
 
     private fun initBtn() {
         settings.setOnClickListener {
-            //MainRouter.navigateToSettings(this)
-            adapter.notifyDataSetChanged()
+            MainRouter().navigateToSettings(this)
         }
     }
+
+    override fun setData(data: AccountDTO){
+        root.findViewById<TextView>(R.id.profileStudentName).text = data.fullname
+        root.findViewById<TextView>(R.id.profileGroup).text = data.group
+    }
+
 }

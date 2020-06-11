@@ -60,7 +60,8 @@ class ProfileElectivesFragment : Fragment(),
         adapter.setData(list)
     }
 
-    override fun hideRV(b:Boolean){
+    override fun hideImg(b:Boolean){
         root.findViewById<View>(R.id.profilEmptyImage).visibility = if(b) View.VISIBLE else View.INVISIBLE
+        root.findViewById<View>(R.id.profileRV).visibility = if(!b) View.VISIBLE else View.INVISIBLE
     }
 }

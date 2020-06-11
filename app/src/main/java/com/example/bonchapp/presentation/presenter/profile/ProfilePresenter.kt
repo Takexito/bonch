@@ -12,8 +12,6 @@ class ProfilePresenter @Inject constructor(private val interactor: IProfileInter
 
 
     override fun getAttachView(): IProfileView {
-
-
         TODO("Not yet implemented")
     }
 
@@ -21,4 +19,13 @@ class ProfilePresenter @Inject constructor(private val interactor: IProfileInter
         this.viewMain = viewMain
     }
 
+    override fun updateData() {
+        interactor.getUserInfo(
+            callback = {
+                if (it != null) {
+                    viewMain.setData(it)
+                }
+            }
+        )
+    }
 }

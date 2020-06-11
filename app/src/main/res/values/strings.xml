@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BonchApp</string>
+    <string name="app_name" translatable="false">BonchApp</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="navgut_loading_error">Произошла ошибка загрузки. Нажмите в любом месте, чтобы попробовать снова</string>
@@ -36,4 +36,8 @@
         <item>Библиотека СПбГУТ</item>
         <item>bonchfiles</item>
     </string-array>
+    <string name="btn_settings">Settings</string>
+    <string name="btn_logout">Logout</string>
+    <string name="text_language">Language</string>
+    <string name="text_warningLogout">Do you really want to leave your account?</string>
 </resources>
