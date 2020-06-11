@@ -30,7 +30,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
-            android:text="Академическая задолженность\n отсутсвует"
+            android:text="@string/text_profile_debt"
             android:textColor="#666666"
             android:textSize="16sp" />
     </LinearLayout>

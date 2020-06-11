@@ -29,6 +29,7 @@ class ProfileMarkPresenter @Inject constructor(
                     if (it!!.isNotEmpty()) {
                         list = sortArray(it!!)
                         viewMain.setData(list)
+                        viewMain.setData(sortArray(it!!))
                         viewMain.hideRV(false)
                     } else
                         viewMain.hideRV(true)

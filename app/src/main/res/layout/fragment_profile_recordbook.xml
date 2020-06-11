@@ -30,7 +30,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
-            android:text="На данный момент в зачетной книжке\n нет записей"
+            android:text="@string/text_profile_mark"
             android:textColor="#666666"
             android:textSize="16sp" />
     </LinearLayout>

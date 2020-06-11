@@ -36,7 +36,7 @@ lateinit var root:View
 
         }
         back.setOnClickListener {
-            fragmentManager?.popBackStack()
+            requireActivity().onBackPressed()
         }
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(root.context)

@@ -1,6 +1,7 @@
 package com.example.bonchapp.presentation.ui.profile
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,15 +60,23 @@ class ProfileFragment : Fragment(),IProfileView {
         TabLayoutMediator(profileTabLayout, profileViewPager, object : TabLayoutMediator.TabConfigurationStrategy {
             override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
                 when(position){
-                    0 -> tab.text = "Задолженность"
-                    1 -> tab.text = "Зачетка"
-                    2 -> tab.text = "Файлы группы"
-                    3 -> tab.text = "Факультативы"
+                    0 -> tab.text = resources.getText(R.string.text_profile_tab_debt)
+                    1 -> tab.text = resources.getText(R.string.text_profile_tab_record)
+                    2 -> tab.text = resources.getText(R.string.text_profile_tab_groupFiles)
+                    3 -> tab.text = resources.getText(R.string.text_profile_tab_electives)
                 }
 
                 // Styling each tab here
             }
         }).attach()
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(root.context)
+        var lang = sharedPreferences.getString("lang", "ru")!!
+
+        if(lang == "en")
+            profileTabLayout.tabMode = TabLayout.MODE_FIXED
+        else
+            profileTabLayout.tabMode = TabLayout.MODE_SCROLLABLE
 
     }
 
@@ -81,5 +90,4 @@ class ProfileFragment : Fragment(),IProfileView {
         root.findViewById<TextView>(R.id.profileStudentName).text = data.fullname
         root.findViewById<TextView>(R.id.profileGroup).text = data.group
     }
-
 }

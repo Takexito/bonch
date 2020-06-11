@@ -81,34 +81,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="15dp"
+        app:tabMinWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profileConstraintLayout"
-        app:tabMode="scrollable">
+        app:tabMode="auto"
+        app:tabGravity = "fill"
+        >
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/profileDebtTab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Задолженность" />
+            android:text="@string/text_profile_tab_debt" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/profileRecordBookTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Зачетка" />
+            android:text="@string/text_profile_tab_record" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/profileFilesTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Файлы группы" />
+            android:text="@string/text_profile_tab_groupFiles" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/profileElectivesTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Факультативы" />
+            android:text="@string/text_profile_tab_electives" />
     </com.google.android.material.tabs.TabLayout>
 
 
