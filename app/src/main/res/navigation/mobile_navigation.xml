@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_navigation_storage_to_sendMessageFragment"
             app:destination="@id/sendMessageFragment" />
+        <action
+            android:id="@+id/action_navigation_storage_to_fullMassageFragment"
+            app:destination="@id/fullMassageFragment" />
     </fragment>
 
     <fragment
@@ -106,5 +109,14 @@
         android:name="com.example.bonchapp.presentation.ui.message.SendMessageFragment"
         android:label="fragment_send_message"
         tools:layout="@layout/fragment_send_message" />
+    <fragment
+        android:id="@+id/fullMassageFragment"
+        android:name="com.example.bonchapp.presentation.ui.message.FullMessageFragment"
+        android:label="fragment_full_massage"
+        tools:layout="@layout/fragment_full_massage" >
+        <argument
+            android:name="message"
+            app:argType="android.os.Message" />
+    </fragment>
 
 </navigation>

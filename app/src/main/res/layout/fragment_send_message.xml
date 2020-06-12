@@ -46,7 +46,6 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/send_message_destination_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Кому: "
@@ -54,7 +53,7 @@
                     android:textSize="16sp" />
 
                 <Spinner
-                    android:id="@+id/send_message_destination_spinner"
+                    android:id="@+id/send_message_destination_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7" />
@@ -84,7 +83,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider3">
 
                 <TextView
-                    android:id="@+id/send_message_subject_view2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -93,7 +91,7 @@
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName"
+                    android:id="@+id/send_message_subject_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
@@ -113,7 +111,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/theme" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/read_message_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
@@ -125,10 +123,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider4"
-                app:layout_constraintBottom_toTopOf="@+id/filesChip"/>
+                app:layout_constraintBottom_toTopOf="@+id/send_files_chip"/>
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/filesChip"
+                android:id="@+id/send_files_chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

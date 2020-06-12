@@ -3,6 +3,7 @@ package com.example.bonchapp.router
 import android.os.Bundle
 import androidx.navigation.NavController
 import com.example.bonchapp.R
+import com.example.bonchapp.domain.entities.Message
 import javax.inject.Singleton
 
 class MainRouter {
@@ -32,6 +33,12 @@ class MainRouter {
 
     fun navigateToSendMessage() {
         navController.navigate(R.id.action_navigation_storage_to_sendMessageFragment)
+    }
+
+    fun navigateToFullMessage(message: Message){
+        val bundle = Bundle()
+        bundle.putSerializable(Constants.FULL_MESSAGE, message)
+        navController.navigate(R.id.action_navigation_storage_to_fullMassageFragment, bundle)
     }
 
 }

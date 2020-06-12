@@ -2,7 +2,7 @@ package com.example.bonchapp.domain.entities
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-
+import java.io.Serializable
 
 data class Message(
 
@@ -41,4 +41,4 @@ data class Message(
         @SerializedName("type")
         @Expose
         var type: String? = null
-)
+) : Serializable

@@ -29,7 +29,7 @@ class MessagePresenter @Inject constructor(val interactor: IMessageInteractor, v
     }
 
     override fun onItemClick(item: Message) {
-
+        router.navigateToFullMessage(item)
     }
 
     override fun onFabClick() {
