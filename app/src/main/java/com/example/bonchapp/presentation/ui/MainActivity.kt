@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.navigation_event,
             R.id.navigation_navgut,
-            R.id.navigation_timetable,
+            R.id.timetableFragment,
             R.id.navigation_messages,
             R.id.navigation_profile
         ))

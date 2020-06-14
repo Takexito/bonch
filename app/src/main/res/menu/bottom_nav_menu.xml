@@ -12,7 +12,7 @@
         android:title="" />
 
     <item
-        android:id="@+id/navigation_timetable"
+        android:id="@+id/timetableFragment"
         android:icon="@drawable/ic_timetable"
         android:title="" />
 

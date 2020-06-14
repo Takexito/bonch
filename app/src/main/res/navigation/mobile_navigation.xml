@@ -10,10 +10,9 @@
         android:name="com.example.bonchapp.presentation.ui.authorization.AuthFragment"
         tools:layout="@layout/fragment_authorization">
         <action
-            android:id="@+id/action_navigation_authorization_to_navigation_timetable"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/mobile_navigation"
-            app:destination="@id/navigation_timetable" />
+            android:id="@+id/action_navigation_authorization_to_timetableFragment"
+            app:destination="@id/timetableFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/navigation_event"
@@ -63,13 +62,8 @@
     </dialog>
 
     <fragment
-        android:id="@+id/navigation_timetable"
-        android:name="com.example.bonchapp.presentation.ui.timetable.TimetableFragment">
-
-
-    <fragment
         android:id="@+id/selectGroup"
-        android:name="com.example.bonchapp.presentation.ui.timetable.SelectGroupFragment"
+        android:name="com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment"
         android:label="fragment_select_group"
         tools:layout="@layout/fragment_select_group">
         <argument
@@ -112,6 +106,17 @@
         tools:layout="@layout/fragment_settings">
     </fragment>
 
+    <fragment
+        android:id="@+id/selectGroupFragment"
+        android:name="com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment"
+        android:label="SelectGroupFragment" />
+    <fragment
+        android:id="@+id/timetableFragment"
+        android:name="com.example.bonchapp.presentation.ui.timetable.main.TimetableFragment"
+        android:label="TimetableFragment" >
+        <action
+            android:id="@+id/action_timetableFragment_to_selectGroupFragment"
+            app:destination="@id/selectGroupFragment" />
     </fragment>
 
 </navigation>

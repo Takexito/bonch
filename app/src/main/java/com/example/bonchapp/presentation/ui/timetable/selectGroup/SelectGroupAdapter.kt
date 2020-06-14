@@ -1,8 +1,5 @@
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/adapters/SelectGroupAdapter.kt
-package com.example.bonchapp.presentation.ui.adapters
-=======
 package com.example.bonchapp.presentation.ui.timetable.selectGroup
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectGroup/SelectGroupAdapter.kt
+
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,13 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/adapters/SelectGroupAdapter.kt
-import com.example.bonchapp.presentation.ui.timetable.mPresenter
-=======
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
 import javax.inject.Inject
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectGroup/SelectGroupAdapter.kt
 
 class SelectGroupAdapter(val context: Context) :
     RecyclerView.Adapter<SelectGroupPostHolder>() {

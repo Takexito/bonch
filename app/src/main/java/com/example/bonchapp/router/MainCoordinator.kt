@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.presentation.ui.event.FullEventFragment
 import com.example.bonchapp.presentation.ui.event.my.ApplicationEventFragment
-import com.example.bonchapp.presentation.ui.timetable.SelectTypeTimetableFragment
+import com.example.bonchapp.presentation.ui.timetable.selectType.SelectTypeTimetableFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 object MainCoordinator {
@@ -58,7 +58,7 @@ object MainCoordinator {
     }*/
 
     fun navigateToSelectGroup(context: Fragment) {
-        context.findNavController().navigate(R.id.action_navigation_timetable_to_selectGroupFragment)
+        context.findNavController().navigate(R.id.action_timetableFragment_to_selectGroupFragment)
     }
 
     fun navigateToSelectTypeTimetable(context: Fragment){
@@ -69,10 +69,10 @@ object MainCoordinator {
     }
     fun navigateToTimetable(context: Fragment) {
         context.requireActivity().nav_view.visibility = View.VISIBLE
-        context.findNavController().navigate(R.id.action_navigation_authorization_to_navigation_timetable)
+        context.findNavController().navigate(R.id.action_navigation_authorization_to_timetableFragment)
     }
     fun navigateToTimetable(context: Activity) {
         context.nav_view.visibility = View.VISIBLE
-        context.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_authorization_to_navigation_timetable)
+        context.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_authorization_to_timetableFragment)
     }
 }

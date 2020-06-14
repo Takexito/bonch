@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.bonchapp.presentation.MainContract
 import com.example.bonchapp.data.ModelTimetable
+import com.example.bonchapp.domain.entities.RequestTimeTable
 import com.example.bonchapp.domain.entities.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import org.joda.time.DateTime
@@ -56,7 +57,7 @@ class PresenterTimeTable(fr: Fragment, view: MainContract.ITimeTableView) :
             start = currentDate.dayOfWeek().setCopy(DateTimeConstants.MONDAY)
             end = currentDate.dayOfWeek().setCopy(DateTimeConstants.SUNDAY)
 
-            val body = RequestTimeTableDTO(dtf.print(start), dtf.print(end), name, type)
+            val body = RequestTimeTable(dtf.print(start), dtf.print(end), name, type)
 
 
             val datesWeeks = arrayListOf<String>(

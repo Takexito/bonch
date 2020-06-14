@@ -1,8 +1,5 @@
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/adapters/TimetableAdapter.kt
-package com.example.bonchapp.presentation.ui.adapters
-=======
 package com.example.bonchapp.presentation.ui.timetable.main
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/main/TimetableAdapter.kt
+
 
 import android.content.Context
 import android.graphics.Color
@@ -17,22 +14,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/adapters/TimetableAdapter.kt
 import com.example.bonchapp.router.MainRouter
 import com.example.bonchapp.pojo.SubjectDTO
-import com.example.bonchapp.router.MainCoordinator
 import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
 
-class TimetableAdapter(val context: Context, fragment: Fragment) :
-=======
 //import com.example.bonchapp.coordinator.MainCoordinator
-import com.example.bonchapp.pojo.SubjectDTO
-import com.example.bonchapp.router.MainRouter
-import org.joda.time.DateTime
 
 class TimetableAdapter(val context: Context, fragment: Fragment, val subject: List<SubjectDTO>, val date: String) :
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/main/TimetableAdapter.kt
     RecyclerView.Adapter<TimetablePostHolder>() {
 
     //var subject = ArrayList<SubjectDTO>()
@@ -189,23 +177,22 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
     }
 
     private fun checkActiveSubject(date: String, time: String): Boolean {
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/adapters/TimetableAdapter.kt
-        if (date.equals(DateTimeFormat.forPattern("dd-MM-yyyy").print(DateTime()))) {
-
-            val s1 = time.substring(0, 5)
-            val s2 = time.substring(6, 10)
-
-            val ss1 = date.substring(6, 10)
-            val ss2 = date.substring(3, 5)
-            val ss3 = date.substring(0, 2)
-            val ss4 = s1.substring(0, 2)
-            val ss5 = s1.substring(2, 4)
-=======
+//<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/adapters/TimetableAdapter.kt
+//        if (date.equals(DateTimeFormat.forPattern("dd-MM-yyyy").print(DateTime()))) {
+//
+//            val s1 = time.substring(0, 5)
+//            val s2 = time.substring(6, 10)
+//
+//            val ss1 = date.substring(6, 10)
+//            val ss2 = date.substring(3, 5)
+//            val ss3 = date.substring(0, 2)
+//            val ss4 = s1.substring(0, 2)
+//            val ss5 = s1.substring(2, 4)
+//=======
         //if (date.equals(DateTimeFormat.forPattern("dd-MM-yyyy").print(DateTime()))) {
         try {
             var s1 = time.substring(0, 5)
             var s2 = time.substring(6, 11)
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/main/TimetableAdapter.kt
 
             if(s1.length<5)
                 s1 = "0$s1"

@@ -1,8 +1,8 @@
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/SelectGroupFragment.kt
+
+
 package com.example.bonchapp.presentation.ui.timetable
-=======
-package com.example.bonchapp.presentation.ui.timetable.selectGroup
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectGroup/SelectGroupFragment.kt
+
+import com.example.bonchapp.presentation.ui.timetable.selectGroup.ITimetableGroupView
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,13 +14,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/SelectGroupFragment.kt
-import com.example.bonchapp.presentation.ui.adapters.SelectGroupAdapter
-=======
 import com.example.bonchapp.presentation.App
+
+import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupAdapter
+
 import com.example.bonchapp.presentation.presenter.timetable.ITimetableGroupPresenter
 import javax.inject.Inject
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectGroup/SelectGroupFragment.kt
+
 
 class SelectGroupFragment() : Fragment(),
     ITimetableGroupView {
@@ -33,7 +33,7 @@ class SelectGroupFragment() : Fragment(),
     lateinit var presenter: ITimetableGroupPresenter
 
     init {
-        App.appComponent.inject(this)
+       // App.appComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -62,13 +62,13 @@ class SelectGroupFragment() : Fragment(),
 
     private fun initRecyclerView(root: View) {
         groupsListAdapter =
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/SelectGroupFragment.kt
-            SelectGroupAdapter(root.context)
-=======
+//<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/SelectGroupFragment.kt
+//            SelectGroupAdapter(root.context)
+//=======
             SelectGroupAdapter(
                 root.context
             )
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectGroup/SelectGroupFragment.kt
+
         val recyclerView = root.findViewById<RecyclerView>(R.id.rv_selectGroup)
         recyclerView.layoutManager = LinearLayoutManager(root.context)
         recyclerView.adapter = groupsListAdapter

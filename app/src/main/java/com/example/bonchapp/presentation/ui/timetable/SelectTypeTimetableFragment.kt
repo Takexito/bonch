@@ -1,20 +1,12 @@
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/SelectTypeTimetableFragment.kt
 package com.example.bonchapp.presentation.ui.timetable
-=======
-package com.example.bonchapp.presentation.ui.timetable.selectType
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectType/SelectTypeTimetableFragment.kt
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.bonchapp.R
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/SelectTypeTimetableFragment.kt
-import com.example.bonchapp.presentation.ui.adapters.SelectGroupAdapter
-=======
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectType/SelectTypeTimetableFragment.kt
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import javax.inject.Inject
 
@@ -24,7 +16,7 @@ class SelectTypeTimetableFragment() : BottomSheetDialogFragment() {
     lateinit var presenter: ITimetablePresenter
 
     init {
-        App.appComponent.inject(this)
+       // App.appComponent.inject(this)
     }
 
 

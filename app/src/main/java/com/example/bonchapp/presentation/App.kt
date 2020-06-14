@@ -46,6 +46,3 @@ class App: Application() {
         //MainActivity.dLocale = Locale(change) //set any locale you want here
     }
 }
-
-}
-

@@ -32,7 +32,7 @@ interface NetworkService {
     fun getTimeTable(
         //@Header("Accept") accept: String = "application/json",
         @Header("Authorization") token: String = "Token ${User.token.value}",
-        @Body body: RequestTimeTableDTO?
+        @Body body: RequestTimeTable?
 	): Call<ArrayList<SubjectDTO>>
 
 

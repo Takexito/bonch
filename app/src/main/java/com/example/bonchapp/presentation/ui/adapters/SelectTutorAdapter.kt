@@ -1,9 +1,6 @@
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/adapters/SelectTutorAdapter.kt
-package com.example.bonchapp.presentation.ui.adapters
-=======
-package com.example.bonchapp.presentation.ui.timetable.selectTutor
 
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectTutor/SelectTutorAdapter.kt
+package com.example.bonchapp.presentation.ui.adapters
+
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -13,13 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/adapters/SelectTutorAdapter.kt
-import com.example.bonchapp.presentation.ui.timetable.mPresenter
-=======
-import com.example.bonchapp.presentation.App
+
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
+import com.example.bonchapp.presentation.ui.timetable.selectTutor.SelectTutorPostHolder
 import javax.inject.Inject
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectTutor/SelectTutorAdapter.kt
 
 class SelectTutorAdapter(val context: Context) :
     RecyclerView.Adapter<SelectTutorPostHolder>() {
@@ -59,7 +53,7 @@ class SelectTutorPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     lateinit var group: String
 
     init {
-        App.appComponent.inject(this)
+        //App.appComponent.inject(this)
     }
 
     fun bind(groupLGr: String, pos: Int) {

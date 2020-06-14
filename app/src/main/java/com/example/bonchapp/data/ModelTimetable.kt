@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.bonchapp.presentation.MainContract
 import com.example.bonchapp.data.network.NetworkServ
+import com.example.bonchapp.domain.entities.RequestTimeTable
 import com.example.bonchapp.domain.entities.RequestTimeTableDTO
 import com.example.bonchapp.pojo.SubjectDTO
 import retrofit2.Call
@@ -13,7 +14,7 @@ import retrofit2.Response
 
 class ModelTimetable() : MainContract.ITimeTableModel {
 
-    override fun loadTimetable(body: RequestTimeTableDTO): LiveData<ArrayList<SubjectDTO>> {
+    override fun loadTimetable(body: RequestTimeTable): LiveData<ArrayList<SubjectDTO>> {
 
         val data = MutableLiveData<ArrayList<SubjectDTO>>()
         NetworkServ

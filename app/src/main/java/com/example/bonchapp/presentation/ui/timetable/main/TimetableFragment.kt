@@ -1,4 +1,4 @@
-package com.example.bonchapp.presentation.timetable.ui
+package com.example.bonchapp.presentation.ui.timetable.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
-import com.example.bonchapp.presentation.ui.timetable.main.DayTimeTableAdapter
+import com.example.bonchapp.presentation.timetable.ui.ITimetableView
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment
 import com.example.bonchapp.presentation.ui.timetable.selectTutor.SelectTutorFragment
 import com.example.bonchapp.presentation.ui.timetable.selectType.SelectTypeTimetableFragment

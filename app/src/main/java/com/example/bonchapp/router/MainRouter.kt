@@ -39,7 +39,7 @@ class MainRouter {
 
     fun navigateToTimetable() {
         //context.requireActivity().nav_view.visibility = View.VISIBLE
-        navController.navigate(R.id.action_navigation_authorization_to_navigation_timetable)
+        navController.navigate(R.id.action_navigation_authorization_to_timetableFragment)
     }
 
     fun navigateToSendMessage() {

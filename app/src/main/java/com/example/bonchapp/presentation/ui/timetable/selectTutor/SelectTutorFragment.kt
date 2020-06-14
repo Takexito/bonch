@@ -1,8 +1,4 @@
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/SelectTutorFragment.kt
-package com.example.bonchapp.presentation.ui.timetable
-=======
 package com.example.bonchapp.presentation.ui.timetable.selectTutor
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectTutor/SelectTutorFragment.kt
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,13 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/SelectTutorFragment.kt
-import com.example.bonchapp.presentation.ui.adapters.SelectTutorAdapter
-=======
+
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetableTutorPresenter
 import javax.inject.Inject
->>>>>>> timeTable:app/src/main/java/com/example/bonchapp/presentation/ui/timetable/selectTutor/SelectTutorFragment.kt
+
 
 
 class SelectTutorFragment() : Fragment(), ITimetableTutorView {

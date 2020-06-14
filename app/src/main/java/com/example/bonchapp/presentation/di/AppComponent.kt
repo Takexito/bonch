@@ -20,9 +20,8 @@ import com.example.bonchapp.presentation.ui.profile.debt.ProfileDebtFragment
 import com.example.bonchapp.presentation.ui.profile.electives.ProfileElectivesFragment
 import com.example.bonchapp.presentation.ui.profile.mark.ProfileMarkFragment
 
-import com.example.bonchapp.domain.di.BaseModule
 import com.example.bonchapp.domain.di.TimetableModule
-import com.example.bonchapp.presentation.timetable.ui.TimetableFragment
+import com.example.bonchapp.presentation.ui.timetable.main.TimetableFragment
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupPostHolder
 import com.example.bonchapp.presentation.ui.timetable.selectTutor.SelectTutorFragment

@@ -1,25 +1,18 @@
 package com.example.bonchapp.presentation.ui.adapters
 
 import android.content.Context
-import android.os.Build
-import android.transition.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.pojo.SubjectDTO
+import com.example.bonchapp.presentation.ui.timetable.main.TimetableAdapter
 import org.joda.time.DateTime
-import org.w3c.dom.Text
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.format.TextStyle
-import java.util.*
 import kotlin.collections.ArrayList
 
 class DayTimeTableAdapter(val context: Context, fragment: Fragment) :
@@ -86,11 +79,11 @@ class DayTimeTableAdapter(val context: Context, fragment: Fragment) :
 
 class DayTimetablePostHolder(itemView: View, fragment: Fragment) :
     RecyclerView.ViewHolder(itemView) {
-    val timeTableAdapter =
-        TimetableAdapter(
-            itemView.context,
-            fragment
-        )
+//    val timeTableAdapter =
+//        TimetableAdapter(
+//            itemView.context,
+//            fragment
+//         )
     val recyclerViewDay = itemView.findViewById<RecyclerView>(R.id.dayRecyclerView)
     val withoutClasses = itemView.findViewById<LinearLayout>(R.id.without_classes)
 
@@ -117,8 +110,8 @@ class DayTimetablePostHolder(itemView: View, fragment: Fragment) :
             recyclerViewDay.visibility = View.VISIBLE
 
             recyclerViewDay.layoutManager = LinearLayoutManager(itemView.context)
-            recyclerViewDay.adapter = timeTableAdapter
-            timeTableAdapter.setSubjects(arrayList, date)
+//            recyclerViewDay.adapter = timeTableAdapter
+//            timeTableAdapter.setSubjects(arrayList, date)
         }
 
         viewDate.text = "${dayOfWeek[number]} ${date.substring(0, 5)}"
