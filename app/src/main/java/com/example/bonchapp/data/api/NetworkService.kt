@@ -20,6 +20,7 @@ interface NetworkService {
     fun getEvents(@Header("Authorization") token: String = "Token ${User.token.value}"
     ): Call<List<Event>>
 
+
     @GET("/api/timetable/group")
     fun getNews(@Header("Authorization") token: String = "Token ${User.token.value}"
     ): Call<ArrayList<ArrayList<String>>>
@@ -81,3 +82,4 @@ interface NetworkService {
         @Header("Authorization") token: String = "Token ${User.token.value}"
     ): Call<ArrayList<MarkDTO>>
 }
+

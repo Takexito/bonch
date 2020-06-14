@@ -7,6 +7,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 
+import javax.inject.Singleton
+
 class MainRouter {
     lateinit var navController: NavController
 
@@ -16,6 +18,17 @@ class MainRouter {
         navController.navigate(R.id.action_navigation_event_to_fullEventFragment)
        // MainCoordinator.navigateToFullEvent( bundle)
     }
+
+
+//    fun navigateToFullEvent(eventId: Int) {
+//        val bundle = Bundle()
+//        bundle.putInt(Constants.FULL_EVENT_ID, eventId)
+//        navController.navigate(R.id.action_navigation_event_to_fullEventFragment)
+//    }
+//
+//    fun navigateToAddEvent() {
+//        navController.navigate(R.id.action_navigation_event_to_addEvent)
+//    }
 
 
     fun navigateToCabinet(cabinet: String) {
@@ -45,6 +58,7 @@ class MainRouter {
     }
 
 
+
     fun showCabinetInNavigator(context: Fragment, cabinet: String) {
         val bundle = Bundle()
         bundle.putString("cabinet", cabinet)
@@ -53,4 +67,3 @@ class MainRouter {
 
 
 }
-

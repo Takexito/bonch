@@ -26,6 +26,7 @@ class NetworkModule {
             .readTimeout(Duration.ofSeconds(120))
             .writeTimeout(Duration.ofSeconds(120))
             .build()
+
         return Retrofit.Builder()
             .baseUrl(Constants.HOST)
             .client(okHttpClient)
@@ -33,5 +34,6 @@ class NetworkModule {
             .build()
             .create(NetworkService::class.java)
     }
+
 }
 

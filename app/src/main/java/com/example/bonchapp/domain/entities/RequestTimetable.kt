@@ -5,4 +5,6 @@ data class RequestTimeTable(
     val to : String,
     val info : String,
     val type : String
+
 )
+
