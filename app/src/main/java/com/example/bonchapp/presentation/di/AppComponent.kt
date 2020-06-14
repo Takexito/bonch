@@ -13,11 +13,16 @@ import com.example.bonchapp.presentation.ui.event.main.MainEventFragment
 import com.example.bonchapp.presentation.ui.event.my.MyEventFragment
 import com.example.bonchapp.presentation.ui.message.MessageFragment
 import com.example.bonchapp.presentation.ui.message.MessageInFragment
+import com.example.bonchapp.domain.di.ProfileModule
+import com.example.bonchapp.presentation.ui.profile.ProfileFragment
+import com.example.bonchapp.presentation.ui.profile.debt.ProfileDebtFragment
+import com.example.bonchapp.presentation.ui.profile.elective.ProfileElectivesFragment
+import com.example.bonchapp.presentation.ui.profile.mark.ProfileMarkFragment
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [NetworkModule::class, EventModule::class, AuthModel::class, BaseModule::class, MessageModule::class])
+@Component(modules = [NetworkModule::class, EventModule::class, AuthModel::class, BaseModule::class, MessageModule::class, ProfileModule::class])
 interface AppComponent {
 
     fun inject(view: MainEventFragment)
@@ -31,4 +36,10 @@ interface AppComponent {
     fun inject(view: MessageFragment)
     fun inject(view: MessageInFragment)
     fun inject(baseEventFragment: BaseEventFragment)
+	
+	fun inject(view: ProfileDebtFragment)
+    fun inject(view: ProfileMarkFragment)
+    fun inject(view: ProfileElectivesFragment)
+    fun inject(view: ProfileFragment)
 }
+

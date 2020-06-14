@@ -24,4 +24,7 @@ object NetworkServ {
         TABLE_API = retrofit.create(
             NetworkService::class.java)
     }
+
+
 }
+

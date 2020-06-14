@@ -41,7 +41,7 @@
         <action
             android:id="@+id/action_navigation_storage_to_fullMassageFragment"
             app:destination="@id/fullMassageFragment" />
-    </fragment>
+	</fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
@@ -49,8 +49,9 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_navigation_profile_to_SettingsFragment"
-            app:destination="@id/settings"/>
+            app:destination="@id/navigation_settings"/>
     </fragment>
+	
     <dialog
         android:id="@+id/fullEventFragment"
         android:name="com.example.bonchapp.presentation.ui.event.FullEventFragment"
@@ -109,5 +110,12 @@
             android:name="message"
             app:argType="android.os.Message" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.bonchapp.presentation.ui.profile.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+    </fragment>
+
 
 </navigation>
