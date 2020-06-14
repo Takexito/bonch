@@ -50,7 +50,8 @@ class EventRepository @Inject constructor(private val networkService: NetworkSer
     }
 
     override fun addFavoriteEvent(event: Event, callback: (error: String?) -> Unit) {
-        EventStorage.addFavoriteEvent(event)
+        if(EventStorage.favoriteEvents.contains(event)) EventStorage.deleteFavoriteEvent(event)
+        else EventStorage.addFavoriteEvent(event)
         callback(null)
     }
 

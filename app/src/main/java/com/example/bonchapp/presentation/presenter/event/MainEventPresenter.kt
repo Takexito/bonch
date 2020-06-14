@@ -31,7 +31,7 @@ class MainEventPresenter @Inject constructor(private val interactor: IEventInter
     override fun onItemLike(event: Event) {
         interactor.addToFavorite(event,
             callback = {
-                viewMain.addToFavorite(event)
+                //viewMain.addToFavorite(event)
             },
             errorCallback = {
             viewMain.showError(it)

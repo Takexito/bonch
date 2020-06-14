@@ -38,6 +38,7 @@ class MainEventFragment : Fragment(), IMainEventView {
         return inflater.inflate(R.layout.fragment_main_event, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.firstLoad()
@@ -56,7 +57,7 @@ class MainEventFragment : Fragment(), IMainEventView {
     }
 
     override fun addToFavorite(event: Event) {
-        TODO("Not yet implemented")
+
     }
 
     override fun setRecyclerVisible(isVisible: Boolean) {

@@ -34,9 +34,6 @@ object MainCoordinator {
 
     }
 
-    fun navigateToAddEvent(fragment: Fragment) {
-        fragment.findNavController().navigate(R.id.action_navigation_event_to_addEvent)
-    }
 
     fun navigateToSettings(fragment: Fragment) {
         fragment.findNavController().navigate(R.id.action_navigation_profile_to_SettingsFragment)

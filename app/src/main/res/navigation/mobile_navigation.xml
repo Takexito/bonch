@@ -24,10 +24,6 @@
             android:id="@+id/action_navigation_event_to_fullEventFragment"
             app:destination="@id/fullEventFragment"
             app:popUpTo="@id/navigation_event" />
-        <action
-            android:id="@+id/action_navigation_event_to_addEvent"
-            app:destination="@id/addEvent"
-            app:popUpTo="@id/navigation_event" />
     </fragment>
 
     <fragment
@@ -64,15 +60,7 @@
             android:name="eventId"
             app:argType="integer"
             android:defaultValue="0" />
-        <action
-            android:id="@+id/action_fullEventFragment_to_orgInfoFragment"
-            app:destination="@id/orgInfo" />
     </dialog>
-    <fragment
-        android:id="@+id/addEvent"
-        android:name="com.example.bonchapp.presentation.ui.event.AddEvent"
-        android:label="fragment_add_event"
-        tools:layout="@layout/fragment_add_event" />
 
     <fragment
         android:id="@+id/navigation_timetable"
@@ -99,11 +87,14 @@
         android:id="@+id/settings"
         android:name="com.example.bonchapp.presentation.ui.profile.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
-    <fragment
+    <dialog
         android:id="@+id/orgInfo"
         android:name="com.example.bonchapp.presentation.ui.event.OrgFragment"
         android:label="fragment_orgInfo"
-        tools:layout="@layout/fragment_org" /><action android:id="@+id/action_global_orgInfo" app:destination="@id/orgInfo"/>
+        tools:layout="@layout/fragment_org" />
+    <action
+        android:id="@+id/action_global_orgInfo"
+        app:destination="@id/orgInfo" />
     <fragment
         android:id="@+id/sendMessageFragment"
         android:name="com.example.bonchapp.presentation.ui.message.SendMessageFragment"

@@ -7,6 +7,7 @@ import com.example.bonchapp.domain.di.EventModule
 import com.example.bonchapp.domain.di.MessageModule
 import com.example.bonchapp.presentation.ui.MainActivity
 import com.example.bonchapp.presentation.ui.authorization.AuthFragment
+import com.example.bonchapp.presentation.ui.event.BaseEventFragment
 import com.example.bonchapp.presentation.ui.event.favorite.FavoriteEventFragment
 import com.example.bonchapp.presentation.ui.event.main.MainEventFragment
 import com.example.bonchapp.presentation.ui.event.my.MyEventFragment
@@ -29,4 +30,5 @@ interface AppComponent {
 
     fun inject(view: MessageFragment)
     fun inject(view: MessageInFragment)
+    fun inject(baseEventFragment: BaseEventFragment)
 }

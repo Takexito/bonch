@@ -16,9 +16,6 @@ class MainRouter {
        // MainCoordinator.navigateToFullEvent( bundle)
     }
 
-    fun navigateToAddEvent() {
-        navController.navigate(R.id.action_navigation_event_to_addEvent)
-    }
 
     fun navigateToCabinet(cabinet: String) {
         val bundle = Bundle()

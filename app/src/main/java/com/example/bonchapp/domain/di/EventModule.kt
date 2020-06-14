@@ -11,6 +11,7 @@ import com.example.bonchapp.presentation.ui.event.main.EventAdapter
 import com.example.bonchapp.router.MainRouter
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class EventModule {
@@ -21,6 +22,7 @@ class EventModule {
             router
         )
     }
+    @Singleton
     @Provides
     fun provideFavoritePresenter(eventInteractor: IEventInteractor, router: MainRouter): IFavoriteEventPresenter {
         return FavoriteEventPresenter(

@@ -32,6 +32,7 @@ class FavoriteEventFragment : Fragment(), IFavoriteEventView {
     }
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,10 +57,10 @@ class FavoriteEventFragment : Fragment(), IFavoriteEventView {
 
     override fun setRecyclerVisible(isVisible: Boolean) {
 
-        if(isVisible)
-            favoriteEventRecycler.visibility = View.VISIBLE
-        else
-            favoriteEventRecycler.visibility = View.GONE
+//        if(isVisible)
+//            favoriteEventRecycler.visibility = View.VISIBLE
+//        else
+//            favoriteEventRecycler.visibility = View.GONE
     }
 
     override fun getRecyclerFilter(): Filter {

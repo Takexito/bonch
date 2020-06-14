@@ -1,5 +1,6 @@
 package com.example.bonchapp.presentation.presenter.event
 
+import android.util.Log
 import com.example.bonchapp.domain.entities.Event
 import com.example.bonchapp.domain.interactors.event.IEventInteractor
 import com.example.bonchapp.presentation.ui.event.favorite.IFavoriteEventView
@@ -32,14 +33,18 @@ class FavoriteEventPresenter @Inject constructor(val interactor: IEventInteracto
     }
 
     override fun firstLoad() {
-        interactor.getFavoriteEvents(
-            callback = {
-                view.updateRecycler(it)
-            },
-            errorCallback = {
-                view.showError(it)
-            }
-        )
+
+        if(this::view.isInitialized) {
+            interactor.getFavoriteEvents(
+                    callback = {
+                        view.updateRecycler(it)
+                    },
+                    errorCallback = {
+                        view.showError(it)
+                        Log.d("FavoriteEvent", "Callback error")
+                    }
+            )
+        }
     }
 
     override fun onItemClick(event: Event) {

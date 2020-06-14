@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.Event
 import com.example.bonchapp.presentation.presenter.event.IEventPresenter
+import com.example.bonchapp.presentation.presenter.event.MainEventPresenter
 import com.example.bonchapp.presentation.presenter.event.MyEventPresenter
 import kotlinx.android.synthetic.main.item_event.view.*
 import javax.inject.Inject
 
-class EventAdapter @Inject constructor(val presenter: MyEventPresenter) :
+class EventAdapter @Inject constructor(val presenter: MainEventPresenter) :
         RecyclerView.Adapter<EventAdapter.ViewHolder>(), Filterable {
 
     private var data: ArrayList<Event>? = arrayListOf()
@@ -44,13 +45,9 @@ class EventAdapter @Inject constructor(val presenter: MyEventPresenter) :
                 presenter.onItemClick(data?.get(position)!!)
             }
 
-//            favoriteEventButton.setOnClickListener {
-//                data?.get(position)?.let { it1 -> {
-//                    favoriteEventButton.setBackgroundColor(R.color.colorOrange)
-//                    presenter.onItemLike(it1)
-//                    }
-//                }
-//            }
+            favoriteEventButton.setOnClickListener {
+                data?.get(position)?.let { it1 -> presenter.onItemLike(it1) }
+            }
         }
     }
 
