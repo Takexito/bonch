@@ -26,6 +26,7 @@
         <item name="android:layout_marginStart">8dp</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="chipStrokeColor">@color/colorOrange</item>
+    </style>
 
     <style name="RadioButtonTheme" parent="@style/AppTheme">
         <item name="colorControlActivated">@color/colorOrange</item>

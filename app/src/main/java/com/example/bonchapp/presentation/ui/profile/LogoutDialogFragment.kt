@@ -1,8 +1,4 @@
-<<<<<<< HEAD:app/src/main/java/com/example/bonchapp/presentation/ui/profile/LogoutDialogFragment.kt
 package com.example.bonchapp.presentation.ui.profile
-=======
-package com.example.bonchapp.presentation.ui.profile.settings
->>>>>>> StudentProfile:app/src/main/java/com/example/bonchapp/presentation/ui/profile/settings/LogoutDialogFragment.kt
 
 import com.example.bonchapp.R
 import android.app.Dialog

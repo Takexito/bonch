@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bonchapp.presentation.MainContract
 import com.example.bonchapp.R
+import com.example.bonchapp.presentation.MainContract
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presentation.presenter.timetable.PresenterTimeTable
 import com.example.bonchapp.presentation.ui.adapters.DayTimeTableAdapter
@@ -20,44 +20,17 @@ import org.joda.time.DateTime
 
 lateinit var mPresenter: PresenterTimeTable
 
-class TimetableFragment : Fragment(), MainContract.ITimeTableView {
+
+class TimetableFragment : Fragment(), MainContract.ITimeTableView
+{
 
     var dayTimeTableAdapter: DayTimeTableAdapter? = null
     lateinit var selectGroupFragment: SelectGroupFragment
     lateinit var selectTutorFragment: SelectTutorFragment
 
-
-    //val mPresenter = PresenterTimeTable(this, this)
-	
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-	
-	        val root = inflater.inflate(R.layout.fragment_timetable, container, false)
-
-        return root
-    }
-}
-
-package com.example.bonchapp.presentation.ui.profile.recordbook
-
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.example.bonchapp.R
-import com.example.bonchapp.presentation.presenter.profile.ProfilePresenter
-import com.example.bonchapp.presentation.ui.profile.IProfileView
-import javax.inject.Inject
-
-class TimetableFragment : Fragment() {
-
     //val mPresenter = PresenterTimeTable(this, this)
 	lateinit var root: View
-	
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -99,7 +72,7 @@ class TimetableFragment : Fragment() {
     override fun showSelectProfessorFragment() {
         selectTutorFragment = SelectTutorFragment()
 
-        activity!!.supportFragmentManager.beginTransaction().add(
+        requireActivity().supportFragmentManager.beginTransaction().add(
             R.id.nav_host_fragment,
             selectTutorFragment, null
         ).addToBackStack(null).commit()
@@ -111,7 +84,7 @@ class TimetableFragment : Fragment() {
     override fun showSelectGroupFragment() {
         selectGroupFragment = SelectGroupFragment()
 
-        activity!!.supportFragmentManager.beginTransaction().add(
+        requireActivity().supportFragmentManager.beginTransaction().add(
             R.id.nav_host_fragment,
             selectGroupFragment, null
         ).addToBackStack(null).commit()
@@ -213,7 +186,7 @@ class TimetableFragment : Fragment() {
         val button = root.findViewById<ImageView>(R.id.filter)
         button.setOnClickListener {
             //MainCoordinator.navigateToSelectTypeTimetable(this)
-            activity!!.supportFragmentManager.beginTransaction()
+            requireActivity().supportFragmentManager.beginTransaction()
                 .add(SelectTypeTimetableFragment(), null).addToBackStack("1")
                 .commit()
         }

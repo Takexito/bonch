@@ -60,25 +60,24 @@ interface NetworkService {
     @GET("/api/user/account")
     fun getUserInfo(
         //@Header("Authorization") token: String = "Token ${User.token.value}"
-        @Header("Authorization") token: String = "Token 2862f0edde71b45d44d897c88ba4516bccdc172d"
+        @Header("Authorization") token: String = "Token ${User.token.value}"
     ): Call<AccountDTO>
 
     @GET("/api/user/debt")
     fun getDebt(
         //@Header("Authorization") token: String = "Token ${User.token.value}"
-        @Header("Authorization") token: String = "Token 2862f0edde71b45d44d897c88ba4516bccdc172d"
+        @Header("Authorization") token: String = "Token ${User.token.value}"
     ): Call<ArrayList<DebtDTO>>
 
     @GET("/api/user/history")
     fun getHistoryElectives(
         //@Header("Authorization") token: String = "Token ${User.token.value}"
-        @Header("Authorization") token: String = "Token 2862f0edde71b45d44d897c88ba4516bccdc172d"
+        @Header("Authorization") token: String = "Token ${User.token.value}"
     ): Call<ArrayList<ElectiveDTO>>
 
     @GET("/api/user/mark")
     fun getMark(
         //@Header("Authorization") token: String = "Token ${User.token.value}"
-        @Header("Authorization") token: String = "Token 2862f0edde71b45d44d897c88ba4516bccdc172d"
+        @Header("Authorization") token: String = "Token ${User.token.value}"
     ): Call<ArrayList<MarkDTO>>
 }
-

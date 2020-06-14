@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_navgut"/>
 
     <fragment
-        android:id="@+id/navigation_storage"
+        android:id="@+id/navigation_messages"
         android:name="com.example.bonchapp.presentation.ui.message.MessageFragment"
         tools:layout="@layout/fragment_storage" >
         <action

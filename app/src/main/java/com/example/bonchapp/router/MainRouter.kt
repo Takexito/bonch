@@ -1,14 +1,11 @@
 package com.example.bonchapp.router
 
 import android.os.Bundle
-import androidx.navigation.NavController
-import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.Message
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
-import javax.inject.Singleton
 
 class MainRouter {
     lateinit var navController: NavController

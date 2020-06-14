@@ -2,11 +2,9 @@ package com.example.bonchapp.presentation
 
 import android.app.Application
 import android.preference.PreferenceManager
-import com.example.bonchapp.MainActivity
 import com.example.bonchapp.presentation.di.AppComponent
 import com.example.bonchapp.presentation.di.DaggerAppComponent
 import com.jakewharton.threetenabp.AndroidThreeTen
-import java.util.*
 
 class App: Application() {
 

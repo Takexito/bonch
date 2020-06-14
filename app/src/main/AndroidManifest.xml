@@ -17,8 +17,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:windowSoftInputMode="adjustPan"
-            android:name=".presentation.ui.MainActivity"
-            android:name="MainActivity"
+            android:name=".presentation.ui.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -37,7 +37,7 @@ class ProfileElectivesFragment : Fragment(),
     }
 
     init {
-        App.appComponent.inject(this)
+        //App.appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -16,7 +16,7 @@ import com.example.bonchapp.presentation.ui.message.MessageInFragment
 import com.example.bonchapp.domain.di.ProfileModule
 import com.example.bonchapp.presentation.ui.profile.ProfileFragment
 import com.example.bonchapp.presentation.ui.profile.debt.ProfileDebtFragment
-import com.example.bonchapp.presentation.ui.profile.elective.ProfileElectivesFragment
+import com.example.bonchapp.presentation.ui.profile.electives.ProfileElectivesFragment
 import com.example.bonchapp.presentation.ui.profile.mark.ProfileMarkFragment
 import dagger.Component
 import javax.inject.Singleton

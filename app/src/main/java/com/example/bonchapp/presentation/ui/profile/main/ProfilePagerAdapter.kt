@@ -7,7 +7,7 @@ import com.example.bonchapp.presentation.ui.profile.debt.ProfileDebtFragment
 import com.example.bonchapp.presentation.ui.profile.electives.ProfileElectivesFragment
 import com.example.bonchapp.presentation.ui.profile.recordbook.ProfileRecordbookFragment
 
-class ProfilePagerAdapter(val fragment: Fragment): FragmentPagerAdapter(fragment.fragmentManager!!) {
+class ProfilePagerAdapter(val fragment: Fragment): FragmentPagerAdapter(fragment.requireFragmentManager()) {
     private val tabs = arrayOf("Задолженность", "Зачетка","Факультативы")
     override fun getItem(position: Int): Fragment {
         return when(position){

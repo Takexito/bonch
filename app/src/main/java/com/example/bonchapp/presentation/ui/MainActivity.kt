@@ -1,7 +1,10 @@
 package com.example.bonchapp.presentation.ui
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
+import android.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -15,11 +18,15 @@ import com.example.bonchapp.domain.entities.Token
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.router.Constants
 import com.example.bonchapp.router.MainCoordinator
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
+    lateinit var preferences: SharedPreferences
+    lateinit var locale: Locale
+    lateinit var lang: String
 
     @Inject
     lateinit var router: MainRouter
@@ -41,12 +48,12 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_event,
             R.id.navigation_navgut,
             R.id.navigation_timetable,
-            R.id.navigation_storage,
+            R.id.navigation_messages,
             R.id.navigation_profile
         ))
         navView.setupWithNavController(navController)
 
-
+        updateConfiguration()
 
         val sharedPreferences = getSharedPreferences(Constants.APP_PREFERENCE, Context.MODE_PRIVATE)
         if(sharedPreferences.contains(Constants.TOKEN)) {
@@ -54,5 +61,28 @@ class MainActivity : AppCompatActivity() {
             MainCoordinator.navigateToTimetable(this)
         }
 
+    }
+
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        baseContext.resources.updateConfiguration(config, null)
+    }
+
+    fun updateConfiguration() {
+        preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        lang = preferences.getString("lang", "ru")!!
+        if (lang.equals("default")) {
+            lang = resources.configuration.locale.country
+        }
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        baseContext.resources.updateConfiguration(config, null)
     }
 }

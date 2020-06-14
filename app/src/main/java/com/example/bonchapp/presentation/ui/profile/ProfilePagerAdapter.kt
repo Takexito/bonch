@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.bonchapp.presentation.ui.profile.debt.ProfileDebtFragment
-import com.example.bonchapp.presentation.ui.profile.elective.ProfileElectivesFragment
+import com.example.bonchapp.presentation.ui.profile.electives.ProfileElectivesFragment
 import com.example.bonchapp.presentation.ui.profile.files.ProfileFileFragment
 import com.example.bonchapp.presentation.ui.profile.mark.ProfileMarkFragment
 
