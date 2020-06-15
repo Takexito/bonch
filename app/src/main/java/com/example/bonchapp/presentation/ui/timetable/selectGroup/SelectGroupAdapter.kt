@@ -1,4 +1,4 @@
-package com.example.bonchapp.presentation.ui.adapters
+package com.example.bonchapp.presentation.ui.timetable.selectGroup
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,12 +8,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-import com.example.bonchapp.presentation.ui.timetable.mPresenter
+import com.example.bonchapp.presentation.App
+import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
+import javax.inject.Inject
 
 class SelectGroupAdapter(val context: Context) :
     RecyclerView.Adapter<SelectGroupPostHolder>() {
 
     var subject = ArrayList<ArrayList<String>>()
+
+
 
     fun setGroups(groupList: List<ArrayList<String>>) {
         this.subject.clear()
@@ -42,6 +46,13 @@ class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     val imageSrc = itemView.findViewById<ImageView>(R.id.faculty_icon)
     val textName = itemView.findViewById<TextView>(R.id.item_group_nameGroup)
     lateinit var group: String
+
+    @Inject
+    lateinit var presenter: ITimetablePresenter
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     fun bind(groupLGr: ArrayList<String>, pos: Int) {
 
@@ -78,7 +89,7 @@ class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
         itemView.setBackgroundColor(background)
 
         itemView.setOnClickListener {
-            mPresenter.switchGroup(group, "group")
+            presenter.switchName(group)
         }
     }
 }

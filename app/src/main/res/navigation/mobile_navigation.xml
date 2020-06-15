@@ -64,7 +64,7 @@
 
     <fragment
         android:id="@+id/navigation_timetable"
-        android:name="com.example.bonchapp.presentation.ui.timetable.TimetableFragment"
+        android:name="com.example.bonchapp.presentation.ui.timetable.main.TimetableFragment"
         tools:layout="@layout/fragment_timetable">
         <action
             android:id="@+id/action_navigation_timetable_to_selectGroupFragment"
@@ -73,7 +73,7 @@
 
     <fragment
         android:id="@+id/selectGroup"
-        android:name="com.example.bonchapp.presentation.ui.timetable.SelectGroupFragment"
+        android:name="com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment"
         android:label="fragment_select_group"
         tools:layout="@layout/fragment_select_group">
         <argument
@@ -83,7 +83,6 @@
     </fragment>
 
     <fragment
-
         android:id="@+id/settings"
         android:name="com.example.bonchapp.presentation.ui.profile.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings" />

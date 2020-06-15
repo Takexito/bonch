@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.presentation.ui.event.FullEventFragment
 import com.example.bonchapp.presentation.ui.event.my.ApplicationEventFragment
-import com.example.bonchapp.presentation.ui.timetable.SelectTypeTimetableFragment
+import com.example.bonchapp.presentation.ui.timetable.selectType.SelectTypeTimetableFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 object MainCoordinator {

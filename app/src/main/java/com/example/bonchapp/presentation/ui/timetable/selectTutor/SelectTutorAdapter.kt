@@ -1,4 +1,5 @@
-package com.example.bonchapp.presentation.ui.adapters
+package com.example.bonchapp.presentation.ui.timetable.selectTutor
+
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-import com.example.bonchapp.presentation.ui.timetable.mPresenter
+import com.example.bonchapp.presentation.App
+import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
+import javax.inject.Inject
 
 class SelectTutorAdapter(val context: Context) :
     RecyclerView.Adapter<SelectTutorPostHolder>() {
@@ -41,7 +44,15 @@ class SelectTutorAdapter(val context: Context) :
 class SelectTutorPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val imageSrc = itemView.findViewById<ImageView>(R.id.faculty_icon)
     val textName = itemView.findViewById<TextView>(R.id.item_group_nameGroup)
+
+    @Inject
+    lateinit var presenter: ITimetablePresenter
+
     lateinit var group: String
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     fun bind(groupLGr: String, pos: Int) {
 
@@ -53,7 +64,7 @@ class SelectTutorPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
             itemView.setBackgroundColor(itemView.resources.getColor(R.color.colorItemWhite))
 
         itemView.setOnClickListener {
-            mPresenter.switchGroup(groupLGr, "tutor")
+            presenter.switchName(groupLGr)
         }
     }
 }

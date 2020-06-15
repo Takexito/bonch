@@ -28,11 +28,11 @@ interface NetworkService {
 
     //TimeTable
     //@FormUrlEncoded
-    @POST("/api/timetable/")
+    @POST("/api/timetable")
     fun getTimeTable(
         //@Header("Accept") accept: String = "application/json",
         @Header("Authorization") token: String = "Token ${User.token.value}",
-        @Body body: RequestTimeTableDTO?
+        @Body body: RequestTimeTable?
     ): Call<ArrayList<SubjectDTO>>
 
     @GET("/api/timetable/tutor/long")
@@ -58,5 +58,4 @@ interface NetworkService {
         @Header("Authorization") token: String = "Token ${User.token.value}",
         @Body body: MessageBody
     ): Call<Messages>
-
 }
