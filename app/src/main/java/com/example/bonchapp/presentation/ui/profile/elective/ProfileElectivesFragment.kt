@@ -1,4 +1,4 @@
-package com.example.bonchapp.presentation.ui.profile.debt
+package com.example.bonchapp.presentation.ui.profile.elective
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,27 +9,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.DebtDTO
+import com.example.bonchapp.domain.entities.ElectiveDTO
 import com.example.bonchapp.presentation.App
-import com.example.bonchapp.presentation.presenter.profile.debt.IProfileDebtPresenter
+import com.example.bonchapp.presentation.presenter.profile.electives.IProfileElectivesPresenter
+import com.example.bonchapp.presentation.ui.profile.debt.DebtAdapter
 import javax.inject.Inject
 
-class ProfileDebtFragment : Fragment(),
-    IProfileDebtView {
+class ProfileElectivesFragment : Fragment(),
+    IProfileElectivesView {
 
     @Inject
-    lateinit var presenter: IProfileDebtPresenter
+    lateinit var presenter: IProfileElectivesPresenter
 
-    lateinit var adapter: DebtAdapter
+    lateinit var adapter: ElectiveAdapter
 
     lateinit var root: View
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
-        root = inflater.inflate(R.layout.fragment_profile_debt, container, false)
+        root = inflater.inflate(R.layout.fragment_profile_electives, container, false)
 
         return root
     }
@@ -42,11 +44,10 @@ class ProfileDebtFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
         initRV()
         presenter.attachView(this)
-        presenter.updateData()
-    }
+        presenter.updateData()    }
 
     fun initRV() {
-        adapter = DebtAdapter(
+        adapter = ElectiveAdapter(
             root.context,
             this
         )
@@ -55,11 +56,12 @@ class ProfileDebtFragment : Fragment(),
         recyclerViewDay.adapter = adapter
     }
 
-    override fun setData(list: ArrayList<ArrayList<DebtDTO>>) {
+    override fun setData(list: ArrayList<ElectiveDTO>) {
         adapter.setData(list)
     }
 
-    override fun hideRV(b:Boolean){
+    override fun hideImg(b:Boolean){
         root.findViewById<View>(R.id.profilEmptyImage).visibility = if(b) View.VISIBLE else View.INVISIBLE
+        root.findViewById<View>(R.id.profileRV).visibility = if(!b) View.VISIBLE else View.INVISIBLE
     }
 }

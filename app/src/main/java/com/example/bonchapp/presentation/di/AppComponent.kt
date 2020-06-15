@@ -10,6 +10,10 @@ import com.example.bonchapp.presentation.ui.event.main.MainEventFragment
 import com.example.bonchapp.presentation.ui.event.my.MyEventFragment
 import com.example.bonchapp.presentation.ui.message.MessageFragment
 import com.example.bonchapp.presentation.ui.message.MessageInFragment
+import com.example.bonchapp.presentation.ui.profile.ProfileFragment
+import com.example.bonchapp.presentation.ui.profile.debt.ProfileDebtFragment
+import com.example.bonchapp.presentation.ui.profile.elective.ProfileElectivesFragment
+import com.example.bonchapp.presentation.ui.profile.mark.ProfileMarkFragment
 import com.example.bonchapp.presentation.ui.timetable.main.TimetableFragment
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupPostHolder
@@ -20,7 +24,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [NetworkModule::class, EventModule::class, AuthModel::class, BaseModule::class, MessageModule::class, TimetableModule::class])
+@Component(modules = [NetworkModule::class, EventModule::class, AuthModel::class, BaseModule::class, MessageModule::class, TimetableModule::class, ProfileModule::class])
 interface AppComponent {
 
     fun inject(view: MainEventFragment)
@@ -41,4 +45,10 @@ interface AppComponent {
     fun inject(view: SelectGroupPostHolder)
     fun inject(view: SelectTutorFragment)
     fun inject(view: SelectTutorPostHolder)
+
+    fun inject(view: ProfileDebtFragment)
+    fun inject(view: ProfileMarkFragment)
+    fun inject(view: ProfileElectivesFragment)
+    fun inject(view: ProfileFragment)
+
 }

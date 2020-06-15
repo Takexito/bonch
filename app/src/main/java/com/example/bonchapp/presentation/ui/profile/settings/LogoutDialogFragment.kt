@@ -1,6 +1,6 @@
-package com.example.bonchapp.presentation.ui.profile
+package com.example.bonchapp.presentation.ui.profile.settings
 
-import android.R
+import com.example.bonchapp.R
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
@@ -12,14 +12,15 @@ class LogoutDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder =
-            AlertDialog.Builder(activity!!)
+            AlertDialog.Builder(requireActivity())
         return builder
-            .setTitle("Вы действительно хотите покинуть личный кабинет?")
-            .setIcon(R.drawable.ic_dialog_alert)
+            .setTitle(getString(R.string.text_warningLogout))
             .setMessage("Вы будете отчислены")
             .setPositiveButton("Пофиг", null)
             .setNegativeButton("Не пофиг", null)
-            .create()
+
+            .create()//.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.colorTextBlue);
+        //return builder.setView(R.layout.fragment_logout_dialog).create()
     }
 
     fun onClick(dialog: DialogInterface?, which: Int) {

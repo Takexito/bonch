@@ -1,4 +1,4 @@
-package com.example.bonchapp.presentation.ui.profile.debt
+package com.example.bonchapp.presentation.ui.profile.mark
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,27 +9,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.DebtDTO
+import com.example.bonchapp.domain.entities.MarkDTO
 import com.example.bonchapp.presentation.App
-import com.example.bonchapp.presentation.presenter.profile.debt.IProfileDebtPresenter
+import com.example.bonchapp.presentation.presenter.profile.mark.IProfileMarkPresenter
+import com.example.bonchapp.presentation.ui.profile.debt.DebtAdapter
 import javax.inject.Inject
 
-class ProfileDebtFragment : Fragment(),
-    IProfileDebtView {
+class ProfileMarkFragment : Fragment(),
+    IProfileMarkView {
 
     @Inject
-    lateinit var presenter: IProfileDebtPresenter
+    lateinit var presenter: IProfileMarkPresenter
 
-    lateinit var adapter: DebtAdapter
+    lateinit var adapter: MarkAdapter
 
     lateinit var root: View
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
-        root = inflater.inflate(R.layout.fragment_profile_debt, container, false)
+        root = inflater.inflate(R.layout.fragment_profile_recordbook, container, false)
 
         return root
     }
@@ -46,7 +48,7 @@ class ProfileDebtFragment : Fragment(),
     }
 
     fun initRV() {
-        adapter = DebtAdapter(
+        adapter = MarkAdapter(
             root.context,
             this
         )
@@ -55,7 +57,7 @@ class ProfileDebtFragment : Fragment(),
         recyclerViewDay.adapter = adapter
     }
 
-    override fun setData(list: ArrayList<ArrayList<DebtDTO>>) {
+    override fun setData(list: ArrayList<ArrayList<MarkDTO>>) {
         adapter.setData(list)
     }
 

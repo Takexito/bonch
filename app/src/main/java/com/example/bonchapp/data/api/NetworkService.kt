@@ -58,4 +58,25 @@ interface NetworkService {
         @Header("Authorization") token: String = "Token ${User.token.value}",
         @Body body: MessageBody
     ): Call<Messages>
+
+    @GET("/api/user/account")
+    fun getUserInfo(
+        @Header("Authorization") token: String = "Token ${User.token.value}"
+    ): Call<AccountDTO>
+
+    @GET("/api/user/debt")
+    fun getDebt(
+        @Header("Authorization") token: String = "Token ${User.token.value}"
+    ): Call<ArrayList<DebtDTO>>
+
+    @GET("/api/user/history")
+    fun getHistoryElectives(
+        @Header("Authorization") token: String = "Token ${User.token.value}"
+    ): Call<ArrayList<ElectiveDTO>>
+
+    @GET("/api/user/mark")
+    fun getMark(
+        @Header("Authorization") token: String = "Token ${User.token.value}"
+    ): Call<ArrayList<MarkDTO>>
+
 }

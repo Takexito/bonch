@@ -1,7 +1,9 @@
 package com.example.bonchapp.router
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.Message
 import javax.inject.Singleton
@@ -37,5 +39,10 @@ class MainRouter {
         bundle.putSerializable(Constants.FULL_MESSAGE, message)
         navController.navigate(R.id.action_navigation_storage_to_fullMassageFragment, bundle)
     }
+
+    fun navigateToSettings(fragment: Fragment) {
+        fragment.findNavController().navigate(R.id.action_navigation_profile_to_SettingsFragment)
+    }
+
 
 }
