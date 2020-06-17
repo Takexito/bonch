@@ -90,6 +90,8 @@ class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         itemView.setOnClickListener {
             presenter.switchName(group)
+            presenter.loadTimetable()
+            presenter.closeFragment()
         }
     }
 }

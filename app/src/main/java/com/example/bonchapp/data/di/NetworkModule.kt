@@ -20,7 +20,12 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideNetworkService(): NetworkService {
-        val okHttpClient = OkHttpClient.Builder().connectTimeout(Duration.ofSeconds(100)).callTimeout(Duration.ofSeconds(100)).readTimeout(Duration.ofSeconds(100)).build()
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(Duration.ofSeconds(120))
+            .callTimeout(Duration.ofSeconds(120))
+            .readTimeout(Duration.ofSeconds(120))
+            .writeTimeout(Duration.ofSeconds(120))
+            .build()
 
         return Retrofit.Builder()
             .baseUrl(Constants.HOST)

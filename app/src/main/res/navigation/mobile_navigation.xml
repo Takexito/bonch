@@ -3,16 +3,137 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_timetable">
+    app:startDestination="@+id/navigation_authorization">
 
-<!--    -->
+    <fragment
+        android:id="@+id/navigation_authorization"
+        android:name="com.example.bonchapp.presentation.ui.authorization.AuthFragment"
+        tools:layout="@layout/fragment_authorization">
+        <action
+            android:id="@+id/action_navigation_authorization_to_navigation_timetable"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/mobile_navigation"
+            app:destination="@id/navigation_timetable" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_event"
+        android:name="com.example.bonchapp.presentation.ui.event.BaseEventFragment"
+        tools:layout="@layout/fragment_event">
+        <action
+            android:id="@+id/action_navigation_event_to_fullEventFragment"
+            app:destination="@id/fullEventFragment"
+            app:popUpTo="@id/navigation_event" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_navgut"
+        android:name="com.example.bonchapp.presentation.ui.navgut.NavgutFragment"
+        tools:layout="@layout/fragment_navgut"/>
+
+    <fragment
+        android:id="@+id/navigation_storage"
+        android:name="com.example.bonchapp.presentation.ui.message.MessageFragment"
+        tools:layout="@layout/fragment_storage" >
+        <action
+            android:id="@+id/action_navigation_storage_to_sendMessageFragment"
+            app:destination="@id/sendMessageFragment" />
+        <action
+            android:id="@+id/action_navigation_storage_to_fullMassageFragment"
+            app:destination="@id/fullMassageFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.bonchapp.presentation.ui.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_SettingsFragment"
+            app:destination="@id/settings"/>
+    </fragment>
+    <dialog
+        android:id="@+id/fullEventFragment"
+        android:name="com.example.bonchapp.presentation.ui.event.FullEventFragment"
+        android:label="fragment_full_event"
+        tools:layout="@layout/fragment_full_event" >
+        <argument
+            android:name="eventId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </dialog>
 
     <fragment
         android:id="@+id/navigation_timetable"
-        android:name="com.example.bonchapp.presentation.timetable.ui.TimetableFragment"
+        android:name="com.example.bonchapp.presentation.ui.timetable.main.TimetableFragment"
         tools:layout="@layout/fragment_timetable">
-
+        <action
+            android:id="@+id/action_navigation_timetable_to_selectTypeFragment"
+            app:destination="@id/selectType"
+            app:popUpTo="@id/navigation_timetable"/>
     </fragment>
 
+    <dialog
+        android:id="@+id/selectType"
+        android:name="com.example.bonchapp.presentation.ui.timetable.selectType.SelectTypeTimetableFragment"
+        android:label="fragment_select_type"
+        app:popUpTo="@id/navigation_timetable"
+        tools:layout="@layout/fragment_type_timetable" >
+        <argument
+            android:name="b"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_navigation_timetable_to_selectGroupFragment"
+            app:destination="@id/selectGroup"
+            app:popUpTo="@id/navigation_timetable"/>
+        <action
+            android:id="@+id/action_navigation_timetable_to_selectTutorFragment"
+            app:destination="@id/selectTutor"
+            app:popUpTo="@id/navigation_timetable"/>
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/selectGroup"
+        android:name="com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment"
+        android:label="fragment_select_group"
+        app:popUpTo="@id/navigation_timetable"
+        tools:layout="@layout/fragment_select_group">
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectTutor"
+        android:name="com.example.bonchapp.presentation.ui.timetable.selectTutor.SelectTutorFragment"
+        android:label="fragment_select_group"
+        app:popUpTo="@id/navigation_timetable"
+        tools:layout="@layout/fragment_select_group">
+    </fragment>
+
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.bonchapp.presentation.ui.profile.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+    <dialog
+        android:id="@+id/orgInfo"
+        android:name="com.example.bonchapp.presentation.ui.event.OrgFragment"
+        android:label="fragment_orgInfo"
+        tools:layout="@layout/fragment_org" />
+    <action
+        android:id="@+id/action_global_orgInfo"
+        app:destination="@id/orgInfo" />
+    <fragment
+        android:id="@+id/sendMessageFragment"
+        android:name="com.example.bonchapp.presentation.ui.message.SendMessageFragment"
+        android:label="fragment_send_message"
+        tools:layout="@layout/fragment_send_message" />
+    <fragment
+        android:id="@+id/fullMassageFragment"
+        android:name="com.example.bonchapp.presentation.ui.message.FullMessageFragment"
+        android:label="fragment_full_massage"
+        tools:layout="@layout/fragment_full_massage" >
+        <argument
+            android:name="message"
+            app:argType="android.os.Message" />
+    </fragment>
 
 </navigation>
