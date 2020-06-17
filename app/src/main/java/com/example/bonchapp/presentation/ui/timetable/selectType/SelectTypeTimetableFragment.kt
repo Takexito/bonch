@@ -8,6 +8,7 @@ import com.example.bonchapp.R
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.fragment_type_timetable.*
 import javax.inject.Inject
 
 class SelectTypeTimetableFragment() : BottomSheetDialogFragment() {
@@ -38,25 +39,25 @@ class SelectTypeTimetableFragment() : BottomSheetDialogFragment() {
     }
 
     private fun btnInit(){
-        val btn_select_group = root.findViewById<View>(R.id.btn_select_group)
-        val btn_select_professor = root.findViewById<View>(R.id.btn_select_tutor)
-        val btn_select_exam = root.findViewById<View>(R.id.btn_exams)
-        val btn_select_elective = root.findViewById<View>(R.id.btn_elective)
+        //val btn_select_group = root.findViewById<View>(R.id.btn_select_group)
+        //val btn_select_professor = root.findViewById<View>(R.id.btn_select_tutor)
+        //val btn_select_exam = root.findViewById<View>(R.id.btn_exams)
+        //val btn_select_elective = root.findViewById<View>(R.id.btn_elective)
 
         btn_select_group.setOnClickListener {
             presenter.switchType("group")
 
         }
 
-        btn_select_professor.setOnClickListener {
+        btn_select_tutor.setOnClickListener {
             presenter.switchType("tutor")
         }
 
-        btn_select_exam.setOnClickListener {
+        btn_exams.setOnClickListener {
             presenter.switchType("exam")
         }
 
-        btn_select_elective.setOnClickListener {
+        btn_elective.setOnClickListener {
             presenter.switchType("user_id")
         }
     }

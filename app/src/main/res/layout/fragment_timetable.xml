@@ -15,21 +15,16 @@
         tools:context=".ui.timetable.TimetableFragment">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/timeTable_recyclerView"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="100dp"
-            android:background="#F5F3F5"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            tools:listitem="@layout/item_subject"
-            tools:visibility="invisible" />
-
-
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
             android:id="@+id/calendar"
@@ -37,13 +32,13 @@
             android:layout_height="wrap_content"
 
             android:layout_marginTop="22dp"
+            app:firstDayOfWeek="monday"
+
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintStart_toStartOf="parent"
 
             app:layout_constraintTop_toTopOf="parent"
-
-            app:firstDayOfWeek="monday"
 
 
             app:selectedItem_background="@drawable/selectedday_outline"

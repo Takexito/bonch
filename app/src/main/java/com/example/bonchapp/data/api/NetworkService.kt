@@ -13,7 +13,7 @@ interface NetworkService {
 
     @GET("/api/timetable/group")
     //fun getGroups(@Header("Authorization") token: String = "Token ${User.token.value}"
-    fun getGroups(@Header("Authorization") token: String = "Token 2862f0edde71b45d44d897c88ba4516bccdc172d"
+    fun getGroups(@Header("Authorization") token: String = "Token cec257ea71d8b96aac5b54bdf5d60667616d357e"
     ): Call<ArrayList<ArrayList<String>>>
 
 //    @GET("/api/timetable/group")
@@ -29,14 +29,14 @@ interface NetworkService {
     fun getTimeTable(
         //@Header("Accept") accept: String = "application/json",
         //@Header("Authorization") token: String = "Token ${User.token.value}",
-        @Header("Authorization") token: String = "Token 2862f0edde71b45d44d897c88ba4516bccdc172d",
+        @Header("Authorization") token: String = "Token cec257ea71d8b96aac5b54bdf5d60667616d357e",
         @Body body: RequestTimeTable?
     ): Call<ArrayList<SubjectDTO>>
 
     @GET("/api/timetable/tutor/long")
     fun getTutors(
         //@Header("Authorization") token: String = "Token ${User.token.value}"
-        @Header("Authorization") token: String = "Token 2862f0edde71b45d44d897c88ba4516bccdc172d"
+        @Header("Authorization") token: String = "Token cec257ea71d8b96aac5b54bdf5d60667616d357e"
     ): Call<ArrayList<String>>
 
     @POST("/api/login")

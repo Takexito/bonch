@@ -21,20 +21,7 @@ import org.joda.time.DateTime
 class TimetableAdapter(val context: Context, fragment: Fragment, val subject: List<SubjectDTO>, val date: String) :
     RecyclerView.Adapter<TimetablePostHolder>() {
 
-    //var subject = ArrayList<SubjectDTO>()
-
     val fragment = fragment
-
-    //lateinit var date: String
-
-    /*fun setSubjects(subjectList: List<SubjectDTO>, date: String) {
-        this.subject.clear()
-        this.subject.addAll(subjectList)
-
-        this.date = date
-
-        notifyDataSetChanged()
-    }*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimetablePostHolder {
         return TimetablePostHolder(

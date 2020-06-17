@@ -4,6 +4,7 @@ import com.example.bonchapp.data.di.NetworkModule
 import com.example.bonchapp.domain.di.BaseModule
 import com.example.bonchapp.domain.di.TimetableModule
 import com.example.bonchapp.presentation.timetable.ui.TimetableFragment
+import com.example.bonchapp.presentation.ui.timetable.main.TimetableViewPagerFragment
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupPostHolder
 import com.example.bonchapp.presentation.ui.timetable.selectTutor.SelectTutorFragment
@@ -28,6 +29,6 @@ interface AppComponent {
     fun inject(view: SelectGroupPostHolder)
     fun inject(view: SelectTutorFragment)
     fun inject(view: SelectTutorPostHolder)
-    //fun inject(action: MainActivity)
+    fun inject(action: TimetableViewPagerFragment)
     //fun inject(view: AuthFragment)
 }
