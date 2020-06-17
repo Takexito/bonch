@@ -1,39 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#F5F3F5"
     android:gravity="center_horizontal"
-    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="16dp"
-        android:textSize="16dp"
-        android:text="Выбор препода"
+        android:layout_height="50dp"
         android:background="#FFFFFF"
-        android:textColor="@color/colorOrange"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:elevation="5dp">
 
-    <EditText
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Выбор препода"
+            android:textColor="@color/colorOrange"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="20dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/ic_backarrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="0dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <SearchView
         android:id="@+id/search_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
         android:background="#FFFFFF"
-        android:hint="Поиск группы"/>
+        android:hint="Поиск группы"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_selectGroup"
@@ -44,6 +62,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:listitem="@layout/item_tutor"/>
-
+        tools:listitem="@layout/item_tutor" />
 </LinearLayout>

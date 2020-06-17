@@ -65,6 +65,8 @@ class SelectTutorPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         itemView.setOnClickListener {
             presenter.switchName(groupLGr)
+            presenter.loadTimetable()
+            presenter.closeFragment()
         }
     }
 }

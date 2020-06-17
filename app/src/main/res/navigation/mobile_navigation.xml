@@ -67,19 +67,46 @@
         android:name="com.example.bonchapp.presentation.ui.timetable.main.TimetableFragment"
         tools:layout="@layout/fragment_timetable">
         <action
-            android:id="@+id/action_navigation_timetable_to_selectGroupFragment"
-            app:destination="@id/selectGroup"/>
+            android:id="@+id/action_navigation_timetable_to_selectTypeFragment"
+            app:destination="@id/selectType"
+            app:popUpTo="@id/navigation_timetable"/>
     </fragment>
+
+    <dialog
+        android:id="@+id/selectType"
+        android:name="com.example.bonchapp.presentation.ui.timetable.selectType.SelectTypeTimetableFragment"
+        android:label="fragment_select_type"
+        app:popUpTo="@id/navigation_timetable"
+        tools:layout="@layout/fragment_type_timetable" >
+        <argument
+            android:name="b"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_navigation_timetable_to_selectGroupFragment"
+            app:destination="@id/selectGroup"
+            app:popUpTo="@id/navigation_timetable"/>
+        <action
+            android:id="@+id/action_navigation_timetable_to_selectTutorFragment"
+            app:destination="@id/selectTutor"
+            app:popUpTo="@id/navigation_timetable"/>
+
+    </dialog>
 
     <fragment
         android:id="@+id/selectGroup"
         android:name="com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment"
         android:label="fragment_select_group"
+        app:popUpTo="@id/navigation_timetable"
         tools:layout="@layout/fragment_select_group">
-        <argument
-            android:name="listGroup"
-            app:argType="integer"
-            android:defaultValue="0" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectTutor"
+        android:name="com.example.bonchapp.presentation.ui.timetable.selectTutor.SelectTutorFragment"
+        android:label="fragment_select_group"
+        app:popUpTo="@id/navigation_timetable"
+        tools:layout="@layout/fragment_select_group">
     </fragment>
 
     <fragment

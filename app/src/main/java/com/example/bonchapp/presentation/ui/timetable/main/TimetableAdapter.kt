@@ -15,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 //import com.example.bonchapp.coordinator.MainCoordinator
 import com.example.bonchapp.pojo.SubjectDTO
+import com.example.bonchapp.presentation.App
+import com.example.bonchapp.presentation.di.AppComponent
+import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
 import com.example.bonchapp.router.MainRouter
 import org.joda.time.DateTime
+import javax.inject.Inject
 
 class TimetableAdapter(val context: Context, fragment: Fragment, val subject: List<SubjectDTO>, val date: String) :
     RecyclerView.Adapter<TimetablePostHolder>() {
@@ -60,7 +64,14 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
 
     val imageGradient = itemView.findViewById<ImageView>(R.id.gradient_timetable)
 
+    @Inject
+    lateinit var presenter: ITimetablePresenter
+
     val fragment = fragment
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     fun bind(subject: SubjectDTO, number: Int, date: String) {
         textTime.text = subject.time
@@ -78,9 +89,7 @@ class TimetablePostHolder(itemView: View, fragment: Fragment) : RecyclerView.Vie
             textCabinet.setText("")
 
         textCabinet.setOnClickListener {
-            //MainRouter.showCabinetInNavigator(fragment, stringer(subject.place))
-            TODO("Подключить навигатор")
-            MainRouter().navigateToCabinet(stringer(subject.place))
+            presenter.navigateToCabinet(stringer(subject.place))
         }
     }
 

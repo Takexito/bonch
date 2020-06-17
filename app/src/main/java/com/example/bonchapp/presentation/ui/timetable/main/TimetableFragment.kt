@@ -1,26 +1,28 @@
 package com.example.bonchapp.presentation.ui.timetable.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.bonchapp.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bonchapp.R
 import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
-import com.example.bonchapp.presentation.ui.timetable.main.DayTimeTableAdapter
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment
 import com.example.bonchapp.presentation.ui.timetable.selectTutor.SelectTutorFragment
-import com.example.bonchapp.presentation.ui.timetable.selectType.SelectTypeTimetableFragment
+import com.example.bonchapp.router.MainCoordinator
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
 import kotlinx.android.synthetic.main.activity_main.*
 import org.joda.time.DateTime
 import javax.inject.Inject
+
 
 class TimetableFragment : Fragment(), ITimetableView {
 
@@ -46,8 +48,7 @@ class TimetableFragment : Fragment(), ITimetableView {
 
         root = inflater.inflate(R.layout.fragment_timetable, container, false)
         presenter.attachView(this)
-        //presenter.switchName("ИКПИ-84")
-        presenter.updateTimetable()
+        presenter.firstLoad()
 
         initRecyclerView()
         initCalender()
@@ -57,7 +58,7 @@ class TimetableFragment : Fragment(), ITimetableView {
     }
 
 
-    override fun updateTimetable(timetable: ArrayList<SubjectDTO>, date: DateTime) {
+    override fun setTimetable(timetable: ArrayList<SubjectDTO>, date: DateTime) {
         dayTimeTableAdapter.setList(timetable, date)
     }
 
@@ -99,7 +100,7 @@ class TimetableFragment : Fragment(), ITimetableView {
                 recyclerViewDay.scrollToPosition(dt.dayOfWeek - 1)
             }
 
-            override fun onItemClick(view: View) {}
+            override fun onItemClick(v: View) {}
             override fun onClickListener() {
             }
 
@@ -111,22 +112,34 @@ class TimetableFragment : Fragment(), ITimetableView {
                 textMonth.text = resources.getStringArray(R.array.Months)[(calendar.month ?: 1)]
             }
 
-            override fun onWeekChange(i: Int) {}
+            override fun onWeekChange(position: Int) {}
         })
     }
 
     private fun initSelectTypeTimetable() {
         val button = root.findViewById<ImageView>(R.id.filter)
         button.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .add(SelectTypeTimetableFragment(), null).addToBackStack("1")
-                .commit()
+            presenter.navigateToSelectType()
+
+            //MainCoordinator.navigateToSelectTypeTimetable(this, presenter.getStatusBtnOrigin())
+
+//            requireActivity().supportFragmentManager.beginTransaction()
+//                .add(SelectTypeTimetableFragment(presenter.getStatusBtnOrigin()), null).addToBackStack("1")
+//                .commit()
         }
     }
 
     override fun closeFragment() {
         //requireActivity().supportFragmentManager.popBackStack()
         requireActivity().onBackPressed()
+        hideKeyboard()
+    }
+
+    fun hideKeyboard(){
+        val context: Context = requireContext().applicationContext
+        val imm =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(root.getWindowToken(), 0)
     }
 
     override fun showSelectGroupFragment() {
@@ -147,5 +160,21 @@ class TimetableFragment : Fragment(), ITimetableView {
     override fun showName(s:String){
         val name = root.findViewById<TextView>(R.id.nameGroup)
         name.text = s
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 }

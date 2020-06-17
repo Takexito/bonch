@@ -12,6 +12,7 @@ import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
 import javax.inject.Inject
 
+
 class SelectGroupAdapter(val context: Context) :
     RecyclerView.Adapter<SelectGroupPostHolder>() {
 
@@ -90,6 +91,8 @@ class SelectGroupPostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         itemView.setOnClickListener {
             presenter.switchName(group)
+            presenter.loadTimetable()
+            presenter.closeFragment()
         }
     }
 }

@@ -44,5 +44,15 @@ class MainRouter {
         fragment.findNavController().navigate(R.id.action_navigation_profile_to_SettingsFragment)
     }
 
-
+    fun navigateToSelectGroup(){
+        navController.navigate(R.id.action_navigation_timetable_to_selectGroupFragment)
+    }
+    fun navigateToSelectTutor(){
+        navController.navigate(R.id.action_navigation_timetable_to_selectTutorFragment)
+    }
+    fun navigateToSelectType(b:Boolean){
+        val bundle = Bundle()
+        bundle.putSerializable(Constants.TYPE_TIMETABLE, b)
+        navController.navigate(R.id.action_navigation_timetable_to_selectTypeFragment, bundle)
+    }
 }
