@@ -107,7 +107,12 @@ class SelectGroupFragment() : Fragment(),
         }
     }
 
-    fun hideKeyboard() {
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard()
+    }
+
+    private fun hideKeyboard() {
         val context: Context = requireContext().applicationContext
         val imm =
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
