@@ -4,9 +4,6 @@ import com.example.bonchapp.pojo.SubjectDTO
 import org.joda.time.DateTime
 
 interface ITimetableView {
-    fun setTimetable(timetable: ArrayList<SubjectDTO>, date: DateTime)
-    fun closeFragment()
-    fun showSelectGroupFragment()
-    fun showSelectTutorFragment()
+    fun hideKeyboard()
     fun showName(s:String)
 }

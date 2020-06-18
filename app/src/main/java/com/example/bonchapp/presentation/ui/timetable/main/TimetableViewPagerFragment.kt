@@ -1,6 +1,7 @@
 package com.example.bonchapp.presentation.ui.timetable.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,18 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
 import org.joda.time.DateTime
 import javax.inject.Inject
 
-class TimetableViewPagerFragment(addWeeks: Int) : Fragment() {
+class TimetableViewPagerFragment() : Fragment() {
 
     @Inject
     lateinit var presenter: ITimetablePresenter
 
-    var myDate = setDate(addWeeks)
+     lateinit var myDate: DateTime
 
     lateinit var dayTimeTableAdapter: DayTimeTableAdapter
 
@@ -33,6 +33,8 @@ class TimetableViewPagerFragment(addWeeks: Int) : Fragment() {
 
         root = inflater.inflate(R.layout.fragment_timetable_viewpager, container, false)
 
+        presenter.addPager(this)
+
         return root
     }
 
@@ -40,24 +42,32 @@ class TimetableViewPagerFragment(addWeeks: Int) : Fragment() {
         App.appComponent.inject(this)
     }
 
+     fun newInstance(num: Int): TimetableViewPagerFragment {
+        val args = Bundle()
+        args.putInt("num", num)
+        val f = TimetableViewPagerFragment()
+        f.arguments = args
+        return f
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        updateTimetable()
+        loadTimetable()
     }
 
 //    fun updateTimetable(timetable: ArrayList<SubjectDTO>, date: DateTime) {
 //        dayTimeTableAdapter.setList(timetable, date)
 //    }
 
-    fun setDate(addWeeks: Int) :DateTime {
+    private fun setDate(addWeeks: Int) :DateTime {
         var date = DateTime()
         date = date.plusWeeks(addWeeks)
         return date
     }
 
-    fun updateTimetable() {
-        presenter.updateTimetable(this, myDate,
+    fun loadTimetable() {
+        presenter.loadTimetable(this, myDate,
             callback = {
                 //fragment.updateTimetable(it!!, date)
                 dayTimeTableAdapter.setList(it!!, myDate)
@@ -75,5 +85,15 @@ class TimetableViewPagerFragment(addWeeks: Int) : Fragment() {
         recyclerViewDay.layoutManager = LinearLayoutManager(root.context)
         recyclerViewDay.adapter = dayTimeTableAdapter
         recyclerViewDay.smoothScrollToPosition(0)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        myDate = setDate(requireArguments().getInt("num"))
+    }
+
+    override fun onDestroyView() {
+        presenter.deletePager(this)
+        super.onDestroyView()
     }
 }

@@ -16,6 +16,7 @@ import com.example.bonchapp.presentation.ui.profile.elective.ProfileElectivesFra
 import com.example.bonchapp.presentation.ui.profile.mark.ProfileMarkFragment
 import com.example.bonchapp.presentation.ui.timetable.main.TimetableFragment
 import com.example.bonchapp.presentation.ui.timetable.main.TimetablePostHolder
+import com.example.bonchapp.presentation.ui.timetable.main.TimetableViewPagerFragment
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment
 import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupPostHolder
 import com.example.bonchapp.presentation.ui.timetable.selectTutor.SelectTutorFragment
@@ -47,6 +48,7 @@ interface AppComponent {
     fun inject(view: SelectTutorFragment)
     fun inject(view: SelectTutorPostHolder)
     fun inject(view: TimetablePostHolder)
+    fun inject(action: TimetableViewPagerFragment)
 
 
     fun inject(view: ProfileDebtFragment)

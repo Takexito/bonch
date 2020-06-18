@@ -9,19 +9,9 @@ import androidx.viewpager.widget.PagerAdapter.POSITION_NONE
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class ViewPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
-
-    var list = arrayListOf<TimetableViewPagerFragment>()
-
-    fun updateList(list: ArrayList<TimetableViewPagerFragment>) {
-        this.list.clear()
-        this.list.addAll(list)
-        notifyDataSetChanged()
-
-    }
-
+class ViewPagerAdapter(fm: Fragment) : FragmentStateAdapter(fm) {
     override fun getItemCount(): Int = 1000
 
     override fun createFragment(position: Int): Fragment =
-        TimetableViewPagerFragment(position - 500)
+        TimetableViewPagerFragment().newInstance(position-500)
 }

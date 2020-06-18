@@ -9,35 +9,25 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
-import com.example.bonchapp.pojo.SubjectDTO
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
-import com.example.bonchapp.presentation.ui.timetable.selectGroup.SelectGroupFragment
-import com.example.bonchapp.presentation.ui.timetable.selectTutor.SelectTutorFragment
-import com.example.bonchapp.router.MainCoordinator
 import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_timetable.*
 import org.joda.time.DateTime
 import javax.inject.Inject
-
 
 class TimetableFragment : Fragment(), ITimetableView {
 
     @Inject
     lateinit var presenter: ITimetablePresenter
-    lateinit var dayTimeTableAdapter: DayTimeTableAdapter
+    lateinit var viewPagerAdapter: ViewPagerAdapter
     lateinit var root: View
 
     init {
         App.appComponent.inject(this)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        requireActivity().nav_view.visibility = View.VISIBLE
     }
 
     override fun onCreateView(
@@ -48,34 +38,29 @@ class TimetableFragment : Fragment(), ITimetableView {
 
         root = inflater.inflate(R.layout.fragment_timetable, container, false)
         presenter.attachView(this)
-        presenter.firstLoad()
 
-        initRecyclerView()
         initCalender()
         initSelectTypeTimetable()
 
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().nav_view.visibility = View.VISIBLE
 
-    override fun setTimetable(timetable: ArrayList<SubjectDTO>, date: DateTime) {
-        dayTimeTableAdapter.setList(timetable, date)
+        presenter.firstLoad()
+        initViewPager()
     }
 
-    private fun initRecyclerView() {
-        dayTimeTableAdapter =
-            DayTimeTableAdapter(
-                root.context,
-                this
-            )
-        val recyclerViewDay = root.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
-        recyclerViewDay.layoutManager = LinearLayoutManager(root.context)
-        recyclerViewDay.adapter = dayTimeTableAdapter
-        recyclerViewDay.smoothScrollToPosition(0)
+    private fun initViewPager() {
+        viewPagerAdapter = ViewPagerAdapter(this)
+
+        viewPager2.adapter = viewPagerAdapter
+        viewPager2.setCurrentItem(500, false)
     }
 
     private fun initCalender() {
-
         val calendar = root.findViewById<CollapsibleCalendar>(R.id.calendar)
 
         val textMonth = root.findViewById<TextView>(R.id.month)
@@ -83,7 +68,6 @@ class TimetableFragment : Fragment(), ITimetableView {
             resources.getStringArray(R.array.Months)[(calendar.selectedDay?.month ?: 1) - 1]
 
         var currentWeek = DateTime.now().weekOfWeekyear
-
 
         calendar.setCalendarListener(object : CollapsibleCalendar.CalendarListener {
             override fun onDaySelect() {
@@ -94,7 +78,6 @@ class TimetableFragment : Fragment(), ITimetableView {
 
                 if (dt.weekOfWeekyear != currentWeek) {
                     currentWeek = dt.dayOfWeek
-                    presenter.switchWeek(dt)
                 }
 
                 recyclerViewDay.scrollToPosition(dt.dayOfWeek - 1)
@@ -120,61 +103,18 @@ class TimetableFragment : Fragment(), ITimetableView {
         val button = root.findViewById<ImageView>(R.id.filter)
         button.setOnClickListener {
             presenter.navigateToSelectType()
-
-            //MainCoordinator.navigateToSelectTypeTimetable(this, presenter.getStatusBtnOrigin())
-
-//            requireActivity().supportFragmentManager.beginTransaction()
-//                .add(SelectTypeTimetableFragment(presenter.getStatusBtnOrigin()), null).addToBackStack("1")
-//                .commit()
         }
     }
 
-    override fun closeFragment() {
-        //requireActivity().supportFragmentManager.popBackStack()
-        requireActivity().onBackPressed()
-        hideKeyboard()
-    }
-
-    fun hideKeyboard(){
+    override fun hideKeyboard() {
         val context: Context = requireContext().applicationContext
         val imm =
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(root.getWindowToken(), 0)
+        imm.hideSoftInputFromWindow(root.windowToken, 0)
     }
 
-    override fun showSelectGroupFragment() {
-        requireActivity().supportFragmentManager.beginTransaction().add(
-            R.id.mainTimetable,
-            SelectGroupFragment(), null
-        ).addToBackStack(null).commit()
-    }
-
-    override fun showSelectTutorFragment() {
-        requireActivity().supportFragmentManager.beginTransaction().add(
-            R.id.mainTimetable,
-            SelectTutorFragment(), null
-        ).addToBackStack(null).commit()
-    }
-
-
-    override fun showName(s:String){
+    override fun showName(s: String) {
         val name = root.findViewById<TextView>(R.id.nameGroup)
         name.text = s
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 }
