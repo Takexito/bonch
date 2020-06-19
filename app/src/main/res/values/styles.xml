@@ -102,4 +102,14 @@
     </style>
 
 
+    <!--timetable_calendar-->
+
+    <style name="CalendarTheme">
+        <item name="calendarViewStyle">@style/CalendarStyle</item>
+    </style>
+
+    <style name="CalendarStyle">
+        <item name="android:orientation">vertical</item>
+    </style>
+
 </resources>

@@ -9,15 +9,16 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
-import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
+import com.example.bonchapp.presentation.ui.timetable.calendar.CollapseCalendarView
+import com.example.bonchapp.presentation.ui.timetable.calendar.manager.CalendarManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_timetable.*
-import org.joda.time.DateTime
+import org.joda.time.LocalDate
 import javax.inject.Inject
+
 
 class TimetableFragment : Fragment(), ITimetableView {
 
@@ -61,42 +62,55 @@ class TimetableFragment : Fragment(), ITimetableView {
     }
 
     private fun initCalender() {
-        val calendar = root.findViewById<CollapsibleCalendar>(R.id.calendar)
 
-        val textMonth = root.findViewById<TextView>(R.id.month)
-        textMonth.text =
-            resources.getStringArray(R.array.Months)[(calendar.selectedDay?.month ?: 1) - 1]
+        val calendarView = root.findViewById<CollapseCalendarView>(R.id.calendar)
+        val manager = CalendarManager(
+            LocalDate.now(),
+            CalendarManager.State.MONTH,
+            LocalDate.now(),
+            LocalDate.now().plusYears(1)
+        )
 
-        var currentWeek = DateTime.now().weekOfWeekyear
 
-        calendar.setCalendarListener(object : CollapsibleCalendar.CalendarListener {
-            override fun onDaySelect() {
-                val day = calendar.selectedDay
-                val dt = DateTime(day!!.year, day.month + 1, day.day, 0, 0)
+        calendarView.init(manager)
 
-                val recyclerViewDay = root.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
-
-                if (dt.weekOfWeekyear != currentWeek) {
-                    currentWeek = dt.dayOfWeek
-                }
-
-                recyclerViewDay.scrollToPosition(dt.dayOfWeek - 1)
-            }
-
-            override fun onItemClick(v: View) {}
-            override fun onClickListener() {
-            }
-
-            override fun onDataUpdate() {}
-            override fun onDayChanged() {
-            }
-
-            override fun onMonthChange() {
-                textMonth.text = resources.getStringArray(R.array.Months)[(calendar.month ?: 1)]
-            }
-
-            override fun onWeekChange(position: Int) {}
-        })
+        
+//        val calendar = root.findViewById<CollapsibleCalendar>(R.id.calendar)
+//
+//        val textMonth = root.findViewById<TextView>(R.id.month)
+//        textMonth.text =
+//            resources.getStringArray(R.array.Months)[(calendar.selectedDay?.month ?: 1) - 1]
+//
+//        var currentWeek = DateTime.now().weekOfWeekyear
+//
+//        calendar.setCalendarListener(object : CollapsibleCalendar.CalendarListener {
+//            override fun onDaySelect() {
+//                val day = calendar.selectedDay
+//                val dt = DateTime(day!!.year, day.month + 1, day.day, 0, 0)
+//
+//                val recyclerViewDay = root.findViewById<RecyclerView>(R.id.timeTable_recyclerView)
+//
+//                if (dt.weekOfWeekyear != currentWeek) {
+//                    currentWeek = dt.dayOfWeek
+//                }
+//
+//                recyclerViewDay.scrollToPosition(dt.dayOfWeek - 1)
+//            }
+//
+//            override fun onItemClick(v: View) {}
+//            override fun onClickListener() {
+//            }
+//
+//            override fun onDataUpdate() {}
+//            override fun onDayChanged() {
+//            }
+//
+//            override fun onMonthChange() {
+//                textMonth.text = resources.getStringArray(R.array.Months)[(calendar.month ?: 1)]
+//            }
+//
+//            override fun onWeekChange(position: Int) {}
+//        })
     }
 
     private fun initSelectTypeTimetable() {
