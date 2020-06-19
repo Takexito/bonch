@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.bonchapp.R;
+import com.example.bonchapp.presentation.App;
+import com.example.bonchapp.presentation.presenter.timetable.TimetablePresenter;
 import com.example.bonchapp.presentation.ui.timetable.calendar.manager.*;
 import com.example.bonchapp.presentation.ui.timetable.calendar.widget.*;
 
@@ -25,9 +27,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/**
- * Created by Blaz Solar on 28/02/14.
- */
+import javax.inject.Inject;
+
 public class CollapseCalendarView extends LinearLayout implements View.OnClickListener {
 
     private static final String TAG = "CalendarView";
@@ -35,10 +36,6 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
     @Nullable
     private CalendarManager mManager;
 
-    @NonNull
-    private TextView mTitleView;
-    @NonNull private ImageButton mPrev;
-    @NonNull private ImageButton mNext;
     @NonNull private LinearLayout mWeeksView;
 
     @NonNull private final LayoutInflater mInflater;
@@ -97,17 +94,17 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
         Log.d(TAG, "On click");
         if (mManager != null) {
             int id = v.getId();
-            if (id == R.id.prev) {
-                if (mManager.prev()) {
-                    populateLayout();
-                }
-            } else if (id == R.id.next) {
-                Log.d(TAG, "next");
-                if (mManager.next()) {
-                    Log.d(TAG, "populate");
-                    populateLayout();
-                }
-            }
+//            if (id == R.id.prev) {
+//                if (mManager.prev()) {
+//                    populateLayout();
+//                }
+//            } else if (id == R.id.next) {
+//                Log.d(TAG, "next");
+//                if (mManager.next()) {
+//                    Log.d(TAG, "populate");
+//                    populateLayout();
+//                }
+//            }
 
         }
     }
@@ -162,16 +159,11 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        mTitleView = (TextView) findViewById(R.id.title);
-        mPrev = (ImageButton) findViewById(R.id.prev);
-        mNext = (ImageButton) findViewById(R.id.next);
         mWeeksView = (LinearLayout) findViewById(R.id.weeks);
 
         mHeader = (LinearLayout) findViewById(R.id.header);
         mSelectionText = (TextView) findViewById(R.id.selection_title);
 
-        mPrev.setOnClickListener(this);
-        mNext.setOnClickListener(this);
 
         populateLayout();
     }
@@ -205,11 +197,6 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
         if (mManager != null) {
 
             populateDays();
-
-            mPrev.setEnabled(mManager.hasPrev());
-            mNext.setEnabled(mManager.hasNext());
-
-            mTitleView.setText(mManager.getHeaderText());
 
             if (mManager.getState() == CalendarManager.State.MONTH) {
                 populateMonthLayout((Month) mManager.getUnits());
@@ -350,5 +337,4 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
     public interface OnDateSelect {
         public void onDateSelected(LocalDate date);
     }
-
 }

@@ -7,47 +7,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_calendar_stroke">
-
-            <ImageButton
-                android:id="@+id/prev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="?android:borderlessButtonStyle"
-                android:src="@drawable/ic_profile"
-                android:contentDescription="Prev"
-                android:background="@null"/>
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textColor="@color/text_normal"
-                android:textSize="20sp"/>
-
-            <ImageButton
-                android:id="@+id/next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="?android:borderlessButtonStyle"
-                android:src="@drawable/ic_profile"
-                android:contentDescription="Next"
-                android:background="@null"/>
-
-        </LinearLayout>
-
         <TextView
             android:id="@+id/selection_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blue_dark"
+            android:background="@color/colorOrange"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:minHeight="48dp"
@@ -139,8 +103,7 @@
         android:id="@+id/weeks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/bg_calendar_stroke">
+        android:orientation="vertical">
 
         <!-- Cashes them at first start -->
         <include layout="@layout/timetable_week_layout" />
@@ -151,5 +114,12 @@
         <include layout="@layout/timetable_week_layout" />
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_slider" />
 
 </merge>

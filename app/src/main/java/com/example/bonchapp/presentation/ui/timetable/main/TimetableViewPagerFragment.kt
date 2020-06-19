@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bonchapp.R
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.timetable.ITimetablePresenter
+import kotlinx.android.synthetic.main.fragment_timetable_viewpager.*
 import org.joda.time.DateTime
 import javax.inject.Inject
 
@@ -19,7 +20,9 @@ class TimetableViewPagerFragment() : Fragment() {
     @Inject
     lateinit var presenter: ITimetablePresenter
 
-     lateinit var myDate: DateTime
+    lateinit var myDate: DateTime
+
+    var myPos = 0
 
     lateinit var dayTimeTableAdapter: DayTimeTableAdapter
 
@@ -42,7 +45,7 @@ class TimetableViewPagerFragment() : Fragment() {
         App.appComponent.inject(this)
     }
 
-     fun newInstance(num: Int): TimetableViewPagerFragment {
+    fun newInstance(num: Int): TimetableViewPagerFragment {
         val args = Bundle()
         args.putInt("num", num)
         val f = TimetableViewPagerFragment()
@@ -60,7 +63,7 @@ class TimetableViewPagerFragment() : Fragment() {
 //        dayTimeTableAdapter.setList(timetable, date)
 //    }
 
-    private fun setDate(addWeeks: Int) :DateTime {
+    private fun setDate(addWeeks: Int): DateTime {
         var date = DateTime()
         date = date.plusWeeks(addWeeks)
         return date
@@ -89,11 +92,17 @@ class TimetableViewPagerFragment() : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        myDate = setDate(requireArguments().getInt("num"))
+        val i = requireArguments().getInt("num")
+        myDate = setDate(i)
+        myPos = i + 500
     }
 
     override fun onDestroyView() {
         presenter.deletePager(this)
         super.onDestroyView()
+    }
+
+    fun scrollRV(posRV:Int){
+        timeTable_recyclerView.smoothScrollToPosition(posRV)
     }
 }

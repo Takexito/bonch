@@ -140,6 +140,7 @@
     <string name="btn_logout">Logout</string>
     <string name="text_language">Language</string>
     <string name="text_warningLogout">Do you really want to leave your account?</string>
+    <string name="text_warningLogout2">Login information will be deleted.</string>
     <string name="text_profile_mark">There are currently no entries in the Gradebook.</string>
     <string name="text_profile_file">There are currently no files for you.</string>
     <string name="text_profile_electives">You currently have no electives.</string>

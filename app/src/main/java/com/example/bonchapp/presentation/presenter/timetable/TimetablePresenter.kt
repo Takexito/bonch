@@ -80,10 +80,19 @@ class TimetablePresenter @Inject constructor(
         )
     }
 
-    override fun firstLoad() {
-        if (!name.equals(""))
-            switchName(name)
+    override fun scrollDayRV(pos:Int, posRV:Int){
+        pagers.forEach {
+            if(pos == it.myPos)
+                it.scrollRV(posRV)
+        }
     }
+
+    override fun firstLoad() {
+        if (!name.equals("")){
+            switchName(name)
+            if (!pagers.isEmpty())
+            viewMain.setDatee(pagers[0].myDate)
+    }}
 
     override fun reloadPagers() {
         pagers.forEach {

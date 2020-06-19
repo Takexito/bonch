@@ -1,6 +1,7 @@
 package com.example.bonchapp.presentation.presenter.timetable
 
 import com.example.bonchapp.pojo.SubjectDTO
+import com.example.bonchapp.presentation.ui.timetable.calendar.manager.CalendarManager
 import com.example.bonchapp.presentation.ui.timetable.main.ITimetableView
 import com.example.bonchapp.presentation.ui.timetable.main.TimetableViewPagerFragment
 import org.joda.time.DateTime
@@ -19,4 +20,5 @@ interface ITimetablePresenter {
     fun navigateToSelectType()
     fun firstLoad()
     fun reloadPagers()
+    fun scrollDayRV(pos:Int, posRV:Int)
     }

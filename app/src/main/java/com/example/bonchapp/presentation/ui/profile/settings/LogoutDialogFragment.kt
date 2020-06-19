@@ -15,10 +15,9 @@ class LogoutDialogFragment : DialogFragment() {
             AlertDialog.Builder(requireActivity())
         return builder
             .setTitle(getString(R.string.text_warningLogout))
-            .setMessage("Вы будете отчислены")
+            .setMessage(getString(R.string.text_warningLogout2))
             .setPositiveButton("Пофиг", null)
             .setNegativeButton("Не пофиг", null)
-
             .create()//.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.colorTextBlue);
         //return builder.setView(R.layout.fragment_logout_dialog).create()
     }
