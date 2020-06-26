@@ -14,4 +14,6 @@
     <string name="text_profile_tab_record">Зачетка</string>
     <string name="text_profile_tab_groupFiles">Файлы группы</string>
     <string name="text_profile_tab_electives">Факультативы</string>
+    <string name="exit">Выйти</string>
+    <string name="cancel">Отмена</string>
 </resources>

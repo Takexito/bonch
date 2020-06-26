@@ -149,5 +149,7 @@
     <string name="text_profile_tab_record">Record</string>
     <string name="text_profile_tab_groupFiles">Group files</string>
     <string name="text_profile_tab_electives">Electives</string>
+    <string name="exit">Exit</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

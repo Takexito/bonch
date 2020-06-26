@@ -14,6 +14,7 @@ import com.example.bonchapp.presentation.ui.profile.ProfileFragment
 import com.example.bonchapp.presentation.ui.profile.debt.ProfileDebtFragment
 import com.example.bonchapp.presentation.ui.profile.elective.ProfileElectivesFragment
 import com.example.bonchapp.presentation.ui.profile.mark.ProfileMarkFragment
+import com.example.bonchapp.presentation.ui.profile.settings.LogoutDialogFragment
 import com.example.bonchapp.presentation.ui.timetable.calendar.CollapseCalendarView
 import com.example.bonchapp.presentation.ui.timetable.calendar.manager.CalendarManager
 import com.example.bonchapp.presentation.ui.timetable.main.TimetableFragment
@@ -57,4 +58,6 @@ interface AppComponent {
     fun inject(view: ProfileMarkFragment)
     fun inject(view: ProfileElectivesFragment)
     fun inject(view: ProfileFragment)
+    fun inject(view: LogoutDialogFragment
+    )
 }

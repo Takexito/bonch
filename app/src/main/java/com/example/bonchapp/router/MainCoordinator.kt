@@ -75,4 +75,12 @@ object MainCoordinator {
         context.nav_view.visibility = View.VISIBLE
         context.findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_authorization_to_navigation_timetable)
     }
+
+    fun navigateToAuthorization(context: Fragment){
+        context.findNavController().navigate(R.id.action_navigation_settings_to_authorization)
+    }
+
+    fun navigateToLogout(context: Fragment){
+        context.findNavController().navigate(R.id.action_navigation_settings_to_logout)
+    }
 }
