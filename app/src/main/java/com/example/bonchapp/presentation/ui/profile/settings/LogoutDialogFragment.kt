@@ -47,33 +47,6 @@ class LogoutDialogFragment : DialogFragment() {
         }
     }
 
-//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-//        val builder =
-//            AlertDialog.Builder(requireActivity())
-//        return builder
-//            .setTitle(getString(R.string.text_warningLogout))
-//            .setMessage(getString(R.string.text_warningLogout2))
-//            .setPositiveButton("Выйти", DialogInterface.OnClickListener { dialog, which ->
-//                logout()
-//                MainCoordinator.navigateToAuterization(this)
-//            })
-//            .setNegativeButton("Отмена", null)
-//            .create()//.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(R.color.colorTextBlue);
-//        //return builder.setView(R.layout.fragment_logout_dialog).create()
-//    }
-//
-//    fun onClick(dialog: DialogInterface?, which: Int) {
-//
-//    }
-//
-//    override fun onDismiss(dialog: DialogInterface) {
-//        super.onDismiss(dialog)
-//    }
-//
-//    override fun onCancel(dialog: DialogInterface) {
-//        super.onCancel(dialog)
-//    }
-
     private fun logout(){
         val sp = requireActivity().getSharedPreferences(Constants.APP_PREFERENCE, Context.MODE_PRIVATE)
         sp.edit().remove(Constants.TOKEN).apply()
