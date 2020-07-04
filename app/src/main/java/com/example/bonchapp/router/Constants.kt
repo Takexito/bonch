@@ -7,6 +7,6 @@ object Constants {
     const val FULL_MESSAGE = "dev.bonch.bonchapp.fullMessage"
     const val TYPE_TIMETABLE = "dev.bonch.bonchapp.typeTimetable"
     const val APP_PREFERENCE = "dev.bonch.bonchapp.app_preference"
-    const val TOKEN = "dev.bonch.bonchapp.app_preference"
+    const val TOKEN = "dev.bonch.bonchapp.token"
 
 }

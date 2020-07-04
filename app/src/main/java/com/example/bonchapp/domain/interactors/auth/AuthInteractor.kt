@@ -14,7 +14,7 @@ class AuthInteractor @Inject constructor(val repository: IAuthRepository) : IAut
             callback = {
             if (it.isSuccessful) callback(it.body(), null)
             else {
-                callback(null, it.errorBody().toString())
+                callback(null, "Error: ${it.errorBody()?.string()}")
             }
         },
         callbackError = {

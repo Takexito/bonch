@@ -15,6 +15,7 @@ import com.example.bonchapp.presentation.presenter.auth.IAuthPresenter
 import com.example.bonchapp.router.Constants
 //import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import kotlinx.android.synthetic.main.auth_page_2.view.*
+import kotlinx.android.synthetic.main.fragment_authorization.*
 import javax.inject.Inject
 
 class AuthFragment: Fragment(), IAuthView {
@@ -43,7 +44,7 @@ class AuthFragment: Fragment(), IAuthView {
         return view
     }
 
-    fun getSharedPreference(): SharedPreferences {
+    private fun getSharedPreference(): SharedPreferences {
        return requireActivity().getSharedPreferences(Constants.APP_PREFERENCE, Context.MODE_PRIVATE)
     }
 
@@ -87,6 +88,16 @@ class AuthFragment: Fragment(), IAuthView {
 
     override fun getSharedPref(): SharedPreferences {
         return getSharedPreference()
+    }
+
+    override fun showProgressBar() {
+        auth_pager.visibility = View.GONE
+        authProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        auth_pager.visibility = View.VISIBLE
+        authProgressBar.visibility = View.GONE
     }
 
 }

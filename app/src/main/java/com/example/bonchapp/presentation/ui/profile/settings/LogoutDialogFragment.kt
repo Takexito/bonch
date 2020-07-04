@@ -2,7 +2,9 @@ package com.example.bonchapp.presentation.ui.profile.settings
 
 import com.example.bonchapp.R
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.system.Os.remove
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +51,6 @@ class LogoutDialogFragment : DialogFragment() {
 
     private fun logout(){
         val sp = requireActivity().getSharedPreferences(Constants.APP_PREFERENCE, Context.MODE_PRIVATE)
-        sp.edit().remove(Constants.TOKEN).apply()
+        sp.edit().remove(Constants.TOKEN).commit()
     }
 }

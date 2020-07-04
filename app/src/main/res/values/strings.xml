@@ -151,5 +151,10 @@
     <string name="text_profile_tab_electives">Electives</string>
     <string name="exit">Exit</string>
     <string name="cancel">Cancel</string>
+    <string name="auth_load_data">
+        Собираем ваши данные. \n
+        Это может занять некоторое время. \n
+        Не закрывайте приложение.
+    </string>
 
 </resources>

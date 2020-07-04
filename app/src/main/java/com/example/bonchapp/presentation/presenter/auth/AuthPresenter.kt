@@ -17,11 +17,16 @@ class AuthPresenter @Inject constructor(val interactor: IAuthInteractor, val rou
 
     private fun signIn(email: String, pass: String) {
 
+
         if (email.isEmpty() or pass.isEmpty()) view.showError("Bad Input")
         else {
+            view.showProgressBar()
             interactor.login(User.create(email, pass)) { token: Token?, s: String? ->
                 if (token != null) signInSuccess(token)
-                else signInError(s)
+                else {
+                    signInError(s)
+                    view.hideProgressBar()
+                }
             }
         }
 //        else {
