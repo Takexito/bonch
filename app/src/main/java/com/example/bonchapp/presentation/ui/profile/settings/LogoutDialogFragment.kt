@@ -39,7 +39,7 @@ class LogoutDialogFragment : DialogFragment() {
         logout_exit.setOnClickListener {
             logout()
             //MainCoordinator.navigateToAuthorization(this)
-            exitProcess(0)
+            requireActivity().finish()
         }
 
         logout_cancel.setOnClickListener {
