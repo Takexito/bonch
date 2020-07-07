@@ -97,7 +97,7 @@
                     android:layout_weight="7"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:text="Theme" />
 
             </LinearLayout>
 
@@ -113,24 +113,34 @@
             <EditText
                 android:id="@+id/read_message_text_view"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="Текст"
                 android:inputType="textMultiLine"
+                android:minHeight="30dp"
                 android:padding="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/send_files_chip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider4"
-                app:layout_constraintBottom_toTopOf="@+id/send_files_chip"/>
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/send_files_chip"
+                style="@style/AppTheme.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Прикрепить файл"
+                    app:chipIcon="@drawable/ic_file"
+                    app:chipIconVisible="true" />
             </com.google.android.material.chip.ChipGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

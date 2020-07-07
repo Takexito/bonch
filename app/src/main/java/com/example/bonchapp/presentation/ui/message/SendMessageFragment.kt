@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.example.bonchapp.R
+import kotlinx.android.synthetic.main.fragment_send_message.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +38,12 @@ class SendMessageFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_send_message, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val data = arrayListOf<String>("Teacher 1", "Teacher 2", "Teacher 3")
+        send_message_destination_view.adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, data)
     }
 
     companion object {

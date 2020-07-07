@@ -1,5 +1,6 @@
 package com.example.bonchapp.presentation.ui.message
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,12 @@ class MessageAdapter @Inject constructor(val presenter: IMessagePresenter) :
             setOnClickListener {
                 presenter.onItemClick(message)
             }
+
+            if(message.isRead == false) message_card.background = resources.getDrawable(R.color.colorOrange)
+
         }
+
+
     }
 
     fun onItemDismiss(position: Int) {
