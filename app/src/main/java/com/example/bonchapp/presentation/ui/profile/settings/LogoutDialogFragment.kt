@@ -1,15 +1,18 @@
 package com.example.bonchapp.presentation.ui.profile.settings
 
-import com.example.bonchapp.R
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.example.bonchapp.R
 import com.example.bonchapp.presentation.App
+import com.example.bonchapp.presentation.ui.MainActivity
 import com.example.bonchapp.router.Constants
-import com.example.bonchapp.router.MainCoordinator
 import com.example.bonchapp.router.MainRouter
 import kotlinx.android.synthetic.main.fragment_logout.*
 import javax.inject.Inject
@@ -38,7 +41,6 @@ class LogoutDialogFragment : DialogFragment() {
 
         logout_exit.setOnClickListener {
             logout()
-            //MainCoordinator.navigateToAuthorization(this)
             requireActivity().finish()
         }
 
@@ -49,6 +51,6 @@ class LogoutDialogFragment : DialogFragment() {
 
     private fun logout(){
         val sp = requireActivity().getSharedPreferences(Constants.APP_PREFERENCE, Context.MODE_PRIVATE)
-        sp.edit().remove(Constants.TOKEN).apply()
+        sp.edit().remove(Constants.TOKEN).commit()
     }
 }

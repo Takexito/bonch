@@ -11,6 +11,7 @@ import com.example.bonchapp.presentation.ui.timetable.main.TimetableViewPagerFra
 import org.joda.time.DateTimeConstants
 import org.joda.time.format.DateTimeFormat
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class TimetablePresenter @Inject constructor(
     private val interactor: ITimetableInteractor, private val profileInteractor: IProfileInteractor,
@@ -29,6 +30,8 @@ class TimetablePresenter @Inject constructor(
     private var btn_origin = false
 
     private val pagers = arrayListOf<TimetableViewPagerFragment>()
+
+    private val cache = mutableMapOf<DateTime, ArrayList<SubjectDTO>>()
 
     init {
         getUserInfo()
@@ -80,19 +83,20 @@ class TimetablePresenter @Inject constructor(
         )
     }
 
-    override fun scrollDayRV(pos:Int, posRV:Int){
+    override fun scrollDayRV(pos: Int, posRV: Int) {
         pagers.forEach {
-            if(pos == it.myPos)
+            if (pos == it.myPos)
                 it.scrollRV(posRV)
         }
     }
 
     override fun firstLoad() {
-        if (!name.equals("")){
+        if (!name.equals("")) {
             switchName(name)
             if (!pagers.isEmpty())
-            viewMain.setDatee(pagers[0].myDate)
-    }}
+                viewMain.setDatee(pagers[0].myDate)
+        }
+    }
 
     override fun reloadPagers() {
         pagers.forEach {
@@ -111,11 +115,16 @@ class TimetablePresenter @Inject constructor(
 
             val body = RequestTimeTable(dtf.print(start), dtf.print(end), name, type)
 
-            interactor.getTimetable(body,
-                callback = {
-                    callback(it)
-                }
-            )
+            if (cache.containsKey(dtf.parseDateTime(dtf.print(date)))) {
+                callback(cache.getValue(dtf.parseDateTime(dtf.print(date))))
+            } else {
+                interactor.getTimetable(body,
+                    callback = {
+                        callback(it)
+                        cache.put(dtf.parseDateTime(dtf.print(date)), it!!)
+                    }
+                )
+            }
         } else {
             getUserInfo(fragment, date, callback)
         }

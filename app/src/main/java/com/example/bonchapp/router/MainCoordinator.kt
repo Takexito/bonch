@@ -77,7 +77,8 @@ object MainCoordinator {
     }
 
     fun navigateToAuthorization(context: Fragment){
-        context.findNavController().navigate(R.id.action_navigation_settings_to_authorization)
+        //context.findNavController().navigate(R.id.action_navigation_settings_to_authorization)
+        context.findNavController().popBackStack(R.id.mobile_navigation, true)
     }
 
     fun navigateToLogout(context: Fragment){

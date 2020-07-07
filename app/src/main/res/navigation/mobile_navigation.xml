@@ -114,6 +114,8 @@
         <action
             android:id="@+id/action_navigation_settings_to_logout"
             app:destination="@id/navigation_logout"
+            app:popUpTo="@id/navigation_authorization"
+            app:popUpToInclusive="true"
             />
 
     </fragment>
@@ -123,12 +125,6 @@
         android:name="com.example.bonchapp.presentation.ui.profile.settings.LogoutDialogFragment"
         android:label="fragment_logout"
         tools:layout="@layout/fragment_logout">
-        <action
-            android:id="@+id/action_navigation_settings_to_authorization"
-            app:destination="@id/navigation_authorization"
-            app:popUpTo="@id/navigation_authorization"
-            app:popUpToInclusive="true"
-            />
     </dialog>
 
     <dialog
