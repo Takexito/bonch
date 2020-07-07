@@ -65,6 +65,8 @@ dependencies {
 //        exclude group: 'org.jetbrains', module: 'annotations'
 //    }
 
+    implementation 'com.github.skydoves:androidveil:1.0.9'
+
     implementation 'joda-time:joda-time:2.10.5'
 
     testImplementation 'junit:junit:4.12'

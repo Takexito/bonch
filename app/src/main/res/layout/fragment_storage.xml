@@ -57,7 +57,7 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.skydoves.androidveil.VeilRecyclerFrameView
         android:id="@+id/message_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -65,6 +65,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/files_search" />
+        app:layout_constraintTop_toBottomOf="@+id/files_search"
+        app:veilFrame_layout="@layout/item_message"
+        app:veilFrame_veiled="true"
+        app:veilFrame_shimmerEnable="true"
+        app:veilFrame_baseColor="@android:color/holo_orange_dark"
+        app:veilFrame_highlightColor="@android:color/holo_orange_light"
+        app:veilFrame_baseAlpha="0.6"
+        app:veilFrame_highlightAlpha="1.0"
+        app:veilFrame_radius="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

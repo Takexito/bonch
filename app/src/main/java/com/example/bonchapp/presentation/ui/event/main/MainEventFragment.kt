@@ -1,6 +1,7 @@
 package com.example.bonchapp.presentation.ui.event.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.bonchapp.domain.entities.Event
 import com.example.bonchapp.presentation.App
 import com.example.bonchapp.presentation.presenter.event.IMainEventPresenter
 import kotlinx.android.synthetic.main.fragment_main_event.*
+import kotlinx.android.synthetic.main.fragment_storage.*
 import javax.inject.Inject
 
 
@@ -41,11 +43,16 @@ class MainEventFragment : Fragment(), IMainEventView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        eventRecyclerView.addVeiledItems(10)
+        eventRecyclerView.veil()
         presenter.firstLoad()
+
         initUi()
     }
 
     override fun updateRecycler(data: List<Event>){
+        eventRecyclerView.unVeil()
+        Log.d("MainEventFragment", "Recycler unVeil")
         eventAdapter.apply {
             setData(data)
             notifyDataSetChanged()
@@ -69,7 +76,7 @@ class MainEventFragment : Fragment(), IMainEventView {
     }
 
     override fun getRecyclerFilter(): Filter {
-        return (eventRecyclerView.adapter as Filterable).filter
+        return (eventRecyclerView.getRecyclerView().adapter as Filterable).filter
 
     }
 
@@ -85,9 +92,12 @@ class MainEventFragment : Fragment(), IMainEventView {
 
     private fun initRecycler() {
         eventRecyclerView.apply {
-            adapter = eventAdapter
-            layoutManager = LinearLayoutManager(context)
+
+            setAdapter(eventAdapter)
+            setLayoutManager(LinearLayoutManager(context))
         }
+        Log.d("MainEventFragment", "Recycler Veil")
+
 
     }
 
@@ -100,7 +110,7 @@ class MainEventFragment : Fragment(), IMainEventView {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                presenter.onSearchQueryUpdate(eventRecyclerView, newText)
+                presenter.onSearchQueryUpdate(eventRecyclerView.getRecyclerView(), newText)
                 return true
             }
         })

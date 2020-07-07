@@ -40,7 +40,6 @@ class MessageFragment : Fragment(), IMessageView {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_storage, container, false)
         initView(root)
-
         //initSpinner()
         presenter.attachView(this)
         return root
@@ -115,10 +114,12 @@ class MessageFragment : Fragment(), IMessageView {
 
         val callback = FilesRecyclerItemTouchHelper(recyclerAdapter)
         val touchHelper = ItemTouchHelper(callback)
-        touchHelper.attachToRecyclerView(message_recycler)
+        touchHelper.attachToRecyclerView(message_recycler.getRecyclerView())
 
-        message_recycler.layoutManager = LinearLayoutManager(this.context)
-        message_recycler.adapter = recyclerAdapter
+        message_recycler.setLayoutManager(LinearLayoutManager(this.context))
+        message_recycler.setAdapter(recyclerAdapter)
+        message_recycler.addVeiledItems(10)
+        message_recycler.veil()
 
     }
 
@@ -128,6 +129,7 @@ class MessageFragment : Fragment(), IMessageView {
     }
 
     override fun updateRecycler(data: Messages) {
+        message_recycler.unVeil()
         recyclerAdapter.apply {
             setData(data)
             notifyDataSetChanged()
