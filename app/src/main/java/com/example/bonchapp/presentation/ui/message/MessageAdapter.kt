@@ -8,7 +8,7 @@ import com.example.bonchapp.R
 import com.example.bonchapp.domain.entities.Message
 import com.example.bonchapp.domain.entities.Messages
 import com.example.bonchapp.presentation.presenter.message.IMessagePresenter
-import kotlinx.android.synthetic.main.item_file.view.*
+import kotlinx.android.synthetic.main.item_message.view.*
 import javax.inject.Inject
 
 
@@ -29,7 +29,7 @@ class MessageAdapter @Inject constructor(val presenter: IMessagePresenter) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_file, parent, false)
+            .inflate(R.layout.item_message, parent, false)
         return ViewHolder(itemView)
     }
 
