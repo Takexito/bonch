@@ -92,12 +92,12 @@ class AuthFragment: Fragment(), IAuthView {
 
     override fun showProgressBar() {
         auth_pager.visibility = View.GONE
-        authProgressBar.visibility = View.VISIBLE
+        auth_load.visibility = View.VISIBLE
     }
 
     override fun hideProgressBar() {
         auth_pager.visibility = View.VISIBLE
-        authProgressBar.visibility = View.GONE
+        auth_load.visibility = View.GONE
     }
 
 }

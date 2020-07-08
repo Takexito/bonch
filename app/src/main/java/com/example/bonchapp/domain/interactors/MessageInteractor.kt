@@ -22,7 +22,7 @@ class MessageInteractor @Inject constructor(var repository: IMessageRepository):
 
                 repository.inMessages = inMessages
                 repository.outMessages = outMessages
-                callback(data)
+                callback(repository.inMessages!!)
                 //TODO("Move to another thread")
             }
             if (error != null) errorCallback(error)
